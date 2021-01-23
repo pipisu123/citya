@@ -61,7 +61,12 @@
 		methods: {
 			// 根据性别来查询
 			async selectsex(data){
-				console.log(data)
+				// console.log(data)
+				if(data=='男'){
+					data = "man"
+				}else{
+					data = "woman"
+				}
 				const res = await this.$myRequest({
 					url:'findResume',
 					dataType: "json",
@@ -80,6 +85,7 @@
 					method: 'POST'
 				})
 				console.log(res)
+				console.log(data)
 				this.list = res.data.data.resumes;
 				for(var i=0;i<this.list.length;i++){
 						if(this.list[i].sex == '男'){

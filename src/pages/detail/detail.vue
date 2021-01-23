@@ -95,7 +95,17 @@
 		<Companybar :item="item" @itemClick="goCompany()"></Companybar>
 		<map class="map" :longitude="longitude" :latitude="latitude"></map>	
         <view class="bottom">
-        	<u-button type="primary">立即沟通</u-button>
+        	<view class="chat">
+        		<u-button type="primary" shape="circle">
+					<u-icon name="chat"></u-icon>
+					微聊</u-button>
+        	</view>
+			<view class="phone">
+				<u-button type="success" shape="circle">
+					<u-icon name="phone"></u-icon>
+					{{item.phone}}
+				</u-button>
+			</view>
         </view>
 		<!-- 温馨提示 -->
 		<WarningTip></WarningTip>
@@ -256,11 +266,18 @@
 		border-radius: 25%;
 	}
 	.bottom{
+		display: flex;
 		width: 100%;
 		height: 44px;
 		position: fixed;
 		bottom: 0rpx;
 		border-top: 5rpx solid #F1F1F1;
+		.chat{
+			width: 50%;
+		}
+		.phone{
+			width: 50%;
+		}
 	}
 	// 个体发布
 	.personRecruitment{

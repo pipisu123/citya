@@ -171,7 +171,6 @@
 // 个人资料
 .person{
 	border-bottom: 3rpx solid #F1F1F1;
-	margin-top: 50rpx;
 	.avatar{
 		display: flex;
 		padding: 8rpx;

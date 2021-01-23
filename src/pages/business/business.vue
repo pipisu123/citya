@@ -1,20 +1,22 @@
 <template>
-	<view class="wrap">
-		<u-card margin="30rpx"></u-card>
+	<view>
+	商家
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		methods: {
 			
 		}
-	},
-	
-};
+	}
 </script>
 
-<style lang="scss" scoped>
-	
+<style>
+
 </style>

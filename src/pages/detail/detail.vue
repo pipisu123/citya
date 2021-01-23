@@ -96,7 +96,7 @@
 		<map class="map" :longitude="longitude" :latitude="latitude"></map>	
         <view class="bottom">
         	<view class="chat">
-        		<u-button type="primary" shape="circle">
+        		<u-button type="primary" shape="circle" @click="tochat">
 					<u-icon name="chat"></u-icon>
 					微聊</u-button>
         	</view>
@@ -194,6 +194,12 @@
 			// 		method: 'POST'
 			// 	})
 			// },
+			// 跳转到聊天
+			tochat(){
+				uni.navigateTo({
+					url:'/pages/detail/chat/chat'
+				})
+			},
 			goCompany(company_id){
 				uni.navigateTo({
 					url:'/pages/companyDetail/companyDetail?company_id='+company_id

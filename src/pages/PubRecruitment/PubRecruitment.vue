@@ -53,7 +53,7 @@
 			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
 				<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="false" :before-upload="beforeUpload" max-count=1 :max-size="1 * 1024 * 1024" ></u-upload>
 			</u-form-item>
-			<text style="color: #999999;">只能上传一张图片</text>
+			<text style="color: #999999;">只能上传一张图片，大小不超1m</text>
 		</u-form>
 		<!-- 创建个体招聘信息 -->
 		<PersonRecruitment v-else></PersonRecruitment>

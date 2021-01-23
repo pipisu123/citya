@@ -16,10 +16,15 @@
 	    		</u-form-item>
 	    		<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
 	    			<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="false" max-count=5 @on-remove="deleteImgs"></u-upload>
+					<text style="color: #999999;">最多只能上传5张图片，大小不超过1m</text>
 	    		</u-form-item>
-				<text style="color: #999999;">最多只能上传5张图片</text>
+				<u-form-item :label-position="labelPosition" label="上传营业照" prop="license" label-width="150">
+					<u-upload width="160" height="160" action="#"  ref="uUpload1" :auto-upload="false" max-count=1 @on-remove="deleteImgs"></u-upload>
+					<text style="color: #999999;">最多只能上传1张图片，大小不超过1m</text>
+				</u-form-item>
 	    	</u-form-item>
 	    </u-form>
+		<u-toast ref="uToast" />
 		<!-- 上传图片 -->
 		<view class="uploadfile">
 			<button  @click="click">上传</button>
@@ -218,10 +223,13 @@
 				files = this.$refs.uUpload.lists;
 				for(var i=0;i<files.length;i++){
 					this.urlTobase64(files[i].url,i)
-				   
-					
 				}
-				 // console.log(this.model.photo)
+				if(files.length>0){
+					this.$refs.uToast.show({
+							title: '上传成功',
+							type: 'success',
+									})
+				}
 			},
 			// 上传图片回调转base64
 			urlTobase64(url,i){

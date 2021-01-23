@@ -1,6 +1,6 @@
 <template>
 	<view>
-	商家
+	商家ded
 	</view>
 </template>
 

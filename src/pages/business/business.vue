@@ -1,6 +1,6 @@
 <template>
 	<view>
-	商家lk
+	商家lk1
 	</view>
 </template>
 

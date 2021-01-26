@@ -33,7 +33,7 @@
 					{
 						src: '/static/17.jpg',
 						title: '二手房',
-						path: '/pages/car/car'
+						path: '/pages/house/resold/resold'
 					},
 					{
 						src: '/static/16.jpg',

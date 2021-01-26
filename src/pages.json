@@ -276,6 +276,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/house/resold/resold",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -2,11 +2,11 @@
 	<view class="recommend">
 		<view class="hot-recommend">
 			<view class="left">
-				<image class="hot-recommend-image" src="https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00167-300.jpg" mode="heightFix;widthFix"></image>
+				<image class="hot-recommend-image" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F00.minipic.eastday.com%2F20170308%2F20170308113153_8580c2031d77a8fcedaae6e34aa8780e_9.jpeg&refer=http%3A%2F%2F00.minipic.eastday.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613956992&t=7f67a5f244d1725157c45024da2842c5" mode="heightFix;widthFix"></image>
 			</view>
 			<view class="right">
-				<image class="hot-recommend-image" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1411722287,1553020603&fm=26&gp=0.jpg" mode="heightFix;widthFix"></image>
-				<image class="hot-recommend-image" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3222642489,3571657882&fm=26&gp=0.jpg" mode="heightFix;widthFix"></image>
+				<image class="hot-recommend-image" src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=734895668,3018529710&fm=26&gp=0.jpg" mode="heightFix;widthFix"></image>
+				<image class="hot-recommend-image" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fb%2F59acb3af83afb.jpg&refer=http%3A%2F%2Fpic1.win4000.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613957563&t=e2251ed0c045b33ad946feda2dd32218" mode="heightFix;widthFix"></image>
 			</view>
 		</view>
 	</view>

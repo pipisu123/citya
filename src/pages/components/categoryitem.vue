@@ -21,27 +21,27 @@
 			return {
 				navs:[
 					{
-						src:'../../static/towork.png',
+						src:'../../static/p.jpeg',
 						title: '求职招聘',
 						path: '/pages/man/man'
 					},
 					{
-						src: '../../static/city.png',
+						src: '/static/19.jpg',
 						title: '房屋出售',
 						path: '/pages/house/house'
 					},
 					{
-						src: '../../static/car.png',
+						src: '/static/er.jpg',
 						title: '二手转让',
 						path: '/pages/car/car'
 					},
 					{
-						src: '../../static/market.png',
+						src: '/static/rr.jpg',
 						title: '人人集市',
 						path: '/pages/mall/mall'
 					},
 					{
-						src: '../../static/towork.png',
+						src: '../../static/jj.png',
 						title: '积分商城',
 						path: '/pages/mall/mall'
 					},
@@ -51,7 +51,7 @@
 						path: '/pages/mall/mall'
 					},
 					{
-						src: '../../static/jifen.png',
+						src: '../../static/jj.png',
 						title: '积分商城',
 						path: '/pages/mall/mall'
 					},
@@ -61,8 +61,8 @@
 						path: '/pages/mall/mall'
 					},
 					{
-						src: '../../static/more.png',
-						title: '积分商城',
+						src: '/static/jia.jpg',
+						title: '环球家居',
 						path: '/pages/mall/mall'
 					},
 					{

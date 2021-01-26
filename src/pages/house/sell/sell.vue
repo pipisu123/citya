@@ -1,6 +1,6 @@
 <template>
 	<view>
-	商家lk
+		出售
 	</view>
 </template>
 

@@ -43,7 +43,7 @@
 					{
 						src: '/static/19.jpg',
 						title: '商铺',
-						path: '/pages/mall/mall'
+						path: '/pages/house/shop/shop'
 					},
 					
 				]

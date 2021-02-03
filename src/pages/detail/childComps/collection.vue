@@ -5,7 +5,7 @@
 			 <u-icon name="star"></u-icon>
              <text>收藏</text>
          </view>
-		 
+		 <u-toast ref="uToast" />
      </view>
   </view>
 </template>
@@ -21,9 +21,19 @@ methods:{
 	tapInfo(e) {
 		if (this.rSelect.indexOf(e) == -1) {
 			this.rSelect.push(e);//选中添加到数组里
+			this.$refs.uToast.show({
+				title: '收藏成功',
+				type: 'default',
+				// url: '/pages/user/index'
+				})
 			console.log("收藏成功")
 		} else {
 			this.rSelect.splice(this.rSelect.indexOf(e), 1); //取消
+			this.$refs.uToast.show({
+				title: '已取消收藏',
+				type: 'default',
+				// url: '/pages/user/index'
+				})
 				console.log("取消收藏")
 		}
 		

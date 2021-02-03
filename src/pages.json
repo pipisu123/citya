@@ -267,6 +267,7 @@
             }
             
         }
+<<<<<<< HEAD
 		,{
 		    "path" : "pages/house/resold/resold",
 		    "style" :                                                                                    
@@ -276,6 +277,8 @@
 		    }
 		    
 		}
+=======
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
         ,{
             "path" : "pages/house/sell/sell",
             "style" :                                                                                    
@@ -286,7 +289,11 @@
             
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/house/shop/shop",
+=======
+            "path" : "pages/house/resold/resold",
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -295,7 +302,11 @@
             
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/house/detailpage/detailpage",
+=======
+            "path" : "pages/myResume/UpdatemyResume/UpdatemyResume",
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -304,7 +315,11 @@
             
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/house/shoppage/shoppage",
+=======
+            "path" : "pages/myResume/UpdateworkExp/UpdateworkExp",
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -313,7 +328,11 @@
             
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/house/newdish/newdish",
+=======
+            "path" : "pages/myResume/UpdateEducation/UpdateEducation",
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -322,6 +341,7 @@
             
         }
         ,{
+<<<<<<< HEAD
             "path" : "pages/house/newdishpage/newdishpage",
             "style" :                                                                                    
             {
@@ -332,6 +352,9 @@
         }
         ,{
             "path" : "pages/house/sellhousepage/sellhousepage",
+=======
+            "path" : "pages/myResume/UpdateProject/UpdateProject",
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -350,7 +373,7 @@
 	   "color":"#2C405A",
 	   "selectedColor":"#333333",
 	   "borderStyle":"white",
-	   "backgroundColor":"#B6B6B6 ",
+	   "backgroundColor":"#FFFFFF",
 		"list":[
 			{
 				"pagePath":"pages/index/index",

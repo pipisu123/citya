@@ -54,6 +54,8 @@
 
 <script>
 	import comment from './childComps/comment.vue'
+	
+	import {findCompany} from '../../util/company.js'
 	export default {
 		data() {
 			return {
@@ -76,21 +78,29 @@
 				this.$refs.uReadMore.init();
 			},
 			async goCompany(company_id) {
-				const res = await this.$myRequest({
-					url: 'findCompany',
-					dataType: "json",
-					header: {
-						'content-type': 'application/json',
-					},
-					data: JSON.stringify({
-						"company_id": company_id
-
-					}),
-
-					method: 'POST'
+				findCompany({
+					"company_id": company_id
+				}).then(res=>{
+					console.log(res)
+					this.list = res.data.data.companys[0]
+				}).catch(err=>{
+					console.log(err)
 				})
-				console.log(res.data.data.companys[0])
-				this.list = res.data.data.companys[0]
+				// const res = await this.$myRequest({
+				// 	url: 'findCompany',
+				// 	dataType: "json",
+				// 	header: {
+				// 		'content-type': 'application/json',
+				// 	},
+				// 	data: JSON.stringify({
+				// 		"company_id": company_id
+
+				// 	}),
+
+				// 	method: 'POST'
+				// })
+				// console.log(res.data.data.companys[0])
+				// this.list = res.data.data.companys[0]
 			}
 		}
 	}

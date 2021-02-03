@@ -3,7 +3,7 @@
 		<view class="new-items" v-for="(item,index) in list" :key="index" @click="goDetail(item.recruitment_id)">
 			<image src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1050564413,3771618612&fm=26&gp=0.jpg" mode=""
 			 v-if="item.poster_path=='默认海报路径'"></image>
-			<image :src="'http://192.168.101.24:8081/'+item.poster_path" mode="" v-else></image>
+			<image :src="'http://192.168.101.24:8080/'+item.poster_path" mode="" v-else></image>
 			<view class="personRecruitment" v-if="item.poster_path=='默认海报路径'">
 				<view class="persontitle">
 					<text>{{item.introduction}}</text>

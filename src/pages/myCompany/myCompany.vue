@@ -55,6 +55,7 @@
 </template>
 
 <script>
+	import {findCompany} from '../../util/company.js'
 	export default {
 		data() {
 			return {
@@ -71,20 +72,16 @@
 		methods: {
 			// 查询我的公司
 			async getmyCompany(company_id) {
-				const res = await this.$myRequest({
-					url: 'findCompany',
-					dataType: "json",
-					header: {
-						'content-type': 'application/json',
-					},
-					data: JSON.stringify({
-						"company_id":company_id
-					}),
-					method: 'POST'
+				findCompany({
+					"company_id":company_id
+				}).then(res=>{
+					console.log(res)
+					this.company = res.data.data.companys[0]
+					this.listimg = res.data.data.companys[0].company_picture
+				}).catch(err=>{
+					console.log(err)
 				})
-				console.log(res)
-				this.company = res.data.data.companys[0]
-				this.listimg = res.data.data.companys[0].company_picture
+				
 			},
 			// 跳转到修改公司信息
 			toUpdateCompany(company_id){

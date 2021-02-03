@@ -9,7 +9,11 @@
 					<text class="worktype">中成公寓</text>
 				</view>
 				<view class="industry">
+<<<<<<< HEAD
 					<text>面积：360㎡|东|明湖百货</text>
+=======
+					<text>面积：360平方米|东|明湖百货</text>
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
 				</view>
 				<view></view>
 				<view class="wages">中介|南北通透|随时看房</view>

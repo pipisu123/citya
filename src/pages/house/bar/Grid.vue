@@ -38,12 +38,20 @@
 					{
 						src: '/static/16.jpg',
 						title: '新盘',
+<<<<<<< HEAD
 						path: '/pages/house/newdish/newdish'
+=======
+						path: '/pages/mall/mall'
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
 					},
 					{
 						src: '/static/19.jpg',
 						title: '商铺',
+<<<<<<< HEAD
 						path: '/pages/house/shop/shop'
+=======
+						path: '/pages/mall/mall'
+>>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
 					},
 					
 				]

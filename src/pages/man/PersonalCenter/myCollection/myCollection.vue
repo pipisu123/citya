@@ -34,7 +34,7 @@
 		padding: 15rpx;
 		margin: 15rpx;
 		background: #F1F1F1;
-		border-radius: 5%;
+		border-radius: 10px;
 		.title{
 		    font-weight: bold;
 			font-size: 30rpx;

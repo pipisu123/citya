@@ -5,10 +5,10 @@
 				<view class="avatar">
 					<u-avatar :src="avatar" show-sex=true :sex-icon="sex"></u-avatar>
 					<view class="info">
-						<text class="name">{{item.resume_name}}</text>
+						<text class="name">{{item.resumeName}}</text>
 						<text class="info1">{{item.age}} 岁</text>
 						<view class="info3">
-							<text class="info2">{{item.max_degree}}</text>
+							<text class="info2">{{item.maxDegree}}</text>
 							<view class="phone">
 								<u-icon name="phone" color="#5785E5"></u-icon>
 								<text class="info1">{{item.phone}}</text>
@@ -30,7 +30,7 @@
 					</view>
 					<view class="">
 						<u-icon name="map" color="#5785E5"></u-icon>
-						<text>{{item.work_city}}</text>
+						<text>{{item.workCity}}</text>
 					</view>
 					<view class="wages">
 						<u-icon name="rmb-circle" color="#FF0000"></u-icon>
@@ -38,7 +38,7 @@
 					</view>
 					<view class="">
 						<u-icon name="file-text-fill" color="#5785E5"></u-icon>
-						<text>{{item.work_type}}</text>
+						<text>{{item.workType}}</text>
 					</view>
 				
 				</view>
@@ -62,15 +62,15 @@
 				<view class="intro">
 					<view class="">
 						<u-icon name="home" color="#5785E5"></u-icon>
-						<text>{{item.workEXP[0].company_name}}</text>
+						<text>{{item.workExp[0].companyName}}</text>
 					</view>
 					<view class="">
 						<u-icon name="edit-pen" color="#5785E5"></u-icon>
-						<text>{{item.workEXP[0].work_name}}</text>
+						<text>{{item.workExp[0].workName}}</text>
 					</view>
 					<view class="dec">
 						<text>工作描述</text>
-						<text>{{item.workEXP[0].work_matter}}</text>
+						<text>{{item.workExp[0].workMatter}}</text>
 					</view>
 				</view>
 			</view>
@@ -82,7 +82,7 @@
 			</view>
 			<view class="graduate">
 				<text>毕业学校：</text>
-				<text>{{item.educationalEXP[0].school_name}}</text>
+				<text>{{item.educationalExp[0].schoolName}}</text>
 			</view>
 			<view class="graduate">
 				<text>毕业时间：</text>
@@ -90,15 +90,15 @@
 			</view>
 			<view class="graduate">
 				<text>最高学历：</text>
-				<text>{{item.educationalEXP[0].degree}}</text>
+				<text>{{item.educationalExp[0].degree}}</text>
 			</view>
 			<view class="graduate">
 				<text>专业：</text>
-				<text>{{item.educationalEXP[0].specialty}}</text>
+				<text>{{item.educationalExp[0].specialty}}</text>
 			</view>
 			<view class="graduate">
 				<text>学校经历：</text>
-				<text>{{item.educationalEXP[0].school_experience}}</text>
+				<text>{{item.educationalExp[0].schoolExperience}}</text>
 			</view>
 			</view>
 		<!-- 项目经历 -->
@@ -108,15 +108,15 @@
 			</view>
 			<view class="project">
 				<text>项目名称：</text>
-				<text>{{item.projectEXP[0].project_name}}</text>
+				<text>{{item.projectExp[0].projectName}}</text>
 			</view>
 			<view class="project">
 				<text>项目描述：</text>
-				<text>{{item.projectEXP[0].project_description}}</text>
+				<text>{{item.projectExp[0].projectDescription}}</text>
 			</view>
 			<view class="project">
 				<text>项目链接：</text>
-				<text>{{item.projectEXP[0].project_link}}</text>
+				<text>{{item.projectExp[0].projectLink}}</text>
 				<!-- <u-link href="project.project_link" :under-line="true">{{project.project_link}}</u-link> -->
 			</view>
 		</view>
@@ -125,6 +125,7 @@
 </template>
 
 <script>
+	import {resumeList} from '../../util/resume.js'
 	export default {
 		data() {
 			return {
@@ -137,31 +138,27 @@
 		},
 		onLoad(options) {
 			console.log(options)
-			this.getDetail(options.resume_id)
+			this.getDetail(options.resumeId)
 		},
 		methods: {
-			 async getDetail(resume_id){
-				const res = await this.$myRequest({
-					url:'findResume',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"resume_id":resume_id,
-						"paging":{
-							"page":0
-						}
-					}),
-					method: 'POST'
-				})
-				console.log(res.data.data.resumes[0])
-				this.item = res.data.data.resumes[0];
-				if(this.item.sex=='男'){
-					this.sex = "man"
-				}else{
-					this.sex = "woman"
+			 async getDetail(resumeId){
+				 resumeList({
+				"resume_id":resumeId,
+				"paging":{
+					"page":0
 				}
+				 }).then(res=>{
+					 console.log(res)
+					 this.item = res.data.data.resumes[0];
+					 if(this.item.sex=='男'){
+					 	this.sex = "man"
+					 }else{
+					 	this.sex = "woman"
+					 }
+				 }).catch(err=>{
+					 console.log(err)
+				 })
+				
 			}
 		}
 	}

@@ -30,7 +30,7 @@
 			拨打电话</u-button>
 	</view>
 	<!-- 企业发布详情-->
-	<view class="content" v-else>
+	<view class="content" style="height: 100%;" v-else>
 		<view class="wrap">
 			<u-row gutter="16">
 				<u-col span="7">
@@ -50,7 +50,7 @@
 			<u-row gutter="16" justify="space-between">
 				<u-col span="4">
 					<view class="demo-layout bg-purple">
-						<text class="update">更新：{{item.publish_time}}</text>
+						<text class="update">发布：{{item.publish_time.split("T")[0]}}</text>
 					</view>
 				</u-col>
 				<u-col span="8" text-align="right">
@@ -65,10 +65,9 @@
 			<view class="work">
 				<view class="position">
 					<text>职位：</text>
-					<text>{{item.work_name}}</text>
-					<view class="icon">
-						<u-icon name="star" size=45 @click="change" v-if="show"></u-icon>
-					</view>
+					<text>Java程序员</text>
+					<!-- <text>{{item.work_name}}</text> -->
+					<collection class="collect"></collection>
 				</view>
 			</view>
 			<view class="work">
@@ -94,22 +93,10 @@
 		<!-- 公司导航 -->
 		<Companybar :item="item" @itemClick="goCompany()"></Companybar>
 		<map class="map" :longitude="longitude" :latitude="latitude"></map>	
-        <view class="bottom">
-        	<view class="chat">
-        		<u-button type="primary" shape="circle" @click="tochat">
-					<u-icon name="chat"></u-icon>
-					微聊</u-button>
-        	</view>
-			<view class="phone">
-				<u-button type="success" shape="circle">
-					<u-icon name="phone"></u-icon>
-					{{item.phone}}
-				</u-button>
-			</view>
-        </view>
 		<!-- 温馨提示 -->
 		<WarningTip></WarningTip>
-		
+		<!-- 详情底部导航 -->
+		<Bottombar @gochat="gochat"></Bottombar>
 	</view>
 	
 </template>
@@ -119,12 +106,17 @@
 	import Companybar from './childComps/Companybar.vue'
 	import WarningTip from './childComps/WarningTip.vue'
 	import notice from '../components/notice.vue'
+	import collection from './childComps/collection.vue'
+	import Bottombar from './childComps/BottomBar.vue'
+	
+	import {recruitmentList} from '../../util/recruitment.js'
 	export default {
 		data() {
 			return {
 				longitude:110.922477,
 				latitude: 21.666885,
 				item:null,
+				
 				// count1:0
 				// company_id: null
 			}
@@ -133,7 +125,9 @@
 			WorkIntroduce,
 			Companybar,
 			WarningTip,
-			notice
+			notice,
+			collection,
+			Bottombar
 		},
 		onLoad(options) {
 			console.log(options)
@@ -144,25 +138,31 @@
 			
 		},
 		methods: {
-		   async getDetail(recruitment_id){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"recruitment_id":recruitment_id,
-						"paging":{
-							"page":0
-						}
-					}),
-					method: 'POST'
+			// 跳转到聊天
+			gochat(){
+				uni.navigateTo({
+					url:'/pages/detail/chat/chat'
 				})
-				console.log(res.data.data.user_Recruitments)
-				this.item = res.data.data.user_Recruitments[0];
-				
-				// this.company_id = res.data.data.user_Recruitments[0].company.company_id
+			},
+			// 招聘详情
+		   async getDetail(recruitment_id){
+			   uni.showLoading({
+			   	title:'正在加载...'
+			   })
+			   recruitmentList({
+				"recruitment_id":recruitment_id,
+				"paging":{
+					"page":0
+				}
+			   }).then(res=>{
+				   console.log(res)
+				   uni.hideLoading()
+				   
+				   this.item = res.data.data.user_Recruitments[0];
+			   }).catch(err=>{
+				   console.log(err)
+			   })
+			   
 			},
 			// 刷新
 			refresh(){
@@ -212,6 +212,12 @@
 </script>
 
 <style scoped lang="scss">
+	page{
+		height:100%;
+	}
+	.content{
+		height: calc(100% - 49px);
+	}
 	// 企业发布
 	.wrap {
 		padding: 10rpx;
@@ -271,20 +277,6 @@
 		margin-left: 10rpx;
 		border-radius: 25%;
 	}
-	.bottom{
-		display: flex;
-		width: 100%;
-		height: 44px;
-		position: fixed;
-		bottom: 0rpx;
-		border-top: 5rpx solid #F1F1F1;
-		.chat{
-			width: 50%;
-		}
-		.phone{
-			width: 50%;
-		}
-	}
 	// 个体发布
 	.personRecruitment{
 		
@@ -327,5 +319,8 @@
 				word-break:break-all;
 			}
 		}
+	}
+	.collect{
+		margin-left: 380rpx;
 	}
 </style>

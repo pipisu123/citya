@@ -4,13 +4,15 @@
 		<template v-if="show">
 			<!-- 搜索栏 -->
 			<view class="search">
-				<u-search placeholder="请输入职位或公司名称"  v-model="value"  @custom="custom"></u-search>
+				<u-search placeholder="请输入职位或公司名称" v-model="value" @custom="custom"></u-search>
 			</view>
-			<view class="top">
+			<!-- <view class="top">
 				<Recruitment></Recruitment>
-			</view>
+			</view> -->
 			<!-- 轮播图 -->
-			<swipper></swipper>
+			<view class="top">
+				<swipper></swipper>
+			</view>
 			<!-- 广告通知 -->
 			<notice></notice>
 			<!-- 条件选择招聘列表 -->
@@ -20,12 +22,13 @@
 				<view v-if="list.length ===0">
 					<u-empty text="暂无数据" mode="search" margin-top=200></u-empty>
 				</view>
-				<scroll-view scroll-y="true" class="scroll-Y"  @scrolltolower="lower">
-				<Recruitmentlist :list="list" @itemClick="goDetail"></Recruitmentlist>
-				 </scroll-view>
+				<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
+					<Recruitmentlist :list="list" @itemClick="goDetail"></Recruitmentlist>
+					<u-loadmore :status="status" v-model="showLoad" :load-text="loadText" />
+				</scroll-view>
 			</view>
 		</template>
-		
+
 		<!-- 招聘人才库 -->
 		<template v-else-if="show1">
 			<view class="">
@@ -53,15 +56,17 @@
 				<me></me>
 			</view>
 		</template>
-		
+
 		<!-- 底部导航栏 -->
 		<Bottombar @Clickitem="Clickitem"></Bottombar>
+		<u-toast ref="uToast" />
+		
 	</view>
-	
+
 </template>
 
 <script>
-	import Recruitment from './childComps/Recruitment.vue';
+	// import Recruitment from './childComps/Recruitment.vue';
 	import swipper from '../components/swipper.vue'
 	import notice from '../components/notice.vue'
 	import RecruitmentBar from './childComps/RecruitmentBar.vue'
@@ -71,45 +76,53 @@
 	import ResumeList from './Talentpool/ResumeList.vue'
 	import Position from './Position/position.vue'
 	import Public from '../PubRecruitment/PubRecruitment.vue'
-	
+
+	import {
+		recruitmentList
+	} from '../../util/recruitment.js'
+
 	export default {
 		data() {
 			return {
 				value: '',
-				list:[],
-				show:true,
-				show1:false,
-			    show2:false,
-				show3:false,
-				show4:false,
-				company:'',
-				city:'',
-				wages:'',
-				work_types:'',
-				page:0,
-				count:'',
-				
+				list: [],
+				show: true,
+				show1: false,
+				show2: false,
+				show3: false,
+				show4: false,
+				company: '',
+				city: '',
+				wages: '',
+				work_types: '',
+				page: 0,
+				count: '',
+				status:'nomore',
+				loadText: {
+					nomore: '没有更多数据了~'
+				},
+				showLoad:false
+
 			}
 		},
-		components:{
-		Recruitment,
-		swipper,
-		notice,
-		RecruitmentBar,
-		Recruitmentlist,
-		Bottombar,
-		ResumeList,
-		me,
-		Position,
-		Public
+		components: {
+			swipper,
+			notice,
+			RecruitmentBar,
+			Recruitmentlist,
+			Bottombar,
+			ResumeList,
+			me,
+			Position,
+			Public
 		},
 		onLoad() {
 			this.getRecruitmentlist();
-			this.cityChange();
-			this.wagesChange()
+			// this.cityChange();
+			// this.wagesChange()
 		},
 		created() {
-			
+
 		},
 		// 下拉刷新
 		onPullDownRefresh() {
@@ -124,237 +137,273 @@
 		},
 		methods: {
 			// 触底分页查询
-			lower(){
-					this.page++
-					console.log(this.page)
-					 uni.showNavigationBarLoading();//显示加载动画
-					// 查询招聘列表
-						const res = this.$myRequest({
-							url:'findRecruitment',
-							dataType: "json",
-							header: {
-							        'content-type': 'application/json', 
-							        },
-							data:JSON.stringify({ 
-								"str":this.value,
-								"wages": this.wages,
-								"address":this.city,
-								"work_types":this.work_types,
-								"paging":{
-									"count":this.count,
-									"page": this.page,
-								}
-								
-							}),
-							method: 'POST'
-						})
+			lower() {
+				this.page++
+				console.log(this.page)
+				uni.showLoading({
+					title:'正在加载...'
+				})
+				// 查询招聘列表
+				recruitmentList({
+					"str": this.value,
+					"wages": this.wages,
+					"address": this.city,
+					"work_types": this.work_types,
+					"paging": {
+						"count": this.count,
+						"page": this.page,
+					}
+					
+				}).then(res=>{
+					this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起	
+					if(res.statusCode===200){
+						uni.hideLoading()
+						this.$refs.uToast.show({
+											title: '加载成功',
+											type: 'default',
+											duration: 3000
+										})
 						
-						var a = Promise.resolve(res)
-						a.then((res)=>{
-							// console.log(res.data)
-							console.log(this.list.length)
-							console.log(res)
-							if (res.data.code===20001) {//没有数据
-									uni.hideNavigationBarLoading();//关闭加载动画
-									return false;
-										}
-								this.list = this.list.concat(res.data.data.user_Recruitments);//将数据拼接在一起			
-								uni.hideNavigationBarLoading();//关闭加载动画
-						})
-						// this.list = res.data.data.user_Recruitments
+					}else{
+						uni.hideLoading()
+						this.$refs.uToast.show({
+											title: '加载失败',
+											type: 'error',
+											duration: 3500
+										})
+					}
+					console.log(res)
+				}).catch(error=>{
+					console.log(error)
+					this.showLoad = true
+					uni.hideLoading()
+				})
+				// const res = this.$myRequest({
+				// 	url: 'recruitemt/recruitment-recruitment/findRecruitment',
+				// 	dataType: "json",
+				// 	header: {
+				// 		'content-type': 'application/json',
+				// 	},
+				// 	data: JSON.stringify({
+				// 		"str": this.value,
+				// 		"wages": this.wages,
+				// 		"address": this.city,
+				// 		"work_types": this.work_types,
+				// 		"paging": {
+				// 			"count": this.count,
+				// 			"page": this.page,
+				// 		}
+
+				// 	}),
+				// 	method: 'POST'
+				// })
+
+				// var a = Promise.resolve(res)
+				// a.then((res) => {
+				// 	// console.log(res.data)
+				// 	console.log(this.list.length)
+				// 	console.log(res)
+				// 	if (res.data.code === 20001) { //没有数据
+				// 		uni.hideLoading(); //关闭加载动画
+				// 		return false;
+				// 	}
+				// 	this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起			
+				// 	uni.hideLoading(); //关闭加载动画
+				// })
+				// this.list = res.data.data.user_Recruitments
 			},
 			// 搜索招聘
 			custom(value) {
 				console.log(value)
+				this.value = '',
 				this.getRecruitmentlist()
 			},
 			// 跳转到招聘详情
-			goDetail(recruitment_id){
+			goDetail(recruitment_id) {
 				uni.navigateTo({
-					url: '/pages/detail/detail?recruitment_id='+recruitment_id
+					url: '/pages/detail/detail?recruitment_id=' + recruitment_id
 				})
 				console.log(recruitment_id)
-				
+
 			},
-			Clickitem(index){
+			Clickitem(index) {
 				console.log(index)
-				switch(index){
-					case 0 :
-					this.show = true;
-					this.show1 = false;
-					this.show2 = false;
-					this.show3 = false;
-					this.show4 = false;
-					break;
-					case 1 :
-					this.show =false;
-					this.show1 = true;
-					this.show2 = false;
-					this.show3 = false;
-					this.show4 = false;
-					break;
-					case 2 :
-					this.show = false;
-					this.show1 = false;
-					this.show2 = true;
-					this.show3 = false;
-					this.show4 = false;
-					break;
-					case 3 :
-					this.show = false;
-					this.show1 = false;
-					this.show2 = false;
-					this.show3 = true;
-					this.show4 = false;
-					break;
-					case 4 :
-					this.show = false;
-					this.show1 = false;
-					this.show2 = false;
-					this.show3 = false;
-					this.show4 = true;
-					break;
+				switch (index) {
+					case 0:
+						this.show = true;
+						this.show1 = false;
+						this.show2 = false;
+						this.show3 = false;
+						this.show4 = false;
+						break;
+					case 1:
+						this.show = false;
+						this.show1 = true;
+						this.show2 = false;
+						this.show3 = false;
+						this.show4 = false;
+						break;
+					case 2:
+						this.show = false;
+						this.show1 = false;
+						this.show2 = true;
+						this.show3 = false;
+						this.show4 = false;
+						break;
+					case 3:
+						this.show = false;
+						this.show1 = false;
+						this.show2 = false;
+						this.show3 = true;
+						this.show4 = false;
+						break;
+					case 4:
+						this.show = false;
+						this.show1 = false;
+						this.show2 = false;
+						this.show3 = false;
+						this.show4 = true;
+						break;
 				}
 			},
 			// 根据工作类型查询
-			async worktype(data){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"wages": this.wages,
-						"address":this.city,
-						"work_types":data,
-						"paging":{
-							"page":this.page
-						}
-						
-					}),
-					method: 'POST'
+			async worktype(data) {
+				recruitmentList({
+					"wages": this.wages,
+					"address": this.city,
+					"work_types": data,
+					"paging": {
+						"page": this.page
+					}
+				}).then(res => {
+					console.log(res)
+					this.list = res.data.data.user_Recruitments
+				}).catch(err => {
+					console.log(err)
+				
 				})
 				this.work_types = data
-				console.log(res.data.data.user_Recruitments)
-				this.list = res.data.data.user_Recruitments;
 			},
 			// 根据行业查询
-			async industryselect(data){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"industry": data,
-						"address":this.city,
-						"work_types":this.work_types,
-						"wages":this.wages,
-						"paging":{
-							"page":this.page
-						}
-						
-					}),
-					method: 'POST'
+			async industryselect(data) {
+				uni.showLoading({
+					title:'搜索中...'
 				})
-				this.list = res.data.data.user_Recruitments;
+				recruitmentList({
+					"industry": data,
+					"address": this.city,
+					"work_types": this.work_types,
+					"wages": this.wages,
+					"paging": {
+						"page": this.page
+					}
+				}).then(res => {
+					console.log(res)
+					this.list = res.data.data.user_Recruitments
+					if(res.data.code === 20000){
+						uni.hideLoading()
+					}
+				}).catch(err => {
+					console.log(err)
+				
+				})
 				this.industry = data
 			},
 			// 根据工资来查询
-			async wagesChange(data){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"wages": data,
-						"address":this.city,
-						"work_types":this.work_types,
-						"paging":{
-							"page":this.page
-						}
-						
-					}),
-					method: 'POST'
+			async wagesChange(data) {
+				uni.showLoading({
+					title:'搜索中...'
 				})
-				this.list = res.data.data.user_Recruitments;
+				recruitmentList({
+					"wages": data,
+					"address": this.city,
+					"work_types": this.work_types,
+					"paging": {
+						"page": this.page
+					}
+				}).then(res => {
+					console.log(res)
+					this.list = res.data.data.user_Recruitments
+					if(res.data.code === 20000){
+						uni.hideLoading()
+					}
+				}).catch(err => {
+					console.log(err)
+				
+				})
 				this.wages = data
 			},
 			// 根据城市查询招聘列表
-			async cityChange(data){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"address": data,
-						"wages": this.wages,
-						"work_types":this.work_types,
-						"paging":{
-							"page":this.page
-						}
-						
-					}),
-					method: 'POST'
+			async cityChange(data) {
+				recruitmentList({
+					"address": data,
+					"wages": this.wages,
+					"work_types": this.work_types,
+					"paging": {
+						"page": this.page
+					}
+				}).then(res => {
+					console.log(res)
+					this.list = res.data.data.user_Recruitments
+				}).catch(err => {
+					console.log(err)
+				
 				})
-				this.list = res.data.data.user_Recruitments;
 				this.city = data
+				
 			},
 			// 查询招聘列表
-			async getRecruitmentlist(){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"str":this.value,
-						"paging":{
-							"page": this.page
-						}
-						
-					}),
-					method: 'POST'
+			async getRecruitmentlist() {
+				uni.showLoading({
+					title:'正在加载...'
 				})
-				console.log(res)
-				var a = Promise.resolve(res)
-				a.then((res)=>{
-					// console.log(res.data)
+				recruitmentList({
+					"str": this.value,
+					"paging": {
+						"page": this.page
+					}
+				}).then(res => {
+					uni.hideLoading()
+					this.$refs.uToast.show({
+										title: '加载成功',
+										type: 'default',
+										duration: 3000
+									})
+					console.log(res)
+					this.list = res.data.data.user_Recruitments
 					this.count = res.data.paging.count
+				}).catch(err => {
+					console.log(err)
+
 				})
-				this.list = res.data.data.user_Recruitments
-				console.log(res.data.data.user_Recruitments)
-				}
 				
+			}
+
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-.search{
-	background-color: #5785E5;
-	padding-bottom: 10rpx;
-	position: fixed;
-	left: 0;
-	right: 0;
-	top: 0;
-	z-index: 9;
-}
-.top{
-	margin-top: 75rpx;
-}
-.button{
-	margin-top: 600rpx;
-	text-align: center;
-}
-scroll-view{
-		height: 700rpx;
+	.search {
+		background-color: #5785E5;
+		padding-bottom: 10rpx;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		z-index: 9;
+	}
+
+	.top {
+		margin-top: 75rpx;
+	}
+
+	.button {
+		margin-top: 600rpx;
+		text-align: center;
+	}
+
+	scroll-view {
+		height: 900rpx;
 	}
 </style>

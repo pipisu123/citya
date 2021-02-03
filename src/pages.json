@@ -285,6 +285,42 @@
             }
             
         }
+        ,{
+            "path" : "pages/myResume/UpdatemyResume/UpdatemyResume",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/myResume/UpdateworkExp/UpdateworkExp",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/myResume/UpdateEducation/UpdateEducation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/myResume/UpdateProject/UpdateProject",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -296,7 +332,7 @@
 	   "color":"#2C405A",
 	   "selectedColor":"#333333",
 	   "borderStyle":"white",
-	   "backgroundColor":"#B6B6B6 ",
+	   "backgroundColor":"#FFFFFF",
 		"list":[
 			{
 				"pagePath":"pages/index/index",

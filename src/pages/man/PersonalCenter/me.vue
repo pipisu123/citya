@@ -1,5 +1,5 @@
 <template>
-	<div class="vbox">
+	<view class="vbox">
 		<!-- <image class="top_back_img" src="../../../static/set-top-bg.png" mode="aspectFit"></image> -->
 		<view class="top_back_img">
 
@@ -35,8 +35,77 @@
 				<text class="middle-num">{{user.integral}}</text>
 			</view>
 		</view>
-
+		
+ 
 		<!-- 下半部分 -->
+			<view class="title_line">
+				<text class="title">求职管理</text>
+				<text class="more">查看更多</text>
+			</view>
+			
+			<view class="welfare">
+				<template>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">面试邀请</text>
+					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">我的投递</text>
+					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">我的职位</text>
+					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">我的收藏</text>
+					</view>
+				</template>
+			</view>
+			
+			<view class="title_line">
+				<text class="title">招聘管理</text>
+				<text class="more">查看更多</text>
+			</view>
+			
+			<view class="welfare">
+				<template>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">面试邀请</text>
+					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">投递管理</text>
+					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">简历管理</text>
+					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">我的收藏</text>
+					</view>
+				</template>
+			</view>
+		
 		<view class="index">
 			<view class="cell" @click="myResume">
 				<view class="cell-left">
@@ -90,7 +159,7 @@
 			</view>
 
 		</view>
-	</div>
+	</view>
 </template>
 
 <script>
@@ -98,10 +167,7 @@
 		data() {
 			return {
 				src: null,
-				user:null,
-				
-
-
+				user:null
 			}
 		},
 		created() {
@@ -114,19 +180,20 @@
 		methods: {
 			// 查询个人信息
 			async getUser(){
-				const res = await this.$myRequest({
-					url:'findUser',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"user_id":1
-					}),
-					method: 'POST'
-				})
-				console.log(res.data.data.user[0])
-				this.user = res.data.data.user[0]
+				
+				// const res = await this.$myRequest({
+				// 	url:'findUser',
+				// 	dataType: "json",
+				// 	header: {
+				// 	        'content-type': 'application/json', 
+				// 	        },
+				// 	data:JSON.stringify({ 
+				// 		"user_id":1
+				// 	}),
+				// 	method: 'POST'
+				// })
+				// console.log(res.data.data.user[0])
+				// this.user = res.data.data.user[0]
 				
 				},
 
@@ -348,5 +415,70 @@
 		color: #aaa;
 		width: 15upx;
 		height: 28upx;
+	}
+	// 下半部分
+	.title_line {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	
+		.title {
+			margin-left: 20px;
+			font-size: 18px;
+			font-weight: 500;
+			color: rgba(51, 51, 51, 1);
+			line-height: 41px;
+		}
+	
+		.more {
+			margin-right: 20px;
+			font-size: 10px;
+			font-weight: 300;
+			color: rgba(153, 153, 153, 1);
+			line-height: 41px;
+		}
+	}
+	
+	.welfare {
+		width: 92%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		background: rgba(255, 255, 255, 1);
+		box-shadow: 0px 1px 21px 0px rgba(103, 103, 103, 0.2);
+		border-radius: 10px;
+		margin-bottom: 10px;
+	
+		.item {
+			padding: 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+	
+			.border {
+				margin-top: 5px;
+				border: 2px solid #c9ac7a;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+	
+				.img{
+					width: 10rpx;
+					height: 10rpx;
+				}
+			}
+	
+			.txt {
+				margin-top: 5px;
+				font-size: 10px;
+				font-weight: 300;
+				color: rgba(153, 153, 153, 1);
+			}
+		}
 	}
 </style>

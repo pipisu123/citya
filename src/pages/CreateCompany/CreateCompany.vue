@@ -47,6 +47,7 @@
 </template>
 
 <script>
+	import { addCompany } from '../../util/company.js'
 	var sourceType = [
 	        ['camera'],
 	        ['album'],
@@ -107,13 +108,13 @@
 							trigger: 'blur' ,
 						}
 					],
-					photo:[
-						{
-							required: true,
-							message: '请先上传图片',
-							trigger: 'change',
-						}
-					],
+					// photo:[
+					// 	{
+					// 		required: true,
+					// 		message: '请先上传图片',
+					// 		trigger: 'change',
+					// 	}
+					// ],
 				},
 				check: false,
 				selectStatus: 'close',
@@ -167,7 +168,7 @@
 						console.log(res)
 						this.src1 = res.tempFilePath;
 				      uni.uploadFile({
-				        url: 'http://192.168.101.24:8081/addVideo',
+				        url: 'http://192.168.101.24:8080/utils/video/addVideo',
 				        method: 'POST',           // 可用可不用
 				        filePath: res.tempFilePath,
 						header:{"Content-Type":"multipart/form-data"},
@@ -177,7 +178,7 @@
 				          console.log('视频上传成功');
 						  // console.log(JSON.parse(res.data))
 						  data = JSON.parse(res.data)
-						  this.src2 = data.data.video.video_path
+						  this.src2 = data.data.video.videoPath
 						 
 				        },
 				        fail: function() {
@@ -196,7 +197,7 @@
 			            success:(res) =>{
 			                if(res.confirm){
 								uni.request({
-									url:'http://192.168.101.24:8081/deleteVideo',
+									url:'http://192.168.101.24:8080/utils/video/deleteVideo',
 									dataType: "json",
 									header: {
 									        'content-type': 'application/json', 
@@ -253,36 +254,57 @@
 				let file = [];
 				this.$refs.uForm.validate(valid => {
 					if (valid) {
-						const res = this.$myRequest({
-							// 后端接口
-							url:'addCompany',
-							header: {
-							        'content-type': 'application/json', 
-							        },
-							// data: formData,
-							data:JSON.stringify({
-								"user_id":1,
-								"company_name":this.model.company,
-								"company_welfare":this.model.welfare,
-								"company_introduction":this.model.intro,
-								"company_address":this.model.address,
-								"company_picture": this.model.photo,
-								"company_video":{
-									"video_path": this.src2
-								},
-							}),					
-							method: 'POST',
-						})	
-						
-						console.log(res)
-						 
-						this.$refs.uToast.show({
-							title: '提交成功',
-							type: 'success',
-														
+						addCompany({
+							"userId":"8040423884719751168",
+							"companyName":this.model.company,
+							"companyWelfare":this.model.welfare,
+							"companyIntroduction":this.model.intro,
+							"companyAddress":this.model.address,
+							"companyPicture": this.model.photo,
+							"companyVideo":{
+								"videoPath": this.src2
+							},
+						}).then(res=>{
+							console.log(res)
+							this.$refs.uToast.show({
+								title: '提交成功',
+								type: 'success',								
+							})
+						}).catch(err=>{
+							console.log(err)
 						})
-					} else {
-					console.log("提交失败")
+						
+					// 	const res = this.$myRequest({
+					// 		// 后端接口
+					// 		url:'addCompany',
+					// 		header: {
+					// 		        'content-type': 'application/json', 
+					// 		        },
+					// 		// data: formData,
+					// 		data:JSON.stringify({
+					// 			"user_id":1,
+					// 			"company_name":this.model.company,
+					// 			"company_welfare":this.model.welfare,
+					// 			"company_introduction":this.model.intro,
+					// 			"company_address":this.model.address,
+					// 			"company_picture": this.model.photo,
+					// 			"company_video":{
+					// 				"video_path": this.src2
+					// 			},
+					// 		}),					
+					// 		method: 'POST',
+					// 	})	
+						
+					// 	console.log(res)
+						 
+					// 	this.$refs.uToast.show({
+					// 		title: '提交成功',
+					// 		type: 'success',
+														
+					// 	})
+					// } else {
+					// console.log("提交失败")
+					// }
 					}
 				});
 			},

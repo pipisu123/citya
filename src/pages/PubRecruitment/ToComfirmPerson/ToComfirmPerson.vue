@@ -17,6 +17,7 @@
 </template>
 
 <script>
+	import {addRecruitment} from '../../../util/recruitment.js'
 	export default {
 		data() {
 			return {
@@ -41,43 +42,35 @@
 				this.$refs.uReadMore.init();
 			},
 			create1(){
-				const res = this.$myRequest({
-					url:'addRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						 "user_id":1,
-						 "str":"个体发布",
-						 "address":this.PersonRecruitment.address,
-						 "introduction": this.PersonRecruitment.intro,
-						"phone": this.PersonRecruitment.phone,
-					}),						
-					method: 'POST'
-				})
-				var a = Promise.resolve(res)
-				a.then((res)=>{
+				addRecruitment({
+				 "user_id": "8040423884719751168",
+				 "str":"个体发布",
+				 "address":this.PersonRecruitment.address,
+				 "introduction": this.PersonRecruitment.intro,
+				"phone": this.PersonRecruitment.phone,
+				}).then(res=>{
 					console.log(res)
-				   if(res.statusCode===200){
-				   		this.$refs.uToast.show({
-				   			title: '发布成功',
-				   			type: 'success',
-							duration: 2500
-				   		})
-						uni.reLaunch({
-							url:'/pages/man/man'
-						})
-				   	}else {
-				   console.log("提交失败")
-				   this.$refs.uToast.show({
-				   	title: '发布失败，请重新发布',
-				   	type: 'error',
-				   	duration: 2500
-				   								
-				   })		
-				   }
-				})							
+					   if(res.statusCode===200){
+					   		this.$refs.uToast.show({
+					   			title: '发布成功',
+					   			type: 'success',
+								duration: 2500
+					   		})
+							uni.reLaunch({
+								url:'/pages/man/man'
+							})
+					   	}else {
+					   console.log("提交失败")
+					   this.$refs.uToast.show({
+					   	title: '发布失败，请重新发布',
+					   	type: 'error',
+					   	duration: 2500
+					   								
+					   })		
+					   }
+				}).catch(err=>{
+					console.log(err)
+				})		
 			}
 		}
 	}

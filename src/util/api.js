@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://192.168.101.24:8081/'
+export const BASE_URL = 'http://192.168.101.24:8080/'
 export const myRequest = (options)=>{
 	    let headers={}
 		// headers["Content-Type"] = "application/json";
@@ -26,4 +26,5 @@ export const myRequest = (options)=>{
 		})
 	})
 }
+
 

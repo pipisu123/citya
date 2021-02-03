@@ -11,7 +11,7 @@
 							<!-- <image src="https://seopic.699pic.com/photo/50056/2286.jpg_wh1200.jpg" mode=""></image> -->
 							<image src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1050564413,3771618612&fm=26&gp=0.jpg" mode=""
 							 v-if="item.poster_path=='默认海报路径'"></image>
-							<image :src="'http://192.168.101.24:8081/'+item.poster_path" mode="" v-else></image>
+							<image :src="'http://192.168.101.24:8080/'+item.poster_path" mode="" v-else></image>
 							
 							<view class="right">
 								<view class="title">
@@ -40,7 +40,7 @@
 				<view class="news" v-if="list1.length!=0">
 					<view class="new-items" v-for="(item,index) in list1" :key="index" @click="goDetail(item.recruitment_id)">
 						<!-- <image src="https://seopic.699pic.com/photo/50056/2286.jpg_wh1200.jpg" mode=""></image> -->
-						<image :src="'http://192.168.101.24:8081/'+item.poster_path" mode=""></image>
+						<image :src="'http://192.168.101.24:8080/'+item.poster_path" mode=""></image>
 						<view class="right">
 							<view class="title">
 								 <text>{{item.recruitment_title}}</text>
@@ -68,7 +68,7 @@
 				<view class="news" v-if="list1.length!=0">
 					<view class="new-items" v-for="(item,index) in list1" :key="index" @click="goDetail(item.recruitment_id)">
 						<!-- <image src="https://seopic.699pic.com/photo/50056/2286.jpg_wh1200.jpg" mode=""></image> -->
-						<image :src="'http://192.168.101.24:8081/'+item.poster_path" mode=""></image>
+						<image :src="'http://192.168.101.24:8080/'+item.poster_path" mode=""></image>
 						<view class="right">
 							<view class="title">
 								 <text>{{item.recruitment_title}}</text>
@@ -96,7 +96,7 @@
 				<view class="news" v-if="list1.length!=0">
 					<view class="new-items" v-for="(item,index) in list1" :key="index" @click="goDetail(item.recruitment_id)">
 						<!-- <image src="https://seopic.699pic.com/photo/50056/2286.jpg_wh1200.jpg" mode=""></image> -->
-						<image :src="'http://192.168.101.24:8081/'+item.poster_path" mode=""></image>
+						<image :src="'http://192.168.101.24:8080/'+item.poster_path" mode=""></image>
 						<view class="right">
 							<view class="title">
 								 <text>{{item.recruitment_title}}</text>
@@ -124,6 +124,7 @@
 </template>
 
 <script>
+	import {addTopping,recruitmentList} from '../../../../util/recruitment.js'
     export default {
         data() {
             return {
@@ -161,19 +162,27 @@
 			// 置顶职位
 			Topping(recruitment_id){
 				console.log("=========")
-				const res =this.$myRequest({
-					url:'addTopping',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"user_id":1,
-						"recruitment_id":recruitment_id
-					}),
-					method: 'POST'
+				addTopping({
+					"user_id": "8040423884719751168",
+					"recruitment_id":recruitment_id
+				}).then(res=>{
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
 				})
-				console.log(res)
+				// const res =this.$myRequest({
+				// 	url:'addTopping',
+				// 	dataType: "json",
+				// 	header: {
+				// 	        'content-type': 'application/json', 
+				// 	        },
+				// 	data:JSON.stringify({ 
+				// 		"user_id":1,
+				// 		"recruitment_id":recruitment_id
+				// 	}),
+				// 	method: 'POST'
+				// })
+				
 			},
 			// 跳转到详情
 			goDetail(recruitment_id){
@@ -185,24 +194,34 @@
 			},
 			// 查询我的所有职位
 			async getWorkname(){
-				const res = await this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"user_id":1,
-						"paging":{
-							"page":0
-						}
-						
-					}),
-					method: 'POST'
+				recruitmentList({
+					"user_id": "8040423884719751168",
+					"paging":{
+						"page":0
+					}
+				}).then(res=>{
+					console.log(res)
+					this.count = res.data.paging.count
+					this.list1 = res.data.data.user_Recruitments
+				}).catch(err=>{
+					console.log(err)
 				})
-				console.log(res)
-				this.count = res.data.paging.count
-				this.list1 = res.data.data.user_Recruitments
+				// const res = await this.$myRequest({
+				// 	url:'findRecruitment',
+				// 	dataType: "json",
+				// 	header: {
+				// 	        'content-type': 'application/json', 
+				// 	        },
+				// 	data:JSON.stringify({ 
+				// 		"user_id":1,
+				// 		"paging":{
+				// 			"page":0
+				// 		}
+						
+				// 	}),
+				// 	method: 'POST'
+				// })
+				
 			},
 			// 触底刷新
 			reachBottom() {
@@ -210,33 +229,22 @@
 				console.log(this.page)
 				 uni.showNavigationBarLoading();//显示加载动画
 				// 查询招聘列表
-					const res = this.$myRequest({
-						url:'findRecruitment',
-						dataType: "json",
-						header: {
-						        'content-type': 'application/json', 
-						        },
-						data:JSON.stringify({ 
-							"paging":{
-								"count":this.count,
-								"page": this.page
-							}
-							
-						}),
-						method: 'POST'
-					})
-					var a = Promise.resolve(res)
-					a.then((res)=>{
-						// console.log(res.data)
-						console.log(this.list1.length)
-						console.log(res)
-						if (res.data.code===20001) {//没有数据
-								uni.hideNavigationBarLoading();//关闭加载动画
-								return false;
-									}
-							this.list1 = this.list1.concat(res.data.data.user_Recruitments);//将数据拼接在一起			
+				recruitmentList({
+					"paging":{
+						"count":this.count,
+						"page": this.page
+					}
+				}).then(res=>{
+					console.log(res)
+					if (res.data.code===20001) {//没有数据
 							uni.hideNavigationBarLoading();//关闭加载动画
-					})
+							return false;
+								}
+						this.list1 = this.list1.concat(res.data.data.user_Recruitments);//将数据拼接在一起			
+						uni.hideNavigationBarLoading();//关闭加载动画
+				}).catch(err=>{
+					console.log(err)
+				})
 			},
           // tab栏切换
           change(index) {
@@ -246,77 +254,47 @@
 				this.getWorkname()
 			}
 			if(index===1){
-				const res = this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"user_id":1,
-						"work_types":"全职",
-						"paging":{
-							"page":this.page
-						}
-						
-					}),
-					method: 'POST'
-				})
-				console.log(res)
-				var a = Promise.resolve(res)
-				a.then((res)=>{
-					console.log(res.data.data)
-				   this.list1 = res.data.data.user_Recruitments
+				recruitmentList({
+				"user_id": "8040423884719751168",
+				"work_types":"全职",
+				"paging":{
+					"page":this.page
+				}
+				}).then(res=>{
+					console.log(res)
+					this.list1 = res.data.data.user_Recruitments
+				}).catch(err=>{
+					console.log(err)
 				})
 				
 			}
 			if(index===2){
-				const res = this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"user_id":1,
-						"work_types":"兼职",
-						"paging":{
-							"page":0
-						}
-						
-					}),
-					method: 'POST'
-				})
-				console.log(res)
-				var a = Promise.resolve(res)
-				a.then((res)=>{
-					console.log(res.data.data)
-				   this.list1 = res.data.data.user_Recruitments
+				recruitmentList({
+				"user_id":"8040423884719751168",
+				"work_types":"兼职",
+				"paging":{
+					"page":this.page
+				}
+				}).then(res=>{
+					console.log(res)
+					this.list1 = res.data.data.user_Recruitments
+				}).catch(err=>{
+					console.log(err)
 				})
 				
 			}
 			if(index===3){
-				const res = this.$myRequest({
-					url:'findRecruitment',
-					dataType: "json",
-					header: {
-					        'content-type': 'application/json', 
-					        },
-					data:JSON.stringify({ 
-						"user_id":1,
-						"work_types":"实习",
-						"paging":{
-							"page":0
-						}
-						
-					}),
-					method: 'POST'
-				})
-				console.log(res)
-				var a = Promise.resolve(res)
-				a.then((res)=>{
-					console.log(res.data.data)
-				   this.list1 = res.data.data.user_Recruitments
+				recruitmentList({
+				"user_id":"8040423884719751168",
+				"work_types":"实习",
+				"paging":{
+					"page":this.page
+				}
+				}).then(res=>{
+					console.log(res)
+					this.list1 = res.data.data.user_Recruitments
+				}).catch(err=>{
+					console.log(err)
 				})
 				
 			}

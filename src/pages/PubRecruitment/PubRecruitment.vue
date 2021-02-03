@@ -174,13 +174,13 @@ export default {
 							trigger: 'change',
 						}
 					],
-					photo:[
-						{
-							required: true,
-							message: '请先上传图片',
-							trigger: 'change',
-						}
-					],
+					// photo:[
+					// 	{
+					// 		required: true,
+					// 		message: '请先上传图片',
+					// 		trigger: 'change',
+					// 	}
+					// ],
 					count:[
 						{
 							required: true,
@@ -468,7 +468,8 @@ export default {
 		click(){
 			let files = [];
 			files = this.$refs.uUpload.lists;
-			this.urlTobase64(files[0].url); 
+			// this.urlTobase64(files[0].url); 
+			this.base64(files[0].url)
 			this.recruitment.photourl = files[0].url
 			console.log(files[0].url);
 			console.log(this.model.photo)
@@ -499,19 +500,20 @@ export default {
 					}
 				 })	
 		},
-		// 上传图片回调转base64
-		urlTobase64(url){
-		 uni.request({
-		 url: url,
-		 method:'GET',
-		 responseType: 'arraybuffer',
-		 success: ress => {
-		  let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64 
-		  // base64 = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
-		  this.model.photo = base64			
-		  
-		 }
-		    })
+		
+		base64(url){
+		      return new Promise((resolve, reject) => {
+		        wx.getFileSystemManager().readFile({
+		          filePath: url, //选择图片返回的相对路径
+		          encoding: 'base64', //编码格式
+		          success: res => {
+		            resolve('data:image/' + ';base64,' + res.data)
+					console.log(res)
+					this.model.photo = res.data	
+		          },
+		          fail: res => reject(res.errMsg)
+		        })
+		      })
 		},
 		// 点击actionSheet回调
 		actionSheetCallback(index) {

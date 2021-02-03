@@ -57,7 +57,8 @@
         /* 微信小程序特有相关 */
         "appid" : "wx36b27344f1f13531",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : false
         },
         "usingComponents" : true
     },

@@ -24,11 +24,17 @@
 			<u-form-item :label-position="labelPosition" label="选择类型" prop="workType" label-width="150">
 				<u-input :border="border" type="select" :select-open="selectShow" v-model="model.workType" placeholder="请选择工作类型" @click="selectShow = true"></u-input>
 			</u-form-item>
+			<u-form-item :label-position="labelPosition" label="期望工资" prop="compensation" label-width="150">
+				<u-input :border="border" type="select" :select-open="selectShow4" v-model="model.compensation" placeholder="请选择期望工资" @click="selectShow4 = true"></u-input>
+			</u-form-item>
 			<u-form-item :leftIconStyle="{color: '#888', fontSize: '16rpx'}" label-width="130" :label-position="labelPosition" label="学历" prop="maxdegree">
 				<u-input :border="border" placeholder="请输入最高学历" v-model="model.maxdegree" type="text"></u-input>
 			</u-form-item>
-			<u-form-item :leftIconStyle="{color: '#888', fontSize: '16rpx'}" label-width="130" :label-position="labelPosition" label="行业" prop="industry">
+			<!-- <u-form-item :leftIconStyle="{color: '#888', fontSize: '16rpx'}" label-width="130" :label-position="labelPosition" label="行业" prop="industry">
 				<u-input :border="border" placeholder="请输入行业" v-model="model.industry" type="text"></u-input>
+			</u-form-item> -->
+			<u-form-item :label-position="labelPosition" label="选择行业" prop="industry" label-width="150">
+				<u-input :border="border" type="select" :select-open="selectShow5" v-model="model.industry" placeholder="请选择行业" @click="selectShow5 = true"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="毕业时间" prop="time" label-width="150">
 				<u-input :border="border" type="select" :select-open="pickerShow1" v-model="model.time" placeholder="请选择毕业时间" @click="pickerShow1 = true"></u-input>
@@ -112,6 +118,8 @@
 		<u-select mode="single-column" :list="selectList1" v-model="selectShow1" @confirm="selectConfirm1"></u-select>
 		<u-select mode="single-column" :list="selectList2" v-model="selectShow2" @confirm="selectConfirm2"></u-select>
 		<u-select mode="single-column" :list="selectList3" v-model="selectShow3" @confirm="selectConfirm3"></u-select>
+		<u-select mode="single-column" :list="selectList4" v-model="selectShow4" @confirm="selectConfirm4"></u-select>
+		<u-select mode="mutil-column-auto" :list="selectList5" v-model="selectShow5" @confirm="selectConfirm5"></u-select>
 		<u-picker mode="region" v-model="pickerShow" @confirm="regionConfirm"></u-picker>
 		<u-picker mode="time" v-model="pickerShow1" @confirm="timeConfirm"></u-picker>
 		<u-toast ref="uToast" />
@@ -119,6 +127,8 @@
 </template>
 
 <script>
+	import { addResume } from '../../util/resume.js'
+	
 	export default {
 		data() {
 			return {
@@ -136,6 +146,7 @@
 					region:'',
 					intro:'',
 					time: '',
+					compensation:'',
 					// 工作经历
 					Companyname:'',
 					workname:'',
@@ -372,6 +383,136 @@
 						label: '非全日制'
 					},
 				],
+				selectList4:[
+					{
+						value: '不限',
+						label: '不限'
+					},
+					{
+						value: '1000以下',
+						label: '1000以'
+					},
+					{
+						value: '1000-2000',
+						label: '1000-2000'
+					},
+					{
+						value: '2000-3000',
+						label: '2000-3000'
+					},
+					{
+						value: '3000-5000',
+						label: '3000-5000'
+					},
+					{
+						value: '5000-8000',
+						label: '5000-8000'
+					},
+					{
+						value: '8000-12000',
+						label: '8000-12000'
+					},
+					{
+						value: '12000-20000',
+						label: '12000-20000'
+					},
+					{
+						value: '20000-25000',
+						label: '20000-25000'
+					},
+					{
+						value: '25000以上',
+						label: '25000以上'
+					}
+				],
+				selectList5:[
+					{
+						value: 1,
+						label: '销售',
+						children: [
+							{
+								value: 2,
+								label: '销售代表',
+							},
+							{
+								value: 3,
+								label: '销售经理',
+							},
+							{
+								value: 4,
+								label: '销售部主管',
+							},
+							{
+								value: 5,
+								label: '销售总监',
+							},
+							{
+								value: 6,
+								label: '电话销售',
+							},
+							{
+								value: 7,
+								label: '汽车销售',
+							},
+							{
+								value: 8,
+								label: '房屋销售',
+							},
+							{
+								value: 9,
+								label: '销售支持',
+							},
+							
+						]
+					},
+					{
+						value: 10,
+						label: '客服',
+						children: [
+							{
+								value: 11,
+								label: '客服专员',
+							},
+							{
+								value: 12,
+								label: '客服助理',
+							},
+							{
+								value: 12,
+								label: '客服专员',
+							},
+							{
+								value: 13,
+								label: '客服助理',
+							},
+							{
+								value: 14,
+								label: '客服专员',
+							},
+							{
+								value: 15,
+								label: '客服助理',
+							},
+							{
+								value: 16,
+								label: '客服专员',
+							},
+							{
+								value: 17,
+								label: '客服助理',
+							},
+							{
+								value: 18,
+								label: '客服专员',
+							},
+							{
+								value: 19,
+								label: '客服助理',
+							},
+							
+						]
+					}
+				],
 				check: false,
 				selectStatus: 'close',
 				border: false,
@@ -383,7 +524,9 @@
 				selectShow: false,
 				selectShow1: false,
 				selectShow2: false,
-				selectShow3: false
+				selectShow3: false,
+				selectShow4: false,
+				selectShow5: false
 			}
 		},
 		computed: {
@@ -414,67 +557,126 @@
 								
 							  }
 							});
+				uni.showLoading({
+					title:'创建中...'
+				})
 				this.$refs.uForm.validate(valid => {
-					if (valid) {			  
-						const res = this.$myRequest({
-							url:'addResume',
-							dataType: "json",
-							header: {
-							        'content-type': 'application/json', 
-							        },
-							data:JSON.stringify({ 
-								// 个人信息
-								"user_id":1,
-								"resume_name":this.model.name,
-								"age":this.model.age,							
-								"sex":this.model.sex,
-								"phone": this.model.phone,
-								"wechat": this.model.wechat,
-								"work_type":this.model.workType,
-								"industry":this.model.industry,
-								"max_degree":this.model.maxdegree,
-								"work_city":this.model.region,
-								"graduation_time":this.model.time,
-								"introduction":this.model.intro,
-								// 工作经历
-								"workEXP":[{
-									"company_name":this.model.Companyname,
-									"work_name":this.model.workname,
-									"work_time":this.model.worktime,
-									"work_matter":this.model.workmatter
-								}],
-								// 教育经历
-								"educationalEXP":[
-									{
-										"school_name":this.model.Schoolname,
-										"institution":this.model.institution,
-										"degree":this.model.degree,
-										"specialty":this.model.speciality,
-										"school_experience":this.model.shcoolexp
-									}
-								],
-								// 项目经历
-								"projectEXP":[
-									{
-										"project_name":this.model.Projectname,
-										"work_name":this.model.Proworkname,
-										"project_description":this.model.Prodescribe,
-										"project_link":this.model.Projecturl
-									}
-								]
-							}),						
-							method: 'POST'
+					if (valid) {	
+						addResume({
+							// 个人信息
+							"userId":"8040423884719751168",
+							"resumeName":this.model.name,
+							"age":this.model.age,							
+							"sex":this.model.sex,
+							"phone": this.model.phone,
+							"wechat": this.model.wechat,
+							"workType":this.model.workType,
+							"industry":this.model.industry,
+							"maxDegree":this.model.maxdegree,
+							"workCity":this.model.region,
+							"graduation_time":this.model.time,
+							"introduction":this.model.intro,
+							"compensation":this.model.compensation,
+							// 工作经历
+							"workExp":[{
+								"companyName":this.model.Companyname,
+								"workName":this.model.workname,
+								"workTime":this.model.worktime,
+								"workMatter":this.model.workmatter
+							}],
+							// 教育经历
+							"educationalExp":[
+								{
+									"school_name":this.model.Schoolname,
+									"institution":this.model.institution,
+									"degree":this.model.degree,
+									"specialty":this.model.speciality,
+									"schoolExperience":this.model.shcoolexp
+								}
+							],
+							// 项目经历
+							"projectExp":[
+								{
+									"projectName":this.model.Projectname,
+									"workName":this.model.Proworkname,
+									"projectDescription":this.model.Prodescribe,
+									"projectLink":this.model.Projecturl
+								}
+							]
+						}).then(res=>{
+							console.log(res)
+							if(res.data.code===20000){
+								uni.hideLoading()
+								uni.reLaunch({
+									url:'/pages/man/man'
+								})
+							}else{
+								uni.showToast({
+									title:'创建失败，请重新创建~'
+								})
+							}
+						}).catch(err=>{
+							console.log(err)
 						})
-						console.log(res)								
-						this.$refs.uToast.show({
-							title: '提交成功',
-							type: 'success',
-							// url: 'pages/public/public'							
-						})
+				// 		const res = this.$myRequest({
+				// 			url:'addResume',
+				// 			dataType: "json",
+				// 			header: {
+				// 			        'content-type': 'application/json', 
+				// 			        },
+				// 			data:JSON.stringify({ 
+				// 				// 个人信息
+				// 				"user_id":1,
+				// 				"resume_name":this.model.name,
+				// 				"age":this.model.age,							
+				// 				"sex":this.model.sex,
+				// 				"phone": this.model.phone,
+				// 				"wechat": this.model.wechat,
+				// 				"work_type":this.model.workType,
+				// 				"industry":this.model.industry,
+				// 				"max_degree":this.model.maxdegree,
+				// 				"work_city":this.model.region,
+				// 				"graduation_time":this.model.time,
+				// 				"introduction":this.model.intro,
+				// 				// 工作经历
+				// 				"workEXP":[{
+				// 					"company_name":this.model.Companyname,
+				// 					"work_name":this.model.workname,
+				// 					"work_time":this.model.worktime,
+				// 					"work_matter":this.model.workmatter
+				// 				}],
+				// 				// 教育经历
+				// 				"educationalEXP":[
+				// 					{
+				// 						"school_name":this.model.Schoolname,
+				// 						"institution":this.model.institution,
+				// 						"degree":this.model.degree,
+				// 						"specialty":this.model.speciality,
+				// 						"school_experience":this.model.shcoolexp
+				// 					}
+				// 				],
+				// 				// 项目经历
+				// 				"projectEXP":[
+				// 					{
+				// 						"project_name":this.model.Projectname,
+				// 						"work_name":this.model.Proworkname,
+				// 						"project_description":this.model.Prodescribe,
+				// 						"project_link":this.model.Projecturl
+				// 					}
+				// 				]
+				// 			}),						
+				// 			method: 'POST'
+				// 		})
+				// 		console.log(res)								
+				// 		this.$refs.uToast.show({
+				// 			title: '提交成功',
+				// 			type: 'success',
+				// 			// url: 'pages/public/public'							
+				// 		})
 										
 					
-					} else {
-					console.log("提交失败")
+				// 	} else {
+				// 	console.log("提交失败")
 					}
 				});
 			},
@@ -509,6 +711,20 @@
 				this.model.institution = '';
 				e.map((val, index) => {
 					this.model.institution += this.model.institution == '' ? val.label : '-' + val.label;
+				})
+			},
+			// 选择工资回调
+			selectConfirm4(e){
+				this.model.compensation = '';
+				e.map((val, index) => {
+					this.model.compensation += this.model.compensation == '' ? val.label : '-' + val.label;
+				})
+			},
+			// 选择行业回调
+			selectConfirm5(e){
+				this.model.industry = '';
+				e.map((val, index) => {
+					this.model.industry += this.model.industry == '' ? val.label : '-' + val.label;
 				})
 			},
 			// 选择地区回调

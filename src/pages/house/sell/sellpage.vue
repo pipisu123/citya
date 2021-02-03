@@ -1,11 +1,11 @@
 <template>
 	<view class="news">
 		<view class="new-items" @click="goDetail">
-			<image src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1358193358,3195625911&fm=26&gp=0.jpg" mode=""></image>
+			<image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1450998356,1344028689&fm=26&gp=0.jpghttps://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1450998356,1344028689&fm=26&gp=0.jpg" mode=""></image>
 			
 			<view class="right">
 				<view class="title">
-					<text>出租|</text>
+					<text>出售|</text>
 					<text class="worktype">双山二路花园小区</text>
 				</view>
 				<view class="industry">
@@ -13,7 +13,7 @@
 				</view>
 				<view></view>
 				<view class="wages">中介|南北通透|随时看房</view>
-				<view>208万</view>
+				<view>总价：208万</view>
 				
 			</view>
 			<view>
@@ -50,12 +50,12 @@
 			this.src = this.$store.state.avatar
 		},
 		methods: {
-			goDetail() {
+			goDetail(){
 				uni.navigateTo({
-					url:'/pages/house/detailpage/detailpage'
+					url:'/pages/house/sellhousepage/sellhousepage'
 				})
-			}
 		}
+	}
 	}
 </script>
 

@@ -21,28 +21,28 @@
 			return {
 				navs:[
 					{
-						src:'/static/11.jpg',
-						title: '出租',
+						src:'/static/011.jpg',
+						title: '全新楼盘',
 						path: '/pages/house/rent/rent'
 					},
 					{
-						src: '/static/18.jpg',
-						title: '出售',
+						src: '/static/022.jpg',
+						title: '在售楼盘',
 						path: '/pages/house/sell/sell'
 					},
 					{
-						src: '/static/17.jpg',
-						title: '二手房',
+						src: '/static/033.jpg',
+						title: '即将开盘',
 						path: '/pages/house/resold/resold'
 					},
 					{
-						src: '/static/16.jpg',
-						title: '新盘',
+						src: '/static/044.jpg',
+						title: '已开盘',
 						path: '/pages/house/newdish/newdish'
 					},
 					{
-						src: '/static/19.jpg',
-						title: '商铺',
+						src: '/static/055.jpg',
+						title: '低总价',
 						path: '/pages/house/shop/shop'
 					},
 					
@@ -89,7 +89,7 @@
 }
 .content{
 	height: 150rpx;
-	margin-top: 55rpx;
+	// margin-top: 45rpx;
 	background-color: #F1F1F1;
 }
 

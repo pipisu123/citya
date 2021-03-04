@@ -1,19 +1,20 @@
 <template>
 	<view class="news">
 		<view class="new-items" @click="goDetail">
-			<image src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1358193358,3195625911&fm=26&gp=0.jpg" mode=""></image>
+			<image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimage.zp365.com%2Fnews%2Fimages%2Fq4%2F201368414006006.jpg&refer=http%3A%2F%2Fimage.zp365.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614501044&t=654adc215a334861a2c2274d1ae2e20d" mode=""></image>
 			
 			<view class="right">
 				<view class="title">
 					<text>出租|</text>
-					<text class="worktype">双山二路花园小区</text>
+					<text class="worktype">人民广场文创街</text>
 				</view>
 				<view class="industry">
-					<text>面积：360㎡|东|明湖百货</text>
+					<text>面积：65㎡|商业街店铺|</text>
 				</view>
 				<view></view>
-				<view class="wages">中介|南北通透|随时看房</view>
-				<view>208万</view>
+				<view class="wages">临街门面|可餐饮|上水</view>
+				<view>2000/月</view>
+				
 			</view>
 			<view>
 				
@@ -49,12 +50,12 @@
 			this.src = this.$store.state.avatar
 		},
 		methods: {
-			goDetail() {
+			goDetail(){
 				uni.navigateTo({
-					url:'/pages/house/detailpage/detailpage'
+					url:'/pages/house/shoppage/shoppage'
 				})
-			}
 		}
+	}
 	}
 </script>
 

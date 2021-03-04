@@ -267,6 +267,15 @@
             }
             
         }
+		,{
+		    "path" : "pages/house/resold/resold",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
             "path" : "pages/house/sell/sell",
             "style" :                                                                                    
@@ -277,7 +286,7 @@
             
         }
         ,{
-            "path" : "pages/house/resold/resold",
+            "path" : "pages/house/shop/shop",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -285,6 +294,15 @@
             }
             
         }
+		,{
+		    "path" : "pages/house/detailpage/detailpage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
             "path" : "pages/myResume/UpdatemyResume/UpdatemyResume",
             "style" :                                                                                    
@@ -294,6 +312,33 @@
             }
             
         }
+		,{
+		    "path" : "pages/house/shoppage/shoppage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/house/newdish/newdish",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/house/newdishpage/newdishpage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
             "path" : "pages/myResume/UpdateworkExp/UpdateworkExp",
             "style" :                                                                                    
@@ -341,6 +386,7 @@
         }
         ,{
             "path" : "pages/man/PersonalCenter/myDelivery/myDelivery",
+            // "path" : "pages/house/sellhousepage/sellhousepage",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

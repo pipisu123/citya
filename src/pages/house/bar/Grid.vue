@@ -5,7 +5,7 @@
 					<view class="nav" >
 						<view class="nav-item" v-for="(item,index) in navs" :key="index" @click="fb(item.path)">
 							<view>
-								<image :src="item.src" mode="" style="width: 65rpx;height: 65rpx;"></image>
+								<image :src="item.src" mode="" style="width: 80rpx;height: 80rpx;"></image>
 							</view>
 							<text>{{item.title}}</text>
 						</view>
@@ -21,14 +21,9 @@
 			return {
 				navs:[
 					{
-						src:'/static/11.jpg',
+						src:'/static/80.jpg',
 						title: '出租',
 						path: '/pages/house/rent/rent'
-					},
-					{
-						src: '/static/18.jpg',
-						title: '出售',
-						path: '/pages/house/sell/sell'
 					},
 					{
 						src: '/static/17.jpg',
@@ -36,22 +31,19 @@
 						path: '/pages/house/resold/resold'
 					},
 					{
-						src: '/static/16.jpg',
+						src: '/static/70.jpg',
 						title: '新盘',
-<<<<<<< HEAD
+
 						path: '/pages/house/newdish/newdish'
-=======
-						path: '/pages/mall/mall'
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
+
 					},
 					{
-						src: '/static/19.jpg',
+						src: '/static/60.jpg',
 						title: '商铺',
-<<<<<<< HEAD
+
 						path: '/pages/house/shop/shop'
-=======
-						path: '/pages/mall/mall'
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
+
+						
 					},
 					
 				]
@@ -74,13 +66,13 @@
 	display: flex;
     flex-wrap: wrap;
 	.nav-item{
-		width: 20%;
+		width: 25%;
 		text-align: center;
 		view{
 			width: 90rpx;
 			height: 80rpx;
 			background-color:#F1F1F1;
-			margin: 10rpx auto 10rpx;
+			margin: 30rpx auto 2rpx;
 			line-height: 120rpx;
 			color: #fff;
 			font-size: 50rpx;

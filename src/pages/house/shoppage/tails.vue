@@ -37,6 +37,7 @@
 <style scoped lang="scss">
 	.wrap {
 		padding: 24rpx;
+		height: 900rpx;
 	}
 
 	.u-row {

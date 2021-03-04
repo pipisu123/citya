@@ -38,14 +38,14 @@
 		
  
 		<!-- 下半部分 -->
-			<view class="title_line">
+			<view class="title_line"  >
 				<text class="title">求职管理</text>
 				<text class="more">查看更多</text>
 			</view>
-			
-			<view class="welfare">
+			<!-- <view class="box"> -->
+			<view class="welfare ">
 				<template>
-					<view class="item">
+					<view class="item" >
 						<view class="border">
 							<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
 						</view>
@@ -69,10 +69,21 @@
 						</view>
 						<text class="txt">我的收藏</text>
 					</view>
+					<view class="item">
+						<view class="border">
+							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">我的收藏</text>
+					</view>
+					
+					
+					
+					
 				</template>
 			</view>
+			<!-- </view> -->
 			
-			<view class="title_line">
+			<view class="title_line" >
 				<text class="title">招聘管理</text>
 				<text class="more">查看更多</text>
 			</view>
@@ -103,6 +114,7 @@
 						</view>
 						<text class="txt">我的收藏</text>
 					</view>
+				
 				</template>
 			</view>
 		
@@ -423,6 +435,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		// word-break: break-all;
 	
 		.title {
 			margin-left: 20px;
@@ -440,10 +453,20 @@
 			line-height: 41px;
 		}
 	}
+	// .box{
+	// 	display: block;
+		
+	// 	white-space: pre-line;
+	// 	padding: 10rpx;
+	// 	border: 1rpx solid gray;
+	// 	margin: 0;
+		
+	// }
 	
 	.welfare {
 		width: 92%;
 		display: flex;
+		flex-wrap: wrap;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
@@ -451,10 +474,12 @@
 		box-shadow: 0px 1px 21px 0px rgba(103, 103, 103, 0.2);
 		border-radius: 10px;
 		margin-bottom: 10px;
+		
 	
 		.item {
-			padding: 10px;
-			display: flex;
+			padding: 20px;
+			flex-wrap: wrap;
+			white-space: pre-wrap;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
@@ -466,10 +491,12 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				flex-wrap: wrap;
 	
 				.img{
 					width: 10rpx;
 					height: 10rpx;
+					flex-wrap: wrap;
 				}
 			}
 	

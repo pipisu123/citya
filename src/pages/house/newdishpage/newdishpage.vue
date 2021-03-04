@@ -1,23 +1,28 @@
 <template>
 	<view class="wrap">
-		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter"></u-swiper>
+		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter" height=520 title=true effect3d-previous-margin=45></u-swiper>
 		<view class="text" >
-			<view class="u-font-36  $u-type-primary" >
+			<view class="u-font-36  $u-main-color" >
 			<text>出售|茂名保利东湾</text>
 			<view class="u-font-20">
 			<text>别名：保利东江小区</text>
 		</view>
 		</view>
+		<!-- <view class="scroll"></view> -->
 		</view>
 		<newlayout></newlayout>
 		<newnavi></newnavi>
-		<!-- <steps></steps> -->
+		<bbar></bbar>
+		<map></map>
+		<tex></tex>	
 	</view>
 </template>
 
 <script>
 	import newlayout from '../newdishpage/newlayout.vue'
 	import newnavi from '../newdishpage/newnavi.vue'
+	import bbar from '../newdishpage/bbar.vue'
+	import tex from '../newdishpage/tex.vue'
 	// import steps from '../newdishpage/steps.vue'
 	export default {
 		data() {
@@ -43,6 +48,8 @@
 		components:{
 		    newlayout,
 			newnavi,
+			bbar,
+			tex
 			// steps
 		},
 		methods: {
@@ -54,5 +61,10 @@
 <style lang="scss" scoped>
 	.wrap {
 		padding: 10rpx;
+	}
+	.scroll{
+		height: 300rpx;
+		width: 100%;
+		overflow-y: scroll;
 	}
 </style>

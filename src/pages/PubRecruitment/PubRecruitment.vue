@@ -1,5 +1,4 @@
 <template>
-
 <view class="content">
 	<!-- 创建公司 -->
 	<view>
@@ -75,6 +74,7 @@
 			@confirm="confirm" :content="content" confirm-text="前往创建公司" 
 		>
 		</u-modal>
+		
 		<u-button @click="submit(recruitment)" type="primary" v-if="showview">立即发布</u-button>
 	</view>
 </view>

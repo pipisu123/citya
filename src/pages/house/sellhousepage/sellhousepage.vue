@@ -1,8 +1,8 @@
 <template>
 	<view class="wrap">
-		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter"></u-swiper>
+		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter" height=520 title=true effect3d-previous-margin=45></u-swiper>
 		<view class="text" >
-			<view class="u-font-36  $u-type-primary" >
+			<view class="u-font-36 $u-main-color" >
 			<text>5万首付买准现房 学府美宅 世茂锦城 名额有限 先到先得</text>
 			<view class="u-font-32">
 			<text>价格：62万</text>
@@ -10,13 +10,16 @@
 		</view>
 		</view>
 		<sellnavi></sellnavi>
+		
 		<selltext></selltext>
+		<bottomBar></bottomBar>
 	</view>
 </template>
 
 <script>
 	import sellnavi from '../sellhousepage/sellnavi.vue'
 	import selltext from '../sellhousepage/selltext.vue'
+	import bottomBar from '../sellhousepage/bottomBar.vue'
 	export default {
 		data() {
 			return {
@@ -34,7 +37,8 @@
 		},
 		components:{
 			sellnavi,
-			selltext
+			selltext,
+			bottomBar
 		
 		},
 		methods: {
@@ -46,5 +50,8 @@
 <style lang="scss" scoped>
 	.wrap {
 		padding: 10rpx;
+	}
+	.tu-font-32{
+		color: #303133;
 	}
 </style>

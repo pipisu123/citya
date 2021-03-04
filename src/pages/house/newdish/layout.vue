@@ -20,7 +20,32 @@
 		</u-row>
 	</view>
 </template>
-
+<!-- <script>
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		onLoad() {
+			
+		},
+		methods: {
+			goearlymorning(){
+				uni.navigateTo({
+					// url:'test?id=1&name=uniapp'
+					url:"/pages/earlymorning/earlymoning"
+				})
+			}
+			
+		},
+		{
+			"path":"pages/earlymorning/earlymorning",
+			"styly":{}
+		}
+	}
+</script>
+ -->
 <style scoped lang="scss">
 	.wrap {
 		padding: 24rpx;

@@ -23,27 +23,27 @@
 					{
 						src:'/static/011.jpg',
 						title: '全新楼盘',
-						path: '/pages/house/rent/rent'
+						path: '/pages/house/newbuildings/newbuildings'
 					},
 					{
 						src: '/static/022.jpg',
 						title: '在售楼盘',
-						path: '/pages/house/sell/sell'
+						path: '/pages/house/Soldbuilding/Soldbuilding'
 					},
 					{
 						src: '/static/033.jpg',
 						title: '即将开盘',
-						path: '/pages/house/resold/resold'
+						path: '/pages/house/earlymorning/earlymorning'
 					},
 					{
 						src: '/static/044.jpg',
 						title: '已开盘',
-						path: '/pages/house/newdish/newdish'
+						path: '/pages/house/beenopened/beenopened'
 					},
 					{
 						src: '/static/055.jpg',
 						title: '低总价',
-						path: '/pages/house/shop/shop'
+						path: '/pages/house/lowprice/lowprice'
 					},
 					
 				]

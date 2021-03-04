@@ -267,7 +267,6 @@
             }
             
         }
-<<<<<<< HEAD
 		,{
 		    "path" : "pages/house/resold/resold",
 		    "style" :                                                                                    
@@ -277,8 +276,6 @@
 		    }
 		    
 		}
-=======
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
         ,{
             "path" : "pages/house/sell/sell",
             "style" :                                                                                    
@@ -289,11 +286,7 @@
             
         }
         ,{
-<<<<<<< HEAD
             "path" : "pages/house/shop/shop",
-=======
-            "path" : "pages/house/resold/resold",
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -302,11 +295,8 @@
             
         }
         ,{
-<<<<<<< HEAD
+
             "path" : "pages/house/detailpage/detailpage",
-=======
-            "path" : "pages/myResume/UpdatemyResume/UpdatemyResume",
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -315,11 +305,8 @@
             
         }
         ,{
-<<<<<<< HEAD
+
             "path" : "pages/house/shoppage/shoppage",
-=======
-            "path" : "pages/myResume/UpdateworkExp/UpdateworkExp",
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -328,11 +315,11 @@
             
         }
         ,{
-<<<<<<< HEAD
+
             "path" : "pages/house/newdish/newdish",
-=======
-            "path" : "pages/myResume/UpdateEducation/UpdateEducation",
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
+
+           
+
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -341,7 +328,7 @@
             
         }
         ,{
-<<<<<<< HEAD
+
             "path" : "pages/house/newdishpage/newdishpage",
             "style" :                                                                                    
             {
@@ -352,9 +339,206 @@
         }
         ,{
             "path" : "pages/house/sellhousepage/sellhousepage",
-=======
-            "path" : "pages/myResume/UpdateProject/UpdateProject",
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/release/release",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/house/map/map",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/newbuildings/newbuildings",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/Soldbuilding/Soldbuilding",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/earlymorning/earlymorning",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/lowprice/lowprice",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/beenopened/beenopened",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/rental/rental",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/mypage/mypage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/forrent/forrent",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/brokerpage/brokerpage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/newrelease/newrelease",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/secondhandhousingrelease/secondhandhousingrelease",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/shopsrelease/shopsrelease",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/pubilshedpage/pubilshedpage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/house/register/register",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/register/login/login",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/newhouserelease/newhouserelease",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/newpupups/newpupups",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/persomalpublishing/persomalpublishing",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/popup/popup",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/house/secondhandhousingpage/secondhandhousingpage",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

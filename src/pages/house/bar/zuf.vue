@@ -131,6 +131,9 @@
 </script>
 
 <style scoped lang="scss">
+	.search{
+		margin-right: 80%;
+	}
 	.aa{
 		margin-top: 60rpx;
 	}

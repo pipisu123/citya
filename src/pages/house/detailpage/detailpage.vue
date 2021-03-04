@@ -1,8 +1,8 @@
 <template>
 	<view class="wrap">
-		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter"></u-swiper>
+		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter" height=520 title=true effect3d-previous-margin=45></u-swiper>
 		<view class="text" >
-			<view class="u-font-36  $u-type-primary" >
+			<view class="u-font-36 $u-main-color" >
 			<text>出租|双山二路花园小区电梯房首次出租,精装修拎包入住</text>
 			<view class="u-font-30">
 			<text>价格：5000/月</text>
@@ -12,7 +12,8 @@
 		<Banner></Banner>
 		<navi></navi>
 		<tex></tex>
-		<bottom></bottom>
+	<!-- 	<bottom></bottom> -->
+		<Bar></Bar>
 	</view>
 </template>
 
@@ -20,7 +21,8 @@
 	import Banner from '../detailpage/Banner.vue'
 	import navi from '../detailpage/navi.vue'
 	import tex from '../detailpage/tex.vue'
-	import bottom from '../detailpage/bottom.vue'
+	// import bottom from '../detailpage/bottom.vue'
+	import Bar from '../detailpage/Bar.vue'
 	export default {
 		data() {
 			return {
@@ -40,7 +42,8 @@
 			Banner,
 			navi,
 			tex,
-			bottom
+			// bottom,
+			Bar
 		},
 		methods: {
 

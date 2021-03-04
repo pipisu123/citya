@@ -1,6 +1,7 @@
 <template>
 	<view class="news">
-		<view class="new-items">
+		<view class="new-items"  @click="goDetail"
+		>
 			<image src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1358193358,3195625911&fm=26&gp=0.jpg" mode=""></image>
 			
 			<view class="right">
@@ -9,13 +10,8 @@
 					<text class="worktype">中成公寓</text>
 				</view>
 				<view class="industry">
-<<<<<<< HEAD
-					<text>面积：360㎡|东|明湖百货</text>
-=======
 					<text>面积：360平方米|东|明湖百货</text>
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
 				</view>
-				<view></view>
 				<view class="wages">中介|南北通透|随时看房</view>
 				<view>1200/月</view>
 				
@@ -54,8 +50,10 @@
 			this.src = this.$store.state.avatar
 		},
 		methods: {
-			goDetail(recruitment_id) {
-				this.$emit('itemClick', recruitment_id)
+				goDetail(){
+					uni.navigateTo({
+						url:'/pages/house/detailpage/detailpage'
+					})
 			}
 		}
 	}

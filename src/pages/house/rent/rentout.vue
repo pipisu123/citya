@@ -43,21 +43,38 @@
 					},
 					
 				],
-				options2: [{
-						label: '10万',
+				options2: [
+					{
+						label: '不限',
+						value: 0,
+					},
+					{
+						label: '0-500',
 						value: 1,
 					},
 					{
-						label: '80万',
+						label: '500-1000',
 						value: 2,
 					},
 					{
-						label: '85万',
-						value: 2,
+						label: '1000-2000',
+						value: 3,
 					},
 					{
-						label: '90万',
-						value: 2,
+						label: '2000-3000',
+						value: 4,
+					},
+					{
+						label: '3000-4000',
+						value: 5,
+					},
+					{
+						label: '4000-5000',
+						value: 6,
+					},
+					{
+						label: '5000以上',
+						value: 7,
 					},
 				],
 				options3: [{
@@ -70,19 +87,19 @@
 					},
 					{
 						label: '二室',
-						value: 2,
+						value: 3,
 					},
 					{
 						label: '三室',
-						value: 2,
+						value: 4,
 					},
 					{
 						label: '四室',
-						value: 2,
+						value:5,
 					},
 					{
 						label: '五室以上',
-						value: 2,
+						value: 6,
 					},
 					
 				],

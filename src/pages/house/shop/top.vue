@@ -43,46 +43,56 @@
 					},
 					
 				],
-				options2: [{
-						label: '5000/月以下',
+				options2: [
+					{
+						label: '不限',
 						value: 1,
+					},
+					{
+						label: '5000/月以下',
+						value: 2,
 					},
 					{
 						label: '5000-8000/月',
-						value: 2,
+						value: 3,
 					},
 					{
 						label: '8000-10000/月',
-						value: 2,
+						value: 4,
 					},
 					{
 						label: '1-1.5万/月',
-						value: 2,
+						value: 5,
 					},
 				],
-				options3: [{
-						label: '20㎡以下',
+				options3: [
+					{
+						label: '不限',
 						value: 1,
 					},
 					{
-						label: '20-50㎡',
+						label: '20㎡以下',
 						value: 2,
+					},
+					{
+						label: '20-50㎡',
+						value: 3,
 					},
 					{
 						label: '50-100㎡',
-						value: 2,
+						value: 4,
 					},
 					{
 						label: '100-200㎡',
-						value: 2,
+						value: 5,
 					},
 					{
 						label: '200-500㎡',
-						value: 2,
+						value: 6,
 					},
 					{
 						label: '500-1000㎡',
-						value: 2,
+						value: 7,
 					},
 					
 				],

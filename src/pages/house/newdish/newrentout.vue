@@ -43,21 +43,25 @@
 					},
 					
 				],
-				options2: [{
-						label: '30万以下',
+				options2: [
+					{
+						label: '不限',
 						value: 1,
+					},{
+						label: '30万以下',
+						value: 2,
 					},
 					{
 						label: '30-50万',
-						value: 2,
+						value: 3,
 					},
 					{
 						label: '50-80万',
-						value: 2,
+						value: 4,
 					},
 					{
 						label: '80-120万',
-						value: 2,
+						value: 5,
 					},
 				],
 				options3: [{

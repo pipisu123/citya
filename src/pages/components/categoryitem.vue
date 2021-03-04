@@ -41,7 +41,7 @@
 						path: '/pages/mall/mall'
 					},
 					{
-						src: '../../static/jj.png',
+						src: '../../static/19.png',
 						title: '积分商城',
 						path: '/pages/mall/mall'
 					},
@@ -51,7 +51,7 @@
 						path: '/pages/mall/mall'
 					},
 					{
-						src: '../../static/jj.png',
+						src: '../../static/19.png',
 						title: '积分商城',
 						path: '/pages/mall/mall'
 					},

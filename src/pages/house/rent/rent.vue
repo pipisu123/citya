@@ -12,6 +12,7 @@
 	<rentout></rentout>
 	<housing></housing>
 	<housingnvai></housingnvai>
+	<bottombar></bottombar>
 	</view>
 </template>
 
@@ -19,6 +20,7 @@
 	import rentout from '../rent/rentout.vue'
 	import housing from '../rent/housing.vue'
 	import housingnvai from '../rent/housingnvai.vue'
+	import bottombar from '../rent/bottombar.vue'
 	export default {
 		data() {
 			return {
@@ -28,7 +30,8 @@
 		 components:{
 			 rentout,
 			 housing,
-			 housingnvai
+			 housingnvai,
+			 bottombar
 		 },
 		methods: {
 			

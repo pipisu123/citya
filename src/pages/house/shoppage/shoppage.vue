@@ -1,8 +1,8 @@
 <template>
 	<view class="wrap">
-		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter"></u-swiper>
+		<u-swiper :list="list" mode="number" indicator-pos="bottomCenter" height=520 title=true effect3d-previous-margin=45></u-swiper>
 		<view class="text" >
-			<view class="u-font-36  $u-type-primary" >
+			<view class="u-font-36  $u-main-color" >
 			<text>出租|人民广场文创街</text>
 			<view class="u-font-30">
 			<text>价格：5000/月</text>
@@ -12,6 +12,7 @@
 		<navi></navi>
 		<page></page>
 	     <tails></tails>
+		 <bar></bar>
 	</view>
 </template>
 
@@ -19,6 +20,7 @@
 	import navi from '../shoppage/navi.vue'
 	import page from '../shoppage/page.vue'
 	import tails from '../shoppage/tails.vue'
+	import Bar from '../shoppage/Bar.vue'
 	export default {
 		data() {
 			return {
@@ -37,7 +39,8 @@
 		components:{
 			navi,
 			page,
-		   tails
+		   tails,
+		   Bar
 		
 		},
 		methods: {

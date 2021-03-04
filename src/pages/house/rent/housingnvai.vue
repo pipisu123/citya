@@ -39,5 +39,12 @@
 				current: 0
 			}
 		},
+		// methods: {
+		// 		goDetail(){
+		// 			uni.navigateTo({
+		// 				url:'/pages/house/detailpage/detailpage'
+		// 			})
+		// 	}
+		// }
 	}
 </script>

@@ -1,39 +1,45 @@
 <template>
 	<view class="news">
-<<<<<<< HEAD
 		<view class="new-items" @click="goDetail">
-=======
-		<view class="new-items">
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
 			<image src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1358193358,3195625911&fm=26&gp=0.jpg" mode=""></image>
-			
 			<view class="right">
 				<view class="title">
-<<<<<<< HEAD
 					<text>出租|</text>
-					<text class="worktype">双山二路花园小区</text>
+					<text class="worktype">双山二路花园小区 2室1厅1卫</text>
 				</view>
 				<view class="industry">
-					<text>面积：360㎡|东|明湖百货</text>
-=======
-					<text>出售|</text>
-					<text class="worktype">双山二路花园小区</text>
+					<text>2室.360㎡|东| 双山二路花园小区</text>
 				</view>
-				<view class="industry">
-					<text>面积：360平方米|东|明湖百货</text>
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
-				</view>
-				<view></view>
-				<view class="wages">中介|南北通透|随时看房</view>
-				<view>208万</view>
+				
+				<view class="wages">
+					中介|南北通透|电梯房
+					</view>
+					<view class="wrap">
+						<u-row gutter="16">
+							<u-col span="4">
+								<view class="demo-layout bg-purple">
+									<text>押一付一</text>
+								</view>
+							</u-col>
+							<u-col span="4">
+								<view class="demo-layout bg-purple-light">
+									<text>精装修</text>
+								</view>
+							</u-col>
+							<u-col span="4">
+								<view class="demo-layout bg-purple-dark">
+									<text>随时看房</text>
+								</view>
+							</u-col>
+						</u-row>
+						</u-row>
+					</view>
+				<view>800元/月</view>
 				
 			</view>
 			<view>
 				
-				<view class="avatar">
-					<u-avatar :src="src" size=55 show-level=true></u-avatar>
-				</view>
-				<!-- 	<text style="font-size: 18rpx; margin-left: 35rpx;">酒馆</text> -->
+				
 			</view>
 		</view>
 	</view>
@@ -62,21 +68,48 @@
 			this.src = this.$store.state.avatar
 		},
 		methods: {
-<<<<<<< HEAD
 			goDetail() {
 				uni.navigateTo({
 					url:'/pages/house/detailpage/detailpage'
 				})
-=======
-			goDetail(recruitment_id) {
-				this.$emit('itemClick', recruitment_id)
->>>>>>> aace846f24cb0dbd839a8cad243ce0ef139ea1ae
-			}
-		}
+				},
 	}
+	}
+	
 </script>
 
 <style lang="scss">
+	.wrap {
+		padding: 2rpx;
+	}
+	
+	.u-row {
+		margin: 40rpx 0;
+	}
+	
+	.demo-layout {
+		height: 30rpx;
+		border-radius: 8rpx;
+	}
+	
+	.bg-purple {
+		background: #a0cfff;
+		 text-align: center;
+		 padding: 2rpx;
+	}
+	
+	.bg-purple-light {
+		background: #a0cfff; 
+	    text-align: center;
+		padding: 2rpx;
+		
+	}
+	
+	.bg-purple-dark {
+		background: #a0cfff;
+		 text-align: center;
+		 padding: 2rpx;
+	}
 	.news {
 		.new-items {
 			display: flex;
@@ -127,7 +160,5 @@
 		}
 	}
 
-	.wages {
-		color: #FF0000;
-	}
+	
 </style>

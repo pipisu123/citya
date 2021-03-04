@@ -1,36 +1,84 @@
 <template>
-		<view class="wrap">
-			<u-swiper :list="list" effect3d="true" height=320 title=true effect3d-previous-margin=35></u-swiper>
-		</view>
+    <view class="uni-padding-wrap">
+    			<view class="page-section swiper">
+    				<view class="page-section-spacing">
+    					<swiper @change="onSlideChangeEnd" class="swiper" indicator-dots="#000000" :autoplay="autoplay" interval="10000" duration="500">
+    						<swiper-item style="z-index: 1;">
+    							<view class="">
+    								<video @fullscreenchange="event" loop :muted="muted"  autoplay style="" src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4" controls></video>
+    							</view>
+    						</swiper-item>
+    						<swiper-item style="z-index: 1;">
+    							<view class="swiper-item uni-bg-green">
+								<view class="swiper-item uni-bg-green">
+									<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode=""></image>
+								</view>
+								</view>
+    						</swiper-item>
+    						<swiper-item style="z-index: 1;">
+    							<view class="swiper-item uni-bg-green">
+									<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode=""></image>
+								</view>
+    						</swiper-item>
+    						<swiper-item style="z-index: 1;">
+    							<view class="swiper-item uni-bg-blue">C
+								<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode=""></image>
+								</view>
+    						</swiper-item>
+    					</swiper>
+    				</view>
+    			</view>
+    		</view>
 </template>
 
 <script>
 	export default {
-			data() {
-				return {
-					list: [{
-							image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201610%2F07%2F20161007141756_BMwUL.jpeg&refer=http%3A%2F%2Fb-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613978519&t=e001b69f14f6bcad727ca880846c9112',
-							title: ''
+	    data() {
+	        return {
+				muted:false,
+				vido:0,
+	            background: ['color1', 'color2', 'color3'],
+	            indicatorDots: true,
+	            autoplay: true,
+	            interval: 2000,
+	            duration: 500
+	        }
+	    },
+	    methods: {
+	        changeIndicatorDots(e) {
+	            this.indicatorDots = !this.indicatorDots
+	        },
+	        changeAutoplay(e) {
+	            this.autoplay = !this.autoplay
+	        },
+	        intervalChange(e) {
+	            this.interval = e.target.value
+	        },
+	        durationChange(e) {
+	            this.duration = e.target.value
+	        },
+			onSlideChangeEnd: function(swiper) {
+							console.log(swiper.detail.current);
+							this.vido=swiper.detail.current
 						},
-						{
-							image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0117%252F14b826e9p00qn2fh2008ec000he0071c.png%26thumbnail%3D660x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613978606&t=5cc8529c772d57f9c1d61124fced630a',
-							title: ''
+			event(fullScreen, direction){
+							let self=this
+							console.log(fullScreen.detail.fullScreen)
+							if(fullScreen.detail.fullScreen==false){
+								self.autoplay=true
+								self.muted=true
+							}else{
+								self.autoplay=false
+								self.muted=false
+							}
+							
+						console.log(self.autoplay+"22222")
+						console.log(self.muted+"11111111")
+							
 						},
-						{
-							image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0117%252F61c32d79j00qn2fh2000qc000hr006fc.jpg%26thumbnail%3D660x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613979164&t=2d01e418c5acd56ebb2c4fe7cc9e479a',
-							title: ''
-						}
-					],
-				}
-			},
-			methods: {
-	
-			}
-		}
+	    }
+	}
 </script>
 
 <style lang="scss" scoped>
-	.wrap {
-		padding: 20rpx 10rpx;
-	}
 </style>

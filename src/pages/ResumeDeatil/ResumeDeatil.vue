@@ -120,19 +120,22 @@
 				<!-- <u-link href="project.project_link" :under-line="true">{{project.project_link}}</u-link> -->
 			</view>
 		</view>
+		<BottomBar @Collect="Collect" @UnCollect="UnCollect" @Delivery="Delivery"></BottomBar>
 		</view>
-	</view>
 </template>
 
 <script>
+	import BottomBar from './childComps/BottomBar.vue'
+	
 	import {resumeList} from '../../util/resume.js'
+	import {collectResume} from '../../util/resumecollection.js'
 	export default {
 		data() {
 			return {
 				avatar: '',
 				sex: '',
-				item: ''
-				
+				item: '',
+				resumeId:''
 				
 			}
 		},
@@ -140,16 +143,42 @@
 			console.log(options)
 			this.getDetail(options.resumeId)
 		},
+		components:{
+			BottomBar
+		},
 		methods: {
+			// 收藏
+			Collect(){
+				collectResume({
+					"userId": "8040423884719751168",
+					"resumeId": this.resumeId
+				}).then(res=>{
+					console.log(res)
+					if(res.data.code === 20000 ){
+						uni.showToast({
+							title:'收藏成功'
+						})
+					}
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 取消收藏
+			UnCollect(){
+				
+			},
+			// 查询简历详情
 			 async getDetail(resumeId){
+				 console.log(resumeId)
 				 resumeList({
-				"resume_id":resumeId,
+				"resumeId":resumeId,
 				"paging":{
 					"page":0
 				}
 				 }).then(res=>{
 					 console.log(res)
 					 this.item = res.data.data.resumes[0];
+					 this.resumeId = res.data.data.resumes[0].resumeId;
 					 if(this.item.sex=='男'){
 					 	this.sex = "man"
 					 }else{

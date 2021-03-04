@@ -321,6 +321,78 @@
             }
             
         }
+        ,{
+            "path" : "pages/man/PersonalCenter/resumeCollection/resumeCollection",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "简历收藏",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/manageDelivery/manageDelivery",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "投递管理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/myDelivery/myDelivery",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/myInvitation/myInvitation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的面试",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/manageInvitation/manageInvitation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "面试邀请",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/DetailInvite/DetailInvite",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "面试待接受",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/resumeInvite/resumeInvite",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "邀请详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/man/PersonalCenter/myPoints/myPoints",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "积分购买",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

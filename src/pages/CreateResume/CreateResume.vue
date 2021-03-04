@@ -564,7 +564,7 @@
 					if (valid) {	
 						addResume({
 							// 个人信息
-							"userId":"8040423884719751168",
+							"userId":"8037950193056940034",
 							"resumeName":this.model.name,
 							"age":this.model.age,							
 							"sex":this.model.sex,
@@ -618,65 +618,6 @@
 						}).catch(err=>{
 							console.log(err)
 						})
-				// 		const res = this.$myRequest({
-				// 			url:'addResume',
-				// 			dataType: "json",
-				// 			header: {
-				// 			        'content-type': 'application/json', 
-				// 			        },
-				// 			data:JSON.stringify({ 
-				// 				// 个人信息
-				// 				"user_id":1,
-				// 				"resume_name":this.model.name,
-				// 				"age":this.model.age,							
-				// 				"sex":this.model.sex,
-				// 				"phone": this.model.phone,
-				// 				"wechat": this.model.wechat,
-				// 				"work_type":this.model.workType,
-				// 				"industry":this.model.industry,
-				// 				"max_degree":this.model.maxdegree,
-				// 				"work_city":this.model.region,
-				// 				"graduation_time":this.model.time,
-				// 				"introduction":this.model.intro,
-				// 				// 工作经历
-				// 				"workEXP":[{
-				// 					"company_name":this.model.Companyname,
-				// 					"work_name":this.model.workname,
-				// 					"work_time":this.model.worktime,
-				// 					"work_matter":this.model.workmatter
-				// 				}],
-				// 				// 教育经历
-				// 				"educationalEXP":[
-				// 					{
-				// 						"school_name":this.model.Schoolname,
-				// 						"institution":this.model.institution,
-				// 						"degree":this.model.degree,
-				// 						"specialty":this.model.speciality,
-				// 						"school_experience":this.model.shcoolexp
-				// 					}
-				// 				],
-				// 				// 项目经历
-				// 				"projectEXP":[
-				// 					{
-				// 						"project_name":this.model.Projectname,
-				// 						"work_name":this.model.Proworkname,
-				// 						"project_description":this.model.Prodescribe,
-				// 						"project_link":this.model.Projecturl
-				// 					}
-				// 				]
-				// 			}),						
-				// 			method: 'POST'
-				// 		})
-				// 		console.log(res)								
-				// 		this.$refs.uToast.show({
-				// 			title: '提交成功',
-				// 			type: 'success',
-				// 			// url: 'pages/public/public'							
-				// 		})
-										
-					
-				// 	} else {
-				// 	console.log("提交失败")
 					}
 				});
 			},

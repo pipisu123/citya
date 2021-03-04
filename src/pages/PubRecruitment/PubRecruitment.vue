@@ -51,15 +51,12 @@
 				<u-input :border="border" placeholder="请输入招聘人数" v-model="model.count" type="text"></u-input>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
-				<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="false" :before-upload="beforeUpload" max-count=1 :max-size="1 * 1024 * 1024" ></u-upload>
+				<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="true" @on-choose-complete="uploadImage" max-count=1 :max-size="1 * 1024 * 1024" ></u-upload>
 			</u-form-item>
 			<text style="color: #999999;">只能上传一张图片，大小不超1m</text>
 		</u-form>
 		<!-- 创建个体招聘信息 -->
 		<PersonRecruitment v-else></PersonRecruitment>
-		<view class="uploadfile" v-if="showview">
-			<button  @click="click">上传</button>
-		</view>
 		<!-- <view class="public">
 			<u-button @click="submit" type="primary">发布招聘</u-button>
 		</view> -->
@@ -437,6 +434,16 @@ export default {
 	},
 	
 	methods:{
+		// 上传图片回调
+		uploadImage(){
+		   let files = [];
+		   files = this.$refs.uUpload.lists;
+		   // this.urlTobase64(files[0].url); 
+		   this.base64(files[0].url)
+		   this.recruitment.photourl = files[0].url
+		   console.log(files[0].url);
+		   console.log(this.model.photo)
+		},
 		// 关闭提示
 		close() {
 			this.show1 = false;

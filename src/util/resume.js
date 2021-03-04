@@ -1,9 +1,9 @@
-import { myRequest } from './api.js'
+import {myRequest} from './api.js'
 
 // 查询所有简历
 export function resumeList(data){
 	return myRequest ({
-		url:'recruitemt/recruitment-resume/findResume',
+		url:'recruitment/recruitment-resume/findResume',
 		method:'POST',
 		data:data	
 	})
@@ -11,7 +11,7 @@ export function resumeList(data){
 //创建简历
 export function addResume(data){
 	return myRequest ({
-		url:'recruitemt/recruitment-resume/addResume',
+		url:'recruitment/recruitment-resume/addResume',
 		method:'POST',
 		data:data	
 	})
@@ -19,7 +19,7 @@ export function addResume(data){
 //删除简历信息 
 export function detecteResume(data){
 	return myRequest ({
-		url:'recruitemt/recruitment-resume/detecteResume',
+		url:'recruitment/recruitment-resume/detecteResume',
 		method:'POST',
 		data:data	
 	})
@@ -27,7 +27,7 @@ export function detecteResume(data){
 //更新简历信息
 export function updateResume(data){
 	return myRequest ({
-		url:'recruitemt/recruitment-resume/updateResume',
+		url:'recruitment/recruitment-resume/updateResume',
 		method:'POST',
 		data:data	
 	})

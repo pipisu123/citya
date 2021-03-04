@@ -1,12 +1,14 @@
 <template>
-  <view>
-     <view>
-         <view class="defa" :class="{'active': rSelect.indexOf()!=-1}" @tap="tapInfo()">
-			 <u-icon name="star"></u-icon>
-             <text>收藏</text>
-         </view>
-		 
-     </view>
+  <view class="content">
+	  <view class="address">
+		<view class="map1">
+			<u-icon name="map"></u-icon>
+		</view>
+	  	<text>茂名</text>
+	  </view>
+	 <view class="seach">
+	 	 <u-search placeholder="日照香炉生紫烟" v-model="keyword"></u-search>
+	 </view>
   </view>
 </template>
 
@@ -14,37 +16,26 @@
 export default {
  data(){
    return{
-       rSelect:[]
+      
   }
 },
 methods:{
-	tapInfo(e) {
-		if (this.rSelect.indexOf(e) == -1) {
-			this.rSelect.push(e);//选中添加到数组里
-			console.log("收藏成功")
-		} else {
-			this.rSelect.splice(this.rSelect.indexOf(e), 1); //取消
-				console.log("取消收藏")
-		}
-		
-	}
+	
+	
 },
 }
 </script>
 
 <style scoped lang="scss">
-.defa{
-	width: 100rpx;
-	height: 50rpx;
-	margin-right: 10rpx;
-	border-radius: 25px;
-	border: 1px solid #C0C0C0;
-}
-.active{
-	width: 100rpx;
-	height: 50rpx;
-	color: white;
-	border: 1px solid #e5e5e5;
-	background-color: #ff5d00;
+.content{
+	display: flex;
+	.seach{
+		width: 85%;
+	}
+	.address{
+		display: flex;
+		margin-top: 10rpx;
+		
+	}
 }
 </style>

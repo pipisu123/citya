@@ -155,8 +155,8 @@
 					}
 					
 				}).then(res=>{
-					this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起	
-					if(res.statusCode===200){
+					if(res.data.code===20000){
+						this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起	
 						uni.hideLoading()
 						this.$refs.uToast.show({
 											title: '加载成功',
@@ -167,8 +167,8 @@
 					}else{
 						uni.hideLoading()
 						this.$refs.uToast.show({
-											title: '加载失败',
-											type: 'error',
+											title: '暂无数据啦~',
+											type: 'default',
 											duration: 3500
 										})
 					}
@@ -178,39 +178,6 @@
 					this.showLoad = true
 					uni.hideLoading()
 				})
-				// const res = this.$myRequest({
-				// 	url: 'recruitemt/recruitment-recruitment/findRecruitment',
-				// 	dataType: "json",
-				// 	header: {
-				// 		'content-type': 'application/json',
-				// 	},
-				// 	data: JSON.stringify({
-				// 		"str": this.value,
-				// 		"wages": this.wages,
-				// 		"address": this.city,
-				// 		"work_types": this.work_types,
-				// 		"paging": {
-				// 			"count": this.count,
-				// 			"page": this.page,
-				// 		}
-
-				// 	}),
-				// 	method: 'POST'
-				// })
-
-				// var a = Promise.resolve(res)
-				// a.then((res) => {
-				// 	// console.log(res.data)
-				// 	console.log(this.list.length)
-				// 	console.log(res)
-				// 	if (res.data.code === 20001) { //没有数据
-				// 		uni.hideLoading(); //关闭加载动画
-				// 		return false;
-				// 	}
-				// 	this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起			
-				// 	uni.hideLoading(); //关闭加载动画
-				// })
-				// this.list = res.data.data.user_Recruitments
 			},
 			// 搜索招聘
 			custom(value) {
@@ -219,11 +186,11 @@
 				this.getRecruitmentlist()
 			},
 			// 跳转到招聘详情
-			goDetail(recruitment_id) {
+			goDetail(recruitment_id,user_id) {
 				uni.navigateTo({
-					url: '/pages/detail/detail?recruitment_id=' + recruitment_id
+					url: '/pages/detail/detail?recruitment_id=' + recruitment_id + '&user_id='+ user_id
 				})
-				console.log(recruitment_id)
+				
 
 			},
 			Clickitem(index) {
@@ -370,8 +337,15 @@
 										duration: 3000
 									})
 					console.log(res)
-					this.list = res.data.data.user_Recruitments
-					this.count = res.data.paging.count
+					if(res.data.code === 20000){
+						this.list = res.data.data.user_Recruitments
+						this.count = res.data.paging.count
+					}
+					if(res.data.code === 4010002){
+						uni.navigateTo({
+							url:'/pages/login/login'
+						})
+					}
 				}).catch(err => {
 					console.log(err)
 

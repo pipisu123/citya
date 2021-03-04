@@ -43,10 +43,10 @@
 			<text>公司环境视频与相册</text>
 			<scroll-view scroll-x="true">
 				<video class="video" object-fit="fill" id="demoVideo" :controls="true" :enable-progress-gesture="false"
-				 :show-center-play-btn="disable" autoplay=false :src="'http://192.168.101.24:8081/'+company.company_video.video_path">
+				 :show-center-play-btn="disable" autoplay=false :src="'http://192.168.101.24:8080/'+company.company_video.video_path">
 				</video>
 				<view class="item1" v-for="item in listimg" :key="item">
-					<image :src="'http://192.168.101.24:8081/'+item.picture_path" mode="" @tap="_previewImage('http://192.168.101.24:8081/'+item.picture_path)" mode="heightFix;widthFix"></image>
+					<image :src="'http://192.168.101.24:8080/'+item.picture_path" mode="" @tap="_previewImage('http://192.168.101.24:8080/'+item.picture_path)" mode="heightFix;widthFix"></image>
 				</view>
 			</scroll-view>
 		</view>
@@ -60,24 +60,24 @@
 		data() {
 			return {
 				company:null,
-				
 				html: `广州xxxx系统工程有限公司成立于1989年，是一家专注于xx产品和xxx产品研究、开发、生产及销售的高科技企业，总部及研发基地设立于风景秀丽的广州软件园，并在全国各地设有分支机构。公司技术和研发实力雄厚，是国家863项目的参与者，并被政府认定为“高新技术企业。`,
 				listimg: []
 			}
 		},
 		onLoad(options) {
 			console.log(options)
-			this.getmyCompany(options.company_id)
+			this.getmyCompany(options.companyId)
 		},
 		methods: {
 			// 查询我的公司
-			async getmyCompany(company_id) {
+			async getmyCompany(companyId) {
 				findCompany({
-					"company_id":company_id
+					"company_id":companyId
 				}).then(res=>{
 					console.log(res)
 					this.company = res.data.data.companys[0]
 					this.listimg = res.data.data.companys[0].company_picture
+					console.log(this.listimg[0].picture_path)
 				}).catch(err=>{
 					console.log(err)
 				})

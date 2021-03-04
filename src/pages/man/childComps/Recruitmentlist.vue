@@ -1,6 +1,6 @@
 <template>
-	<view class="news">
-		<view class="new-items" v-for="(item,index) in list" :key="index" @click="goDetail(item.recruitment_id)">
+	<view class="recruitment">
+		<view class="recruitment-items" v-for="(item,index) in list" :key="index" @click="goDetail(item.recruitment_id,item.user_id)">
 			<image src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1050564413,3771618612&fm=26&gp=0.jpg" mode=""
 			 v-if="item.poster_path=='默认海报路径'"></image>
 			<image :src="'http://192.168.101.24:8080/'+item.poster_path" mode="" v-else></image>
@@ -50,27 +50,40 @@
 			return {
 				src: null,
 				pic: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
-				scrollTop: 0
-
+				scrollTop: 0,
+				token: '',
+				"userid":'',
+				"username":'',
+				wechatname:''
 			}
 		},
 		onLoad() {
-
+			
 		},
 		created() {
 			this.src = this.$store.state.avatar
+			this.token = this.$store.state.token
+			console.log(this.token)
+			const token = uni.getStorageSync('token')
+			console.log(token)
+			this.userid = this.$store.state.userid
+			console.log(this.userid)
+			this.username = this.$store.state.username
+			console.log(this.username)
+			this.wechatname = this.$store.state.wechatname
+			console.log(this.wechatname)
 		},
 		methods: {
-			goDetail(recruitment_id) {
-				this.$emit('itemClick', recruitment_id)
+			goDetail(recruitment_id,user_id) {
+				this.$emit('itemClick', recruitment_id,user_id)
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.news {
-		.new-items {
+	.recruitment {
+		.recruitment-items {
 			display: flex;
 			padding: 15rpx 20rpx;
 			border-bottom: 2rpx solid #F1F1F1;

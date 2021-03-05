@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<u-select v-model="show" mode="mutil-column-auto" :list="list" @confirm="confirm"></u-select>
-		<button type="default" @click="getCity">dasaaa</button>
+		<button type="default" @click="getCity">dasaaaii</button>
 	</view>
 </template>
 

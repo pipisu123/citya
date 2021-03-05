@@ -112,6 +112,7 @@
 	}
 	.news {
 		.new-items {
+			width: 100%;
 			display: flex;
 			padding: 15rpx 20rpx;
 			border-bottom: 2rpx solid #F1F1F1;

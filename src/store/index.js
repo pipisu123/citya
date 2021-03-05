@@ -8,18 +8,35 @@ import Vuex from 'vuex'
  //创建对象
  const store = new Vuex.Store({
     state: {
-		avatar:'',
-		wechatname: '',
-		show: false
+		avatar: uni.getStorageSync('avatar'),
+		wechatname: uni.getStorageSync('wechatname'),
+		show: false,
+		token: uni.getStorageSync('token'),
+		refreshtoken: uni.getStorageSync('refreshtoken'),
+		userid: uni.getStorageSync('userid'),
+		username: uni.getStorageSync('username'),
 	},
 	mutations:{
 		setavatar(state,data){
 			state.avatar = data;
-			// window.sessionStorage.setItem('avatar',data)
+			uni.setStorageSync('avatar',data)
 		},
 		setwechatname(state,data){
 			state.wechatname = data;
-			// window.sessionStorage.setItem('wechatname',data)
+			uni.setStorageSync('wechatname',data)
+		},
+		//存token
+		setToken(state,data){
+			uni.setStorageSync('token',data)
+		},
+		setRefreshtoken(state,data){
+			uni.setStorageSync('refreshtoken',data)
+		},
+		setUserId(state,data){
+			uni.setStorageSync('userid',data)
+		},
+		setUsername(state,data){
+			uni.setStorageSync('username',data)
 		}
 	},
 	action:{

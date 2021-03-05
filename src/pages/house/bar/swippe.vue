@@ -5,24 +5,24 @@
     					<swiper @change="onSlideChangeEnd" class="swiper" indicator-dots="#000000" :autoplay="autoplay" interval="10000" duration="500">
     						<swiper-item style="z-index: 1;">
     							<view class="">
-    								<video @fullscreenchange="event" loop :muted="muted"  autoplay style="" src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4" controls></video>
+    								<video @fullscreenchange="event" loop :muted="muted"  autoplay style="width: 100%;" src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20200317.mp4" controls></video>
     							</view>
     						</swiper-item>
     						<swiper-item style="z-index: 1;">
     							<view class="swiper-item uni-bg-green">
 								<view class="swiper-item uni-bg-green">
-									<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode=""></image>
+									<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode="" style="width: 100%;"></image>
 								</view>
 								</view>
     						</swiper-item>
-    						<swiper-item style="z-index: 1;">
+    						<swiper-item style="z-index: 1; ">
     							<view class="swiper-item uni-bg-green">
-									<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode=""></image>
+									<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode="" style="width: 100%;"></image>
 								</view>
     						</swiper-item>
     						<swiper-item style="z-index: 1;">
-    							<view class="swiper-item uni-bg-blue">C
-								<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode=""></image>
+    							<view class="swiper-item uni-bg-blue">
+								<image src="https://img1.baidu.com/it/u=2287568211,2342036693&fm=26&fmt=auto&gp=0.jpg" mode="" style="width: 100%;"></image>
 								</view>
     						</swiper-item>
     					</swiper>

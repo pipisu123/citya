@@ -296,30 +296,7 @@
         }
         ,{
 
-            "path" : "pages/house/detailpage/detailpage",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-
             "path" : "pages/house/shoppage/shoppage",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-
-            "path" : "pages/house/newdish/newdish",
-
-           
-
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -437,8 +414,54 @@
             }
             
         }
+          ,{
+           "path" : "pages/house/brokerpage/brokerpage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+		    "path" : "pages/house/detailpage/detailpage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/brokerpage/brokerpage",
+            "path" : "pages/myResume/UpdatemyResume/UpdatemyResume",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		
+		,{
+		    "path" : "pages/house/newrelease/newrelease",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/house/newdish/newdish",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/myResume/UpdateworkExp/UpdateworkExp",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -447,7 +470,7 @@
             
         }
         ,{
-            "path" : "pages/house/newrelease/newrelease",
+            "path" : "pages/myResume/UpdateEducation/UpdateEducation",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -455,8 +478,17 @@
             }
             
         }
+		,{
+		     "path" : "pages/house/secondhandhousingrelease/secondhandhousingrelease",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/secondhandhousingrelease/secondhandhousingrelease",
+            "path" : "pages/myResume/UpdateProject/UpdateProject",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -464,27 +496,62 @@
             }
             
         }
+		,{
+		    "path" : "pages/house/shopsrelease/shopsrelease",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/house/pubilshedpage/pubilshedpage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/shopsrelease/shopsrelease",
+            "path" : "pages/man/PersonalCenter/resumeCollection/resumeCollection",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "简历收藏",
                 "enablePullDownRefresh": false
             }
             
         }
+		,{
+		    "path" : "pages/house/register/register",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/pubilshedpage/pubilshedpage",
+            "path" : "pages/man/PersonalCenter/manageDelivery/manageDelivery",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "投递管理",
                 "enablePullDownRefresh": false
             }
             
         }
-        
+		,{
+		    "path" : "pages/house/register/login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/register/register",
+            "path" : "pages/man/PersonalCenter/myDelivery/myDelivery",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -492,60 +559,105 @@
             }
             
         }
+		,{
+		   "path" : "pages/house/newhouserelease/newhouserelease",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/register/login/login",
+            "path" : "pages/man/PersonalCenter/myInvitation/myInvitation",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "我的面试",
                 "enablePullDownRefresh": false
             }
             
         }
+		,{
+		    "path" : "pages/house/newpupups/newpupups",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/newhouserelease/newhouserelease",
+            "path" : "pages/man/PersonalCenter/manageInvitation/manageInvitation",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "面试邀请",
                 "enablePullDownRefresh": false
             }
-            
+          
         }
+		,{
+		    "path" : "pages/house/persomalpublishing/persomalpublishing",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/newpupups/newpupups",
+            "path" : "pages/man/PersonalCenter/DetailInvite/DetailInvite",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "面试待接受",
                 "enablePullDownRefresh": false
             }
             
         }
+		,{
+		    "path" : "pages/house/popup/popup",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/persomalpublishing/persomalpublishing",
+            "path" : "pages/man/PersonalCenter/resumeInvite/resumeInvite",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "邀请详情",
                 "enablePullDownRefresh": false
             }
             
         }
+		,{
+		    "path" : "pages/house/secondhandhousingpage/secondhandhousingpage",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
         ,{
-            "path" : "pages/house/popup/popup",
+            "path" : "pages/man/PersonalCenter/myPoints/myPoints",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "积分购买",
                 "enablePullDownRefresh": false
             }
             
-        }
-        ,{
-            "path" : "pages/house/secondhandhousingpage/secondhandhousingpage",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+        },
+		{
+		    "path" : "pages/index/advertisementUrl/advertisementUrl",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

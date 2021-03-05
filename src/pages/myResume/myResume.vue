@@ -164,12 +164,14 @@
 		created() {
 			this.avatar=this.$store.state.avatar
 		},
-	    onLoad() {
-	    	this.getResume()
-	    },
-		onShow() {
-			this.getResume()
-		},
+	  onLoad(options) {
+	  	console.log(options.resumeId)
+		
+	  	this.getResume(options.resumeId)
+	  },
+		// onShow() {
+		// 	this.getResume()
+		// },
 		methods: {
 			open(resume) {
 					// this.show = true;
@@ -194,9 +196,10 @@
 				})
 			},
 		// 查询我的简历
-		  async getResume(){
+		  async getResume(resumeId){
+			  console.log(resumeId)
 			  resumeList({
-				"user_id":"8040423884719751168",
+				"resumeId":resumeId,
 				"paging":{
 					"page":0
 				}
@@ -223,41 +226,7 @@
 			  }).catch(err=>{
 				   console.log(err)
 			  })
-				// const res = await this.$myRequest({
-				// 	url:'findResume',
-				// 	dataType: "json",
-				// 	header: {
-				// 	        'content-type': 'application/json', 
-				// 	        },
-				// 	data:JSON.stringify({ 
-				// 		"user_id":1,
-				// 		"paging":{
-				// 			"page":0
-				// 		}
-						
-				// 	}),
-					
-				// 	method: 'POST'
-				// })
-				// console.log(res.data.data)
-				// this.resume = res.data.data.resumes[0],
-				// this.workExp = res.data.data.resumes[0].workEXP[0],
-				// this.education = res.data.data.resumes[0].educationalEXP[0],
-				// this.project = res.data.data.resumes[0].projectEXP[0],
-				// // 修改个人信息
-				// this.model.name = res.data.data.resumes[0].resume_name,
-				// this.model.age = res.data.data.resumes[0].age,
-				// this.model.sex = res.data.data.resumes[0].sex,
-				// this.model.phone = res.data.data.resumes[0].phone,
-				// this.model.wages = res.data.data.resumes[0].compensation,
-				// this.model.industry = res.data.data.resumes[0].industry,
-				// this.model.degree = res.data.data.resumes[0].max_degree,
-				// this.model.region = res.data.data.resumes[0].work_city
-				// if(this.resume.sex=='男'){
-				// 	this.sex = "man"
-				// }else{
-				// 	this.sex = "woman"
-				// }
+				
 				},
 		},
 		

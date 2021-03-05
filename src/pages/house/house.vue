@@ -70,6 +70,7 @@
 				show2: false,
 				show3: false,
 				show4: false,
+			
 			}
 		},
 		components: {
@@ -86,20 +87,22 @@
 
 		},
 		onLoad() {
-			uni.getLocation({
-			    type: 'gcj02', //返回可以用于uni.openLocation的经纬度
+		
+			uni.chooseLocation({
+				
 			    success: function (res) {
-			        const latitude = res.latitude;
-			        const longitude = res.longitude;
-			        uni.openLocation({
-			            latitude: latitude,
-			            longitude: longitude,
-			            success: function () {
-			                console.log('success');
-			            }
-			        });
+					var reg = /.+?(省|市|自治区|自治州|县|区)/g;
+					console.log(res)
+					var city =(res.address+':',res.address.match(reg));
+					console.log(city[1])
+					console.log(res.address+':',res.address.match(reg))
+			        console.log('位置名称：' + res.name.split('市'));
+			        console.log('详细地址：' + res.address);
+			        console.log('纬度：' + res.latitude);
+			        console.log('经度：' + res.longitude);
 			    }
 			});
+			
 		},
 		
 		methods: {

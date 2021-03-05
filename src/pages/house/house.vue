@@ -91,8 +91,12 @@
 			uni.chooseLocation({
 				
 			    success: function (res) {
+					var reg = /.+?(省|市|自治区|自治州|县|区)/g;
 					console.log(res)
-			        console.log('位置名称：' + res.name);
+					var city =(res.address+':',res.address.match(reg));
+					console.log(city[1])
+					console.log(res.address+':',res.address.match(reg))
+			        console.log('位置名称：' + res.name.split('市'));
 			        console.log('详细地址：' + res.address);
 			        console.log('纬度：' + res.latitude);
 			        console.log('经度：' + res.longitude);

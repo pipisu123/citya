@@ -70,6 +70,7 @@
 				show2: false,
 				show3: false,
 				show4: false,
+			
 			}
 		},
 		components: {
@@ -86,20 +87,18 @@
 
 		},
 		onLoad() {
-			uni.getLocation({
-			    type: 'gcj02', //返回可以用于uni.openLocation的经纬度
+		
+			uni.chooseLocation({
+				
 			    success: function (res) {
-			        const latitude = res.latitude;
-			        const longitude = res.longitude;
-			        uni.openLocation({
-			            latitude: latitude,
-			            longitude: longitude,
-			            success: function () {
-			                console.log('success');
-			            }
-			        });
+					console.log(res)
+			        console.log('位置名称：' + res.name);
+			        console.log('详细地址：' + res.address);
+			        console.log('纬度：' + res.latitude);
+			        console.log('经度：' + res.longitude);
 			    }
 			});
+			
 		},
 		
 		methods: {

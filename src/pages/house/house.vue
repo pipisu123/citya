@@ -2,8 +2,16 @@
 	<view>
 		<template v-if="show">
 			<view>
-				<view class="search">
-					<u-search placeholder="请输入房屋信息"></u-search>
+				<view class="searchbar">
+					<view class="address">
+						<view>
+							<u-icon name="map"></u-icon>
+						</view>
+						<text>茂名</text>
+					</view>
+					<view class="seach">
+						<u-search placeholder="请输入工作或房屋信息"></u-search>
+					</view>
 				</view>
 			<Grid></Grid>
 			<swippe></swippe>
@@ -126,6 +134,25 @@
 </script>
 
 <style lang="scss">
+	.searchbar{
+		    display: flex;
+			border-color: #fff;
+		    position: fixed;
+		     left: 0;
+		     right: 0;
+		     top: 0;
+			 width: 100%;
+		     z-index: 9;
+			 background-color: #5785E5;
+		     padding-bottom: 10rpx;
+			 .address{
+				 display: flex;
+				 margin-top: 10rpx;
+			 }
+			 .seach{
+				 width: 88%;
+			 }
+		}	
 	.search{
 		border-color: #fff;
 	    position: fixed;

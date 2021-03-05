@@ -170,18 +170,6 @@
 				}).catch(err=>{
 					console.log(err)
 				})
-				// const res =this.$myRequest({
-				// 	url:'addTopping',
-				// 	dataType: "json",
-				// 	header: {
-				// 	        'content-type': 'application/json', 
-				// 	        },
-				// 	data:JSON.stringify({ 
-				// 		"user_id":1,
-				// 		"recruitment_id":recruitment_id
-				// 	}),
-				// 	method: 'POST'
-				// })
 				
 			},
 			// 跳转到详情
@@ -206,21 +194,6 @@
 				}).catch(err=>{
 					console.log(err)
 				})
-				// const res = await this.$myRequest({
-				// 	url:'findRecruitment',
-				// 	dataType: "json",
-				// 	header: {
-				// 	        'content-type': 'application/json', 
-				// 	        },
-				// 	data:JSON.stringify({ 
-				// 		"user_id":1,
-				// 		"paging":{
-				// 			"page":0
-				// 		}
-						
-				// 	}),
-				// 	method: 'POST'
-				// })
 				
 			},
 			// 触底刷新

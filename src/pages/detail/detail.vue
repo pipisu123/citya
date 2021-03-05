@@ -66,8 +66,6 @@
 				<view class="position">
 					<text>职位：</text>
 					<text>Java程序员</text>
-					<!-- <text>{{item.work_name}}</text> -->
-					<collection class="collect"></collection>
 				</view>
 			</view>
 			<view class="work">
@@ -92,11 +90,17 @@
 		<WorkIntroduce :item="item"></WorkIntroduce>
 		<!-- 公司导航 -->
 		<Companybar :item="item" @itemClick="goCompany()"></Companybar>
-		<map class="map" :longitude="longitude" :latitude="latitude"></map>	
+		<map class="map" :longitude="longitude" :latitude="latitude" :markers="markers"></map>	
 		<!-- 温馨提示 -->
 		<WarningTip></WarningTip>
 		<!-- 详情底部导航 -->
-		<Bottombar @gochat="gochat"></Bottombar>
+		<Bottombar @gochat="gochat" @Collect="Collect"
+		 @UnCollect="UnCollect"
+		 @Callphone="Callphone"
+		  :collectId="collectId"
+		  @UnCollect1="UnCollect1"
+		  @Delivery="Delivery"
+		  :DeliveryId="DeliveryId"></Bottombar>
 	</view>
 	
 </template>
@@ -106,17 +110,29 @@
 	import Companybar from './childComps/Companybar.vue'
 	import WarningTip from './childComps/WarningTip.vue'
 	import notice from '../components/notice.vue'
-	import collection from './childComps/collection.vue'
 	import Bottombar from './childComps/BottomBar.vue'
 	
 	import {recruitmentList} from '../../util/recruitment.js'
+	import { collectRecruitment, UncollectRecruitment } from '../../util/collection.js'
+	import {addDelivery} from '../../util/recruitment/delivery.js'
 	export default {
 		data() {
 			return {
-				longitude:110.922477,
-				latitude: 21.666885,
+				longitude: '',//经度
+				latitude: '',//纬度
 				item:null,
-				
+				recruitmentId:'',
+				phone:'',
+				collectionRecruitmentId:'',
+				collectId:'',
+				DeliveryId:'',
+				releaseUserId:'',
+				markers: [{
+					longitude: '',//经度
+					latitude: '',//纬度
+					iconPath: '',    //显示的图标
+					title:'',//标注点名
+				}]
 				// count1:0
 				// company_id: null
 			}
@@ -126,18 +142,82 @@
 			Companybar,
 			WarningTip,
 			notice,
-			collection,
 			Bottombar
 		},
 		onLoad(options) {
-			console.log(options)
-			this.getDetail(options.recruitment_id)
+			console.log(options.user_id)
+			uni.showModal({
+				title:'恭喜获得10积分'
+			})
+			this.getDetail(options.recruitment_id,options.user_id)
 		},
 		created() {
 			// this.refresh();
 			
 		},
 		methods: {
+			// 收藏招聘
+			Collect(){
+				collectRecruitment({
+					"userId":"8040423884719751168",
+					"recruitmentId": this.recruitmentId
+				}).then(res=>{
+					uni.showToast({
+						title:'收藏成功'
+					})
+					console.log(res)
+					this.collectionRecruitmentId = res.data.data.collectionRecruitmentId
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 取消收藏
+			UnCollect(){
+				console.log(this.collectionRecruitmentId)
+				UncollectRecruitment({
+					"userId":"8040423884719751168",
+					"collectionRecruitmentId": this.collectionRecruitmentId
+				}).then(res=>{
+					uni.showToast({
+						title:'取消收藏'
+					})
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 第二次进来取消收藏
+			UnCollect1(){
+				console.log(this.collectId)
+				UncollectRecruitment({
+					"userId":"8040423884719751168",
+					"collectionRecruitmentId": this.collectId
+				}).then(res=>{
+					uni.showToast({
+						title:'取消收藏'
+					})
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 投递简历
+			Delivery(){
+				addDelivery({
+					"recruitmentId": this.recruitmentId,
+					"releaseUserId": this.releaseUserId,
+				}).then(res=>{
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 拨打电话
+			Callphone(){
+				uni.makePhoneCall({
+				    phoneNumber: this.phone 
+				});
+			},
 			// 跳转到聊天
 			gochat(){
 				uni.navigateTo({
@@ -145,20 +225,31 @@
 				})
 			},
 			// 招聘详情
-		   async getDetail(recruitment_id){
+		   async getDetail(recruitment_id,user_id){
+
 			   uni.showLoading({
 			   	title:'正在加载...'
 			   })
 			   recruitmentList({
 				"recruitment_id":recruitment_id,
+				// "nowUserId": "8037950193056940034",
 				"paging":{
 					"page":0
 				}
 			   }).then(res=>{
 				   console.log(res)
 				   uni.hideLoading()
-				   
+				   this.recruitmentId = res.data.data.user_Recruitments[0].recruitment_id;
+				   this.phone = res.data.data.user_Recruitments[0].phone;
 				   this.item = res.data.data.user_Recruitments[0];
+				   this.collectId = res.data.data.user_Recruitments[0].collectionRecruitmentId;
+				   this.DeliveryId = res.data.data.user_Recruitments[0].deliveryId;
+				   this.releaseUserId = res.data.data.user_Recruitments[0].user.id;
+				   this.longitude = res.data.data.user_Recruitments[0].company.longitude;
+				   this.latitude = res.data.data.user_Recruitments[0].company.latitude;
+				   this.markers[0].longitude = res.data.data.user_Recruitments[0].company.longitude;
+				   this.markers[0].latitude = res.data.data.user_Recruitments[0].company.latitude;
+				   console.log(this.markers[0].longitude)
 			   }).catch(err=>{
 				   console.log(err)
 			   })
@@ -204,8 +295,6 @@
 				uni.navigateTo({
 					url:'/pages/companyDetail/companyDetail?company_id='+company_id
 				})
-				
-				// console.log(company_id)
 			}
 		}
 	}
@@ -271,9 +360,8 @@
 		border-bottom: 10rpx solid #F1F1F1;
 	}
 	.map{
-		width:98%;
+		width:100%;
 		height: 400rpx;
-		padding: 15rpx;
 		margin-left: 10rpx;
 		border-radius: 25%;
 	}
@@ -319,8 +407,5 @@
 				word-break:break-all;
 			}
 		}
-	}
-	.collect{
-		margin-left: 380rpx;
 	}
 </style>

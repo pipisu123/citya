@@ -1,12 +1,20 @@
 <template>
 	<view class="content">
-	<view class="search">
-		<u-search placeholder="请输入工作或房屋信息"></u-search>
-	</view>
+		<view class="searchbar">
+			<view class="address">
+				<view>
+					<u-icon name="map"></u-icon>
+				</view>
+				<text>茂名</text>
+			</view>
+			<view class="seach">
+				<u-search placeholder="请输入工作或房屋信息"></u-search>
+			</view>
+		</view>
 	<!-- 分类导航 -->
 	<categoryitem></categoryitem>
 		<!-- 轮播图 -->
-	   <swipper></swipper>
+	   <swipper :list="list"></swipper>
 	   <!-- 广告信息 -->
 	  <notice></notice>
 	  <!-- 爆款推荐 -->
@@ -31,16 +39,19 @@
 	import categoryitem from '../components/categoryitem.vue'
 	import recommend from './childComps/recommend.vue'
 	import goodlist from './childComps/goodslist.vue'
+	
+	import { findAdvertisement } from '../../util/advertisement/advertisement.js'
 
 	export default {
 		data() {
 			return {
 				current: 0,
-				
+				list:[],
+				adpath:''
 			}
 		},
 		onLoad() {
-
+         this.getAdvertisement()
 		},
 		components:{
          swipper,
@@ -51,30 +62,50 @@
 		 goodlist
 		},
 		methods: {
+			getAdvertisement(){
+				findAdvertisement({
+					"module":'homePage'
+				}).then(res=>{
+					console.log(res)
+					this.list = res.data.data.advertisements
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
           change(e) {
 				this.current = e.detail.current;
 			}
 			
 		},
 		created() {
+			
 		}
 	}
 </script>
-
+ 
 <style scoped lang="scss">
 	.content {
 	
 	}
-	.search{
-		border-color: #fff;
-        position: fixed;
-         left: 0;
-         right: 0;
-         top: 0;
-         z-index: 9;
-		 background-color: #5785E5;
-         padding-bottom: 10rpx;
-	}		
+	.searchbar{
+		    display: flex;
+			border-color: #fff;
+		    position: fixed;
+		     left: 0;
+		     right: 0;
+		     top: 0;
+			 width: 100%;
+		     z-index: 9;
+			 background-color: #5785E5;
+		     padding-bottom: 10rpx;
+			 .address{
+				 display: flex;
+				 margin-top: 10rpx;
+			 }
+			 .seach{
+				 width: 88%;
+			 }
+		}	
 .swiper {
 	height: 300rpx;
 			

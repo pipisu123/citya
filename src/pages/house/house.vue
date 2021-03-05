@@ -13,10 +13,10 @@
 						<u-search placeholder="请输入工作或房屋信息"></u-search>
 					</view>
 				</view>
-			<Grid></Grid>
-			<swippe></swippe>
-			<fz></fz>
-			<ym></ym>
+				<Grid></Grid>
+				<swippe></swippe>
+				<fz></fz>
+				<ym></ym>
 			</view>
 		</template>
 		<template v-else-if="show1">
@@ -26,10 +26,10 @@
 		</template>
 		<template v-else-if="show2">
 			<view>
-			<view class="EC_mr15" >
-				选择发布类型
-			</view>
-			<rental></rental>
+				<view class="EC_mr15">
+					选择发布类型
+				</view>
+				<rental></rental>
 			</view>
 		</template>
 		<template v-else-if="show3">
@@ -39,10 +39,10 @@
 		</template>
 		<template v-else-if="show4">
 			<view>
-			<view class="EC_mr15">
-				
-			</view>
-			<mypage></mypage>
+				<view class="EC_mr15">
+
+				</view>
+				<mypage></mypage>
 			</view>
 		</template>
 		<bar @Clickitem="Clickitem"></bar>
@@ -57,11 +57,11 @@
 	import bar from './bar/bar.vue'
 	import rental from './rental/rentalissue.vue'
 	import mypage from './mypage/mypage.vue'
-	
 
-	
-	
-	
+
+
+
+
 	export default {
 		data() {
 			return {
@@ -72,22 +72,39 @@
 				show4: false,
 			}
 		},
-		 components: {
-				  Grid,
-				  swippe,
-				  fz,
-				  ym,
-				  bar,
-				  rental,
-				  mypage
-				 
-				 
-				
-				 
-		        },
+		components: {
+			Grid,
+			swippe,
+			fz,
+			ym,
+			bar,
+			rental,
+			mypage
+
+
+
+
+		},
+		onLoad() {
+			uni.getLocation({
+			    type: 'gcj02', //返回可以用于uni.openLocation的经纬度
+			    success: function (res) {
+			        const latitude = res.latitude;
+			        const longitude = res.longitude;
+			        uni.openLocation({
+			            latitude: latitude,
+			            longitude: longitude,
+			            success: function () {
+			                console.log('success');
+			            }
+			        });
+			    }
+			});
+		},
+		
 		methods: {
 			Clickitem(index) {
-				console.log(index)
+				// console.log(index)
 				switch (index) {
 					case 0:
 						this.show = true;
@@ -126,41 +143,44 @@
 						break;
 				}
 			},
-				
-			
-			
+
+
+
 		}
 	}
 </script>
 
 <style lang="scss">
-	.searchbar{
-		    display: flex;
-			border-color: #fff;
-		    position: fixed;
-		     left: 0;
-		     right: 0;
-		     top: 0;
-			 width: 100%;
-		     z-index: 9;
-			 background-color: #5785E5;
-		     padding-bottom: 10rpx;
-			 .address{
-				 display: flex;
-				 margin-top: 10rpx;
-			 }
-			 .seach{
-				 width: 88%;
-			 }
-		}	
-	.search{
+	.searchbar {
+		display: flex;
 		border-color: #fff;
-	    position: fixed;
-	     left: 0;
-	     right: 0;
-	     top: 0;
-	     z-index: 9;
-		 background-color: #5785E5;
-	     padding-bottom: 10rpx;
-	}		
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: 9;
+		background-color: #5785E5;
+		padding-bottom: 10rpx;
+
+		.address {
+			display: flex;
+			margin-top: 10rpx;
+		}
+
+		.seach {
+			width: 88%;
+		}
+	}
+
+	.search {
+		border-color: #fff;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		z-index: 9;
+		background-color: #5785E5;
+		padding-bottom: 10rpx;
+	}
 </style>

@@ -16,22 +16,22 @@
 				<text>购买积分</text>
 			</view>
 			<view class="buy-middle">
-				<view class="wrap">
+				<view class="wrap" v-for="(item,index) in list" :key="item">
 					<u-row gutter="16">
-					<u-col span="6">
+					<u-col span="6" >
 						<view class="demo-layout bg-purple">
-							<image src="../../../../static/loan.png" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
-							<text>100积分</text>
+							<image :src="item.src" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
+							<text>{{item.integral}}</text>
 						</view>
 					</u-col>
 					<u-col span="6">
 						<view class="demo-layout bg-purple-light">
-							<image src="../../../../static/loan.png" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
-							<text>1000积分</text>
+							<image :src="item.src" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
+							<text>{{item.integral}}</text>
 						</view>
 					</u-col>
 				</u-row>
-				<u-row gutter="16">
+				<!-- <u-row gutter="16">
 					<u-col span="6">
 						<view class="demo-layout bg-purple">
 							<image src="../../../../static/loan.png" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
@@ -44,7 +44,7 @@
 							<text>20000积分</text>
 						</view>
 					</u-col>
-				</u-row>
+				</u-row> -->
 				</view>
 				<view class="integral-input">
 				    <u-form-item :label-style="{color: '#FFFFFF'}" label-width="150" :label-position="labelPosition" label="积分数量:" prop="count">
@@ -54,7 +54,7 @@
 				    </u-form-item>
 				</view>
 				<view class="buy">
-					<u-button type="warning">立即购买</u-button>
+					<u-button type="warning" @click="buyIntegral">立即购买</u-button>
 				</view>
 			</view>
 		</view>
@@ -62,10 +62,20 @@
 </template>
 
 <script>
+	import { buyIntegral } from '../../../../util/integral/integral.js'
 	export default {
 		data() {
 			return {
-
+				list: [
+					{
+						integral: '100积分',
+						src:'../../../../static/loan.png'
+					},
+					{
+						integral: '1000积分',
+						src:'../../../../static/loan.png'
+					}
+				]
 			}
 		},
 		onLoad() {
@@ -75,7 +85,30 @@
 
 		},
 		methods: {
-
+			buyIntegral(){
+				buyIntegral({
+					"totalFee":100.00
+				}).then(res=>{
+					console.log(res)
+				}).catch(err=>{
+					console.log(err)
+				})
+				// console.log("=======")
+				// uni.requestPayment({
+				//     provider: 'wxpay',
+				//     timeStamp: String(Date.now()),
+				//     nonceStr: 'A1B2C3D4E5',
+				//     package: 'prepay_id=wx20180101abcdefg',
+				//     signType: 'MD5',
+				//     paySign: '',
+				//     success: function (res) {
+				//         console.log('success:' + JSON.stringify(res));
+				//     },
+				//     fail: function (err) {
+				//         console.log('fail:' + JSON.stringify(err));
+				//     }
+				// });
+			}
 		}
 	}
 </script>

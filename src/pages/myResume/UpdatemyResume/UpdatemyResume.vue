@@ -134,42 +134,7 @@
 						}).catch(err=>{
 							console.log(err)
 						})
-				// 	const res = this.$myRequest({
-				// 		url:'updateResume',
-				// 		dataType: "json",
-				// 		header: {
-				// 		        'content-type': 'application/json', 
-				// 		        },
-				// 		data:JSON.stringify({ 
-				// 			"user_id":1,
-				// 			"resume_id":55,
-				// 			"resume_name":this.model.name,
-				// 			"age":this.model.age,
-				// 			"sex":this.model.sex,
-				// 			"phone":this.model.phone,
-				// 			"compensation":this.model.wages,
-				// 			"industry":this.model.industry,
-				// 			"max_degree":this.model.degree,
-				// 			"work_city":this.model.region
-				// 		}),
-						
-				// 		method: 'POST'
-				// 	})
-				// 	this.$refs.uToast.show({
-				// 		title: '修改成功',
-				// 		type: 'success',				
-				// 	})
-				// 	uni.navigateBack({
-				// 	        url:'/pages/myResume/myResume'
-				// 	       });
-				// }else{
-				// 	this.$refs.uToast.show({
-				// 		title: '修改失败，请重新修改',
-				// 		type: 'error',
-				// 		duration: 2500
-													
-				// 	})		
-				// }
+				
 				}else{
 					this.$refs.uToast.show({
 						title: '修改失败，请重新修改',

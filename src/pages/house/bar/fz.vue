@@ -4,7 +4,9 @@
 			<u-dropdown-item v-model="value1" title="区域" :options="options1" @change="change"></u-dropdown-item>
 			<u-dropdown-item v-model="value2" title="价格" :options="options2"></u-dropdown-item>
 		<u-dropdown-item v-model="value3" title="户型" :options="options3"></u-dropdown-item>
+		<!-- <u-dropdown-item  title="更多"></u-dropdown-item> -->
 		</u-dropdown>
+		
 		<view class="wages"@click="show = true">
 		更多
 		</view>
@@ -246,13 +248,19 @@
 				// 更多的细节，如有需要请自行根据业务逻辑进行处理
 				// this.$refs.uDropdown.highlight(xxx);
 			}
-		}
+		},
+		open(open){
+				if(open==3){
+					this.show=true
+				}
+			},
 	}
 </script>
 <style lang="scss">
 	.wage{
 		width: 100%;
 		display:flex;
+		
 		 
 	}
 	.wages{

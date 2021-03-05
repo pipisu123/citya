@@ -10,7 +10,7 @@
                     <image :src="src" mode="" style="width: 120upx;height: 120upx;" class="img"></image>
 					</view>
 					<!-- 微信一键登陆 -->
-					<view class="login" @click="login" v-if="show">
+					<view class="login" @click="login" v-if="this.token == null">
 						<text>点击登录</text>
 					</view>
 					<view class="wechatname" v-else>
@@ -44,7 +44,7 @@
 		data() {
 			return {
 				src:null,
-				show:true,
+				token:'',
 				wechatname:null,
 				status: [{
 						key: 1,
@@ -107,7 +107,8 @@
 		onShow() {
 			this.src=this.$store.state.avatar,
 			this.wechatname = this.$store.state.wechatname
-			
+			const token = uni.getStorageSync('token')
+			this.token = token
 			
 		},
 		methods: {
@@ -123,7 +124,7 @@
 			uni.navigateTo({
 				url:'/pages/login/login'
 			})
-		 this.show = false
+		
 		}
 		},
 		computed: {

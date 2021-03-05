@@ -6,7 +6,7 @@
 	    			<u-input :border="border" placeholder="请输入公司名称" v-model="model.company" type="text"></u-input>
 	    		</u-form-item>
 	    		<u-form-item :leftIconStyle="{color: '#888', fontSize: '16rpx'}" label-width="130" :label-position="labelPosition" label="福利" prop="welfare">
-	    			<u-input :border="border" placeholder="请输入公司福利" v-model="model.welfare" type="text"></u-input>
+	    			<u-input :border="border" placeholder="请输入公司福利" v-model="model.welfare" type="text" ></u-input>
 	    		</u-form-item>
 	    		<u-form-item :label-position="labelPosition" label="简介" prop="intro">
 	    			<u-input type="textarea" :border="border" placeholder="请填写简介" v-model="model.intro" />
@@ -15,20 +15,21 @@
 	    			<u-input :border="border" placeholder="请选择公司地址" v-model="model.address" type="select" @click="Toaddress"></u-input>
 	    		</u-form-item>
 	    		<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
-	    			<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="false" max-count=5 @on-remove="deleteImgs"></u-upload>
+	    			<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="true" max-count=5 @on-remove="deleteImgs" @on-choose-complete="uploadImage"></u-upload>
 					<text style="color: #999999;">最多只能上传5张图片，大小不超过1m</text>
 	    		</u-form-item>
 				<u-form-item :label-position="labelPosition" label="上传营业照" prop="license" label-width="150">
-					<u-upload width="160" height="160" action="#"  ref="uUpload1" :auto-upload="false" max-count=1 @on-remove="deleteImgs"></u-upload>
+					<u-upload width="160" height="160" action="#"  ref="uUpload1" :auto-upload="true" max-count=1 @on-remove="deleteImgs" @on-choose-complete="uploadImage1"></u-upload>
 					<text style="color: #999999;">最多只能上传1张图片，大小不超过1m</text>
 				</u-form-item>
 	    	</u-form-item>
 	    </u-form>
-		<u-toast ref="uToast" />
-		<!-- 上传图片 -->
-		<view class="uploadfile">
-			<button  @click="click">上传</button>
-		</view>
+		<!-- <multipleSelect
+		v-model="show"
+		:data="list"
+		:default-selected="defaultSelected"
+		@confirm="confirm"
+		></multipleSelect> -->
 		<!-- 视频 -->
 		<view class="uni-uploader__file" v-if="src1">
 		    <view class="uploader_video">
@@ -48,6 +49,8 @@
 
 <script>
 	import { addCompany } from '../../util/company.js'
+	
+	// import multipleSelect from './childComps/multiple-select.vue'
 	var sourceType = [
 	        ['camera'],
 	        ['album'],
@@ -57,6 +60,10 @@
 		data() {
 			return {
 				// show: false,
+				    // show: false, //是否显示 - 双向绑定
+				    // info: "",
+				    // list: [], //数据源
+				    // defaultSelected: ["3", "5"], //默认选中项
 				    src1:"",//视频存放
 					src2:'',
 				    sourceTypeIndex: 2,
@@ -78,12 +85,13 @@
 				// 上传表单信息
 				model:{
 					company:'',
-					welfare:'',
+					welfare: [],
 					intro:'',
 					address:'',
-					photo: [
-						
-					]
+					photo: [],
+					latitude:'',//纬度
+					longitude:'',//经度
+					license:''
 				},
 				rules:{
 					
@@ -126,6 +134,53 @@
 				selectShow: false,
 			}
 		},
+		components:{
+			// multipleSelect
+		},
+		// onShow() {
+		//   //模拟异步数据
+		//   setTimeout(() => {
+		//     this.list = [
+		//       {
+		//         label: "皮皮虾",
+		//         value: "1"
+		//       },
+		//       {
+		//         label: "小龙虾",
+		//         value: "2",
+		//         disabled: true //禁用
+		//       },
+		//       {
+		//         label: "大龙虾",
+		//         value: "3"
+		//       },
+		//       {
+		//         label: "石头蟹",
+		//         value: "4"
+		//       },
+		//       {
+		//         label: "兰花蟹",
+		//         value: "5"
+		//       },
+		//       {
+		//         label: "面包蟹",
+		//         value: "6"
+		//       },
+		//       {
+		//         label: "石斑鱼",
+		//         value: "7"
+		//       },
+		//       {
+		//         label: "鲫鱼",
+		//         value: "8"
+		//       },
+		//       {
+		//         label: "鲨鱼",
+		//         value: "9"
+		//       }
+		//     ];
+		//   }, 1000);
+		// },
 		onUnload() {
 		    this.src1 = '',
 		    this.sourceTypeIndex = 2,
@@ -136,6 +191,36 @@
 			
 		},
 		methods: {
+			// poup(){
+			// 	this.show = true
+			// },
+			// 确定事件
+			confirm(data) {
+			  console.log(data);
+			  this.info = data.map(el => el.label).join(",");
+			},
+			uploadImage1(){
+				let files = [];
+				files = this.$refs.uUpload1.lists;
+				this.base641(files[0].url)
+				
+			},
+			uploadImage(){
+				uni.showLoading({
+					title:'上传中...'
+				})
+				let files = [];
+				files = this.$refs.uUpload.lists;
+				for(var i=0;i<files.length;i++){
+					this.base64(files[i].url,i)
+				}
+				if(files.length>0){
+					uni.hideLoading()
+					uni.showToast({
+						title:'上传成功'
+					})
+				}
+			},
 			// 删除图片时触发事件
 			deleteImgs(index,lists){
 				console.log(index)
@@ -146,16 +231,18 @@
 						success:(res)=>{
 							console.log('位置名称：' + res.name);
 							console.log('详细地址：' + res.address);
+							console.log('城市：' + res.address.cityCode);
 							console.log('纬度：' + res.latitude);
 							console.log('经度：' + res.longitude);
 							let latitude = res.latitude; //纬度
 							let longitude = res.longitude; //经度
 							this.model.address = res.address
+							this.model.latitude = res.latitude
+							this.model.longitude = res.longitude
 						}
 						});
 			},
 			chooseVideo(){
-				
 				// 上传视频
 				console.log('上传视频')
 				uni.chooseVideo({
@@ -218,93 +305,80 @@
 			            }
 			        })
 			    },
-			// 上传图片
-			click(){
-				let files = [];
-				files = this.$refs.uUpload.lists;
-				for(var i=0;i<files.length;i++){
-					this.urlTobase64(files[i].url,i)
-				}
-				if(files.length>0){
-					this.$refs.uToast.show({
-							title: '上传成功',
-							type: 'success',
-									})
-				}
-			},
 			// 上传图片回调转base64
-			urlTobase64(url,i){
-			 uni.request({
-			 url: url,
-			 method:'GET',
-			 responseType: 'arraybuffer',
-			 success: ress => {
-			  let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64 
-			  // this.model.photo[i] = base64	
-			  // this.base = base64
-			 var object = {}
-			 object.picture_file = base64
-			 this.model.photo.push(object)
-			 }
-			    })
+			base641(url){
+			      return new Promise((resolve, reject) => {
+			        wx.getFileSystemManager().readFile({
+			          filePath: url, //选择图片返回的相对路径
+			          encoding: 'base64', //编码格式
+			          success: res => {
+			            resolve('data:image/' + ';base64,' + res.data)
+						console.log(res)
+						this.model.license = res.data	
+			          },
+			          fail: res => reject(res.errMsg)
+			        })
+			      })
+			},
+			base64(url,i){
+			      return new Promise((resolve, reject) => {
+			        wx.getFileSystemManager().readFile({
+			          filePath: url, //选择图片返回的相对路径
+			          encoding: 'base64', //编码格式
+			          success: res => {
+			            resolve('data:image/' + ';base64,' + res.data)
+						console.log(res)
+						let base64 = res.data
+						 var object = {}
+						 object.picture_file = base64
+						 this.model.photo.push(object)
+						 
+			          },
+			          fail: res => reject(res.errMsg)
+			        })
+			      })
 			},
 			// 创建公司
 			create(){
-				console.log(this.model.photo)
+				uni.showLoading({
+					title:'创建中...'
+				})
 				let file = [];
 				this.$refs.uForm.validate(valid => {
 					if (valid) {
 						addCompany({
-							"userId":"8040423884719751168",
-							"companyName":this.model.company,
-							"companyWelfare":this.model.welfare,
-							"companyIntroduction":this.model.intro,
-							"companyAddress":this.model.address,
-							"companyPicture": this.model.photo,
+							// "user_id":"8040423884719751160",
+							"company_name":this.model.company,
+							// "company_welfare":this.model.welfare,
+							"company_introduction":this.model.intro,
+							"company_address":this.model.address,
+							"company_picture": this.model.photo,
+							"longitude": this.model.longitude,
+							"latitude": this.model.latitude,
+							"str": this.model.license,
 							"companyVideo":{
 								"videoPath": this.src2
 							},
 						}).then(res=>{
 							console.log(res)
-							this.$refs.uToast.show({
-								title: '提交成功',
-								type: 'success',								
-							})
+							if(res.data.code === 20000){
+								uni.hideLoading()
+								uni.reLaunch({
+									url:'/pages/man/man'
+								})
+								uni.showToast({
+									title:'创建成功',
+									duration:2500
+								})
+							}else{
+								uni.showToast({
+									title:'创建失败，请重新创建'
+								})
+							}
+							
 						}).catch(err=>{
 							console.log(err)
 						})
-						
-					// 	const res = this.$myRequest({
-					// 		// 后端接口
-					// 		url:'addCompany',
-					// 		header: {
-					// 		        'content-type': 'application/json', 
-					// 		        },
-					// 		// data: formData,
-					// 		data:JSON.stringify({
-					// 			"user_id":1,
-					// 			"company_name":this.model.company,
-					// 			"company_welfare":this.model.welfare,
-					// 			"company_introduction":this.model.intro,
-					// 			"company_address":this.model.address,
-					// 			"company_picture": this.model.photo,
-					// 			"company_video":{
-					// 				"video_path": this.src2
-					// 			},
-					// 		}),					
-					// 		method: 'POST',
-					// 	})	
-						
-					// 	console.log(res)
-						 
-					// 	this.$refs.uToast.show({
-					// 		title: '提交成功',
-					// 		type: 'success',
-														
-					// 	})
-					// } else {
-					// console.log("提交失败")
-					// }
 					}
 				});
 			},

@@ -11,7 +11,9 @@
 			</view> -->
 			<!-- 轮播图 -->
 			<view class="top">
-				<swipper></swipper>
+				<view class="wrap">
+					<u-swiper :list="list" effect3d="true" height=320 title=true effect3d-previous-margin=35 @click="click"></u-swiper>
+				</view>
 			</view>
 			<!-- 广告通知 -->
 			<notice></notice>
@@ -19,11 +21,11 @@
 			<RecruitmentBar @cityChange="cityChange" @wagesChange="wagesChange" @worktype="worktype" @industryselect="industryselect"></RecruitmentBar>
 			<!-- 招聘发布列表 -->
 			<view>
-				<view v-if="list.length ===0">
+				<view v-if="list1.length ===0">
 					<u-empty text="暂无数据" mode="search" margin-top=200></u-empty>
 				</view>
 				<scroll-view scroll-y="true" class="scroll-Y" @scrolltolower="lower">
-					<Recruitmentlist :list="list" @itemClick="goDetail"></Recruitmentlist>
+					<Recruitmentlist :list1="list1" @itemClick="goDetail"></Recruitmentlist>
 					<u-loadmore :status="status" v-model="showLoad" :load-text="loadText" />
 				</scroll-view>
 			</view>
@@ -31,9 +33,13 @@
 
 		<!-- 招聘人才库 -->
 		<template v-else-if="show1">
-			<view class="">
+			<view>
 				<!-- 轮播图 -->
-				<swipper></swipper>
+				<view class="talent-swiper">
+					<view class="wrap">
+						<u-swiper :list="list" effect3d="true" height=320 title=true effect3d-previous-margin=35 @click="click"></u-swiper>
+					</view>
+				</view>
 				<!-- 个人简历列表 -->
 				<ResumeList></ResumeList>
 			</view>
@@ -67,7 +73,6 @@
 
 <script>
 	// import Recruitment from './childComps/Recruitment.vue';
-	import swipper from '../components/swipper.vue'
 	import notice from '../components/notice.vue'
 	import RecruitmentBar from './childComps/RecruitmentBar.vue'
 	import Recruitmentlist from './childComps/Recruitmentlist.vue'
@@ -76,6 +81,8 @@
 	import ResumeList from './Talentpool/ResumeList.vue'
 	import Position from './Position/position.vue'
 	import Public from '../PubRecruitment/PubRecruitment.vue'
+	
+	import { findAdvertisement } from '../../util/advertisement/advertisement.js'
 
 	import {
 		recruitmentList
@@ -86,6 +93,7 @@
 			return {
 				value: '',
 				list: [],
+				list1: [],
 				show: true,
 				show1: false,
 				show2: false,
@@ -106,7 +114,6 @@
 			}
 		},
 		components: {
-			swipper,
 			notice,
 			RecruitmentBar,
 			Recruitmentlist,
@@ -118,6 +125,7 @@
 		},
 		onLoad() {
 			this.getRecruitmentlist();
+			this.getadverDetail()
 			// this.cityChange();
 			// this.wagesChange()
 		},
@@ -155,8 +163,8 @@
 					}
 					
 				}).then(res=>{
-					this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起	
-					if(res.statusCode===200){
+					if(res.data.code===20000){
+						this.list1 = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起	
 						uni.hideLoading()
 						this.$refs.uToast.show({
 											title: '加载成功',
@@ -167,8 +175,8 @@
 					}else{
 						uni.hideLoading()
 						this.$refs.uToast.show({
-											title: '加载失败',
-											type: 'error',
+											title: '暂无数据啦~',
+											type: 'default',
 											duration: 3500
 										})
 					}
@@ -178,39 +186,6 @@
 					this.showLoad = true
 					uni.hideLoading()
 				})
-				// const res = this.$myRequest({
-				// 	url: 'recruitemt/recruitment-recruitment/findRecruitment',
-				// 	dataType: "json",
-				// 	header: {
-				// 		'content-type': 'application/json',
-				// 	},
-				// 	data: JSON.stringify({
-				// 		"str": this.value,
-				// 		"wages": this.wages,
-				// 		"address": this.city,
-				// 		"work_types": this.work_types,
-				// 		"paging": {
-				// 			"count": this.count,
-				// 			"page": this.page,
-				// 		}
-
-				// 	}),
-				// 	method: 'POST'
-				// })
-
-				// var a = Promise.resolve(res)
-				// a.then((res) => {
-				// 	// console.log(res.data)
-				// 	console.log(this.list.length)
-				// 	console.log(res)
-				// 	if (res.data.code === 20001) { //没有数据
-				// 		uni.hideLoading(); //关闭加载动画
-				// 		return false;
-				// 	}
-				// 	this.list = this.list.concat(res.data.data.user_Recruitments); //将数据拼接在一起			
-				// 	uni.hideLoading(); //关闭加载动画
-				// })
-				// this.list = res.data.data.user_Recruitments
 			},
 			// 搜索招聘
 			custom(value) {
@@ -219,12 +194,29 @@
 				this.getRecruitmentlist()
 			},
 			// 跳转到招聘详情
-			goDetail(recruitment_id) {
+			goDetail(recruitment_id,user_id) {
 				uni.navigateTo({
-					url: '/pages/detail/detail?recruitment_id=' + recruitment_id
+					url: '/pages/detail/detail?recruitment_id=' + recruitment_id + '&user_id='+ user_id
 				})
-				console.log(recruitment_id)
-
+			},
+			// 查询广告
+			getadverDetail(){
+				findAdvertisement({
+					"module":'recruitment'
+				}).then(res=>{
+					console.log(res)
+					this.list = res.data.data.advertisements
+				}).catch(err=>{
+					console.log(err)
+				})
+			},
+			// 点击广告跳转到外部链接
+			click(index){
+				let url = encodeURIComponent(this.list[index].advertisementPath)
+				console.log(url)
+				uni.navigateTo({
+					url:'/pages/index/advertisementUrl/advertisementUrl?url='+url
+				})
 			},
 			Clickitem(index) {
 				console.log(index)
@@ -277,7 +269,7 @@
 					}
 				}).then(res => {
 					console.log(res)
-					this.list = res.data.data.user_Recruitments
+					this.list1 = res.data.data.user_Recruitments
 				}).catch(err => {
 					console.log(err)
 				
@@ -299,7 +291,7 @@
 					}
 				}).then(res => {
 					console.log(res)
-					this.list = res.data.data.user_Recruitments
+					this.list1 = res.data.data.user_Recruitments
 					if(res.data.code === 20000){
 						uni.hideLoading()
 					}
@@ -323,7 +315,7 @@
 					}
 				}).then(res => {
 					console.log(res)
-					this.list = res.data.data.user_Recruitments
+					this.list1 = res.data.data.user_Recruitments
 					if(res.data.code === 20000){
 						uni.hideLoading()
 					}
@@ -344,7 +336,7 @@
 					}
 				}).then(res => {
 					console.log(res)
-					this.list = res.data.data.user_Recruitments
+					this.list1 = res.data.data.user_Recruitments
 				}).catch(err => {
 					console.log(err)
 				
@@ -370,8 +362,15 @@
 										duration: 3000
 									})
 					console.log(res)
-					this.list = res.data.data.user_Recruitments
-					this.count = res.data.paging.count
+					if(res.data.code === 20000){
+						this.list1 = res.data.data.user_Recruitments
+						this.count = res.data.paging.count
+					}
+					if(res.data.code === 4010002){
+						uni.navigateTo({
+							url:'/pages/login/login'
+						})
+					}
 				}).catch(err => {
 					console.log(err)
 
@@ -395,14 +394,16 @@
 	}
 
 	.top {
-		margin-top: 75rpx;
+		margin-top: 90rpx;
 	}
 
 	.button {
 		margin-top: 600rpx;
 		text-align: center;
 	}
-
+    .talent-swiper{
+		margin-top: 15rpx;
+	}
 	scroll-view {
 		height: 900rpx;
 	}

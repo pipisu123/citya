@@ -66,16 +66,27 @@
 		<!-- 温馨提示 -->
 		<WarningTip></WarningTip>
 		<u-button @click="create" type="primary">立即发布</u-button>
+		<u-modal ref="uModal" v-model="show" :show-cancel-button="true"
+			:show-title="showTitle" :async-close="asyncClose"
+			@confirm="confirm" :content="content" confirm-text="去创建公司"
+		>
+		</u-modal>
 		<u-toast ref="uToast" />
 	</view>
 </template>
 
 <script>
 	import WarningTip from '../../detail/childComps/WarningTip.vue'
+	
 	import { addRecruitment } from '../../../util/recruitment.js'
+	import { findRecruitmentUser } from '../../../util/recruitment/personCenter.js'
 	export default {
 		data() {
 			return {
+				show:false,
+				content:'您还没有创建公司，请先创建公司',
+				showTitle: true,
+				companyId:'',
 				recruitment2:{
 					name: '',
 					workType: '',
@@ -122,47 +133,69 @@
 			parseLoaded() {
 							this.$refs.uReadMore.init();
 						},
+		    // 确认
+			confirm(){
+				setTimeout(() => {
+					this.show = false;
+				}, 2000)
+				uni.navigateTo({
+					url:'/pages/CreateCompany/CreateCompany'
+				})
+			},
 			// 创建招聘
 			create(){
-				uni.showLoading({
-					title:'发布中...'
-				})
-				addRecruitment(
-				{
-				 "user_id": "8040423884719751168",
-				 "company_id": "8040844880120401920",
-				 "recruitment_title":this.recruitment2.name,
-				 "work_types":this.recruitment2.workType,
-				 "work_name":this.recruitment2.goodsType,
-				 "experience":this.recruitment2.worktime,
-				 "address":this.recruitment2.region,
-				 "introduction": this.recruitment2.intro,
-				 "max_degree":this.recruitment2.worktime,
-				 "wages": this.recruitment2.wagesType,
-				 "poster":{
-					"picture_file": this.recruitment2.photo
-				 },
-				 "industry":this.recruitment2.industry,
-				 "phone": this.recruitment2.phone,
-				 "wechat": this.recruitment2.wechat,
-				// "last_time": this.model.lasttime,
-				"recruitment_number": this.recruitment2.count
-				}
-				).then(res=>{
+				findRecruitmentUser({
+					
+				}).then(res=>{
 					console.log(res)
-					if(res.data.code===20000){
-						uni.hideLoading()
-						uni.reLaunch({
-							url:'/pages/man/man'
-						})
-					}else{
-						uni.showToast({
-							title:'发布失败'
-						})
+					this.companyId = res.data.data.recruitmentUserVO.companyId
+					if(res.data.data.recruitmentUserVO.companyId === '0'){
+						this.show = true
+						console.log("还没有创建公司")
+					    }else{
+						   uni.showLoading({
+						   	title:'发布中...'
+						   })
+						   addRecruitment(
+						   {
+						    // "user_id": "8040423884719751168",
+						    "company_id": this.companyId,
+						    "recruitment_title":this.recruitment2.name,
+						    "work_types":this.recruitment2.workType,
+						    "work_name":this.recruitment2.goodsType,
+						    "experience":this.recruitment2.worktime,
+						    "address":this.recruitment2.region,
+						    "introduction": this.recruitment2.intro,
+						    "max_degree":this.recruitment2.worktime,
+						    "wages": this.recruitment2.wagesType,
+						    "poster":{
+						   	"picture_file": this.recruitment2.photo
+						    },
+						    "industry":this.recruitment2.industry,
+						    "phone": this.recruitment2.phone,
+						    "wechat": this.recruitment2.wechat,
+						   "recruitment_number": this.recruitment2.count
+						   }
+						   ).then(res=>{
+						   	console.log(res)
+						   	if(res.data.code===20000){
+						   		uni.hideLoading()
+						   		uni.reLaunch({
+						   			url:'/pages/man/man'
+						   		})
+						   	}else{
+						   		uni.showToast({
+						   			title:'发布失败'
+						   		})
+						   	}
+						   }).catch(err=>{
+						   	console.log(err)
+						   })
 					}
 				}).catch(err=>{
-					
+					console.log(err)
 				})
+				
 			}
 		}
 	}

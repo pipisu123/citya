@@ -86,21 +86,6 @@
 				}).catch(err=>{
 					console.log(err)
 				})
-				// const res = await this.$myRequest({
-				// 	url: 'findCompany',
-				// 	dataType: "json",
-				// 	header: {
-				// 		'content-type': 'application/json',
-				// 	},
-				// 	data: JSON.stringify({
-				// 		"company_id": company_id
-
-				// 	}),
-
-				// 	method: 'POST'
-				// })
-				// console.log(res.data.data.companys[0])
-				// this.list = res.data.data.companys[0]
 			}
 		}
 	}

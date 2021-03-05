@@ -6,10 +6,10 @@
 		</view>
 		<view class="top">
 			<view class="circle">
-				<image class="head" :src="src" mode="widthFix"></image>
+				<image class="head" :src="userinfo.imgpath" mode="widthFix"></image>
 			</view>
 			<view class="top-texts">
-				<text class="name">酒馆</text>
+				<text class="name">{{userinfo.nickName}}</text>
 				<image class="set-top-hr" src="../../../static/set-top-hr.png" mode=""></image>
 				<view>
 					<text>绑定手机：</text>
@@ -29,29 +29,32 @@
 				<text class="middle-num">2302</text>
 			</view>
 			<view class="middle-line"></view>
-			<view class="middle-right">
+			<view class="middle-right" @click="Mypoints">
 				<image class="middle-icon" src="../../../static/loan.png"></image>
 				<text>我的积分：</text>
-				<text class="middle-num">{{user.integral}}</text>
+				<text class="middle-num">{{userinfo.integral}}</text>
 			</view>
 		</view>
 		
  
 		<!-- 下半部分 -->
-			<view class="title_line"  >
+			<view class="title_line">
 				<text class="title">求职管理</text>
 				<text class="more">查看更多</text>
 			</view>
-			<!-- <view class="box"> -->
-			<view class="welfare ">
+			
+			<view class="message">
 				<template>
-					<view class="item" >
-						<view class="border">
-							<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
+					<view class="item" @click="myInvitation">
+						<view class="u-badge-wrap">
+							<u-badge type="error" count="7" offset=[-20,-20] ></u-badge>
+							<view class="border">
+								<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
+							</view>
+							<text class="txt">我的面试</text>
 						</view>
-						<text class="txt">面试邀请</text>
 					</view>
-					<view class="item">
+					<view class="item" @click="myDelivery">
 						<view class="border">
 							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
 						</view>
@@ -63,63 +66,81 @@
 						</view>
 						<text class="txt">我的职位</text>
 					</view>
-					<view class="item">
+					<view class="item" @click="godetail">
 						<view class="border">
 							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
 						</view>
-						<text class="txt">我的收藏</text>
+						<text class="txt">招聘收藏</text>
 					</view>
-					<view class="item">
+					<view class="item" @click="godetail">
 						<view class="border">
 							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
 						</view>
-						<text class="txt">我的收藏</text>
+						<text class="txt">招聘收藏</text>
 					</view>
-					
-					
-					
-					
+					<view class="item" @click="godetail">
+						<view class="border">
+							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">招聘收藏</text>
+					</view>
+					<view class="item" @click="godetail">
+						<view class="border">
+							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">招聘收藏</text>
+					</view>
+					<view class="item" @click="godetail">
+						<view class="border">
+							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
+						</view>
+						<text class="txt">招聘收藏</text>
+					</view>
 				</template>
 			</view>
-			<!-- </view> -->
 			
-			<view class="title_line" >
+			<view class="title_line">
 				<text class="title">招聘管理</text>
 				<text class="more">查看更多</text>
 			</view>
 			
-			<view class="welfare">
+			<view class="message">
 				<template>
-					<view class="item">
-						<view class="border">
-							<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
+					<view class="item" @click="manageInvitation">
+						<view class="u-badge-wrap">
+							<u-badge type="error" count="3" offset=[-20,-20] ></u-badge>
+							<view class="border">
+								<image class="img" src="../../../static/card.png" style="width: 60rpx; height: 60rpx;"></image>
+							</view>
+							<text class="txt">面试邀请</text>
 						</view>
-						<text class="txt">面试邀请</text>
+					</view>
+					<view class="item" @click="ManageDelivery(userinfo.userId)">
+						<view class="u-badge-wrap">
+							<u-badge type="error" count="1" offset=[-20,-20] ></u-badge>
+							<view class="border">
+								<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
+							</view>
+							<text class="txt">投递管理</text>
+						</view>
 					</view>
 					<view class="item">
 						<view class="border">
 							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
 						</view>
-						<text class="txt">投递管理</text>
+						<text class="txt">职位管理</text>
 					</view>
-					<view class="item">
-						<view class="border">
-							<image class="img" src="../../../static/main_off.png" style="width: 60rpx; height: 60rpx;"></image>
-						</view>
-						<text class="txt">简历管理</text>
-					</view>
-					<view class="item">
+					<view class="item" @click="ResumeCollection">
 						<view class="border">
 							<image class="img" src="../../../static/5.png" style="width: 60rpx; height: 60rpx;"></image>
 						</view>
-						<text class="txt">我的收藏</text>
+						<text class="txt">简历收藏</text>
 					</view>
-				
 				</template>
 			</view>
 		
 		<view class="index">
-			<view class="cell" @click="myResume">
+			<view class="cell" @click="myResume(userinfo.resumeId)">
 				<view class="cell-left">
 					<image class="cell_icon" src="../../../static/card.png"></image>
 					<text class="cell-text">我的简历</text>
@@ -129,7 +150,7 @@
 				</view>
 			</view>
 
-			<view class="cell" @click="myCompany(user.company_id)">
+			<view class="cell" @click="myCompany(userinfo.companyId)">
 				<view class="cell-left">
 					<image class="cell_icon" src="../../../static/main_off.png"></image>
 					<text class="cell-text">我的公司</text>
@@ -139,7 +160,7 @@
 				</view>
 			</view>
 
-			<view class="cell" @click="myCollection">
+			<view class="cell">
 				<view class="cell-left">
 					<image class="cell_icon" src="../../../static/5.png"></image>
 					<text class="cell-text">我的收藏</text>
@@ -175,15 +196,15 @@
 </template>
 
 <script>
+	import { findRecruitmentUser } from '../../../util/recruitment/personCenter.js'
 	export default {
 		data() {
 			return {
-				src: null,
-				user:null
+				userinfo:null,
+			
 			}
 		},
 		created() {
-			this.src = this.$store.state.avatar,
 			this.getUser()
 		},
 		onLoad() {
@@ -192,20 +213,20 @@
 		methods: {
 			// 查询个人信息
 			async getUser(){
-				
-				// const res = await this.$myRequest({
-				// 	url:'findUser',
-				// 	dataType: "json",
-				// 	header: {
-				// 	        'content-type': 'application/json', 
-				// 	        },
-				// 	data:JSON.stringify({ 
-				// 		"user_id":1
-				// 	}),
-				// 	method: 'POST'
-				// })
-				// console.log(res.data.data.user[0])
-				// this.user = res.data.data.user[0]
+				uni.showLoading({
+					title:'正在加载数据...'
+				})
+				findRecruitmentUser({
+					
+				}).then(res=>{
+					console.log(res)
+					if(res.data.code === 20000){
+						uni.hideLoading()
+					}
+					this.userinfo = res.data.data.recruitmentUserVO
+				}).catch(err=>{
+					console.log(err)
+				})
 				
 				},
 
@@ -232,26 +253,68 @@
 
 
 			// }
+			// 我的积分
+			Mypoints(){
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/myPoints/myPoints'
+				})
+			},
+			// 我的投递
+			myDelivery(){
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/myDelivery/myDelivery'
+				})
+			},
+			// 管理投递
+			ManageDelivery(userId){
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/manageDelivery/manageDelivery?userId='+userId
+				})
+			},
+			// 我的收藏
+			godetail(){
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/myCollection/myCollection'
+				})
+			},
 			// 我的职位
 			myPosition(){
 				uni.navigateTo({
 					url:'/pages/man/PersonalCenter/myPosition/myPosition'
 				})
 			},
-			// 我的公司
-			myCompany(company_id) {
-				console.log(company_id)
+			// 我的面试
+			myInvitation(){
 				uni.navigateTo({
-					url: '/pages/myCompany/myCompany?company_id='+company_id
+					url:'/pages/man/PersonalCenter/myInvitation/myInvitation'
+				})
+			},
+			// 面试邀请
+			manageInvitation(){
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/manageInvitation/manageInvitation'
+				})
+			},
+			// 我的公司
+			myCompany(companyId) {
+				console.log(companyId)
+				uni.navigateTo({
+					url: '/pages/myCompany/myCompany?companyId='+companyId
 				})
 			},
 			// 我的简历
-			myResume() {
+			myResume(resumeId) {
 				uni.navigateTo({
-					url: '/pages/myResume/myResume'
+					url: '/pages/myResume/myResume?resumeId='+resumeId
 				})
 			},
-			// 我的收藏
+			// 我的简历收藏
+			ResumeCollection(){
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/resumeCollection/resumeCollection'
+				})
+			},
+			// 我的招聘收藏
 			myCollection(){
 				uni.navigateTo({
 					url:'/pages/man/PersonalCenter/myCollection/myCollection'
@@ -435,11 +498,10 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		// word-break: break-all;
 	
 		.title {
 			margin-left: 20px;
-			font-size: 18px;
+			font-size: 15px;
 			font-weight: 500;
 			color: rgba(51, 51, 51, 1);
 			line-height: 41px;
@@ -453,17 +515,8 @@
 			line-height: 41px;
 		}
 	}
-	// .box{
-	// 	display: block;
-		
-	// 	white-space: pre-line;
-	// 	padding: 10rpx;
-	// 	border: 1rpx solid gray;
-	// 	margin: 0;
-		
-	// }
 	
-	.welfare {
+	.message {
 		width: 92%;
 		display: flex;
 		flex-wrap: wrap;
@@ -474,31 +527,30 @@
 		box-shadow: 0px 1px 21px 0px rgba(103, 103, 103, 0.2);
 		border-radius: 10px;
 		margin-bottom: 10px;
-		
-	
+	     .u-badge-wrap{
+			 // width: px;
+			 height: 40px;
+			 border-radius: 6px;
+			 // background-color: $u-light-color;
+			 position: relative;
+			 // margin: auto;
+			 margin-bottom: 13px;
+			 // padding: 5px;
+		 }
 		.item {
-			padding: 20px;
-			flex-wrap: wrap;
-			white-space: pre-wrap;
+			padding: 15px;
+			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 	
-			.border {
-				margin-top: 5px;
-				border: 2px solid #c9ac7a;
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-wrap: wrap;
+			
 	
 				.img{
 					width: 10rpx;
 					height: 10rpx;
-					flex-wrap: wrap;
 				}
-			}
+			
 	
 			.txt {
 				margin-top: 5px;

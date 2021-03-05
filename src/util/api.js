@@ -1,12 +1,12 @@
 export const BASE_URL = 'http://192.168.101.24:8080/'
-export const myRequest = (options)=>{
-	    let headers={}
-		// headers["Content-Type"] = "application/json";
-	    headers["enctype"] = "multipart/form-data";
+export const myRequest = (options)=>{  
 	return new Promise((resolve,reject)=>{
 		uni.request({
 			url:BASE_URL+options.url,
-            header: headers,
+			header: {
+				"authorization":uni.getStorageSync('token'),
+			    // 'content-type': 'multipart/form-data;charset=UTF-8'
+			},
 			method:options.method || 'GET',
 			data: options.data || {},
 			success: (res)=> {

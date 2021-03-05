@@ -31,7 +31,7 @@
 			</view>
 			<view>
 				<view class="avatar">
-					<u-avatar :src="src" size=55 show-level=true></u-avatar>
+					<u-avatar :src="item.user.imgpath" size=55 show-level=true></u-avatar>
 				</view>
 			</view>
 		</view>
@@ -48,7 +48,6 @@
 		},
 		data() {
 			return {
-				src: null,
 				pic: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
 				scrollTop: 0,
 				token: '',

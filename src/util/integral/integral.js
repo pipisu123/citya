@@ -8,3 +8,12 @@ export function buyIntegral(data){
 		data:data	
 	})
 }
+
+// 增加积分
+export function addIntegral(data){
+	return myRequest ({
+		url:'utils/userIntegral/addIntegral',
+		method:'POST',
+		data:data	
+	})
+}

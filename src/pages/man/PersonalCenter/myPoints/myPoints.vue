@@ -7,7 +7,7 @@
 					<text>2000</text>
 				</view>
 				<view class="integral-detail">
-					<text>积分明细></text>
+					<text>积分订单></text>
 				</view>
 			</view>
 		</view>
@@ -16,22 +16,22 @@
 				<text>购买积分</text>
 			</view>
 			<view class="buy-middle">
-				<view class="wrap" v-for="(item,index) in list" :key="item">
+				<view class="wrap">
 					<u-row gutter="16">
 					<u-col span="6" >
 						<view class="demo-layout bg-purple">
-							<image :src="item.src" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
-							<text>{{item.integral}}</text>
+							<image src="../../../../static/loan.png" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
+							<text>100积分</text>
 						</view>
 					</u-col>
 					<u-col span="6">
 						<view class="demo-layout bg-purple-light">
-							<image :src="item.src" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
-							<text>{{item.integral}}</text>
+							<image src="../../../../static/loan.png" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
+							<text>1000积分</text>
 						</view>
 					</u-col>
 				</u-row>
-				<!-- <u-row gutter="16">
+				<u-row gutter="16">
 					<u-col span="6">
 						<view class="demo-layout bg-purple">
 							<image src="../../../../static/loan.png" mode="" style="width: 40rpx; height: 40rpx; padding-top: 15rpx;"></image>
@@ -44,12 +44,12 @@
 							<text>20000积分</text>
 						</view>
 					</u-col>
-				</u-row> -->
+				</u-row>
 				</view>
 				<view class="integral-input">
-				    <u-form-item :label-style="{color: '#FFFFFF'}" label-width="150" :label-position="labelPosition" label="积分数量:" prop="count">
+				    <u-form-item :label-style="{color: '#FFFFFF'}" label-width="130" :label-position="labelPosition" label="金钱:" prop="count">
 				    	<view class="ts-input">
-				    		<u-input :border="border" placeholder="请输入购买积分数量" v-model="model.count" type="text" ></u-input>
+				    		<u-input :border="border" placeholder="请输入多少元" v-model="model.count" type="text" ></u-input>
 				    	</view>
 				    </u-form-item>
 				</view>
@@ -66,16 +66,7 @@
 	export default {
 		data() {
 			return {
-				list: [
-					{
-						integral: '100积分',
-						src:'../../../../static/loan.png'
-					},
-					{
-						integral: '1000积分',
-						src:'../../../../static/loan.png'
-					}
-				]
+				
 			}
 		},
 		onLoad() {

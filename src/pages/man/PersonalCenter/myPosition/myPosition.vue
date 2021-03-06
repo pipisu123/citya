@@ -153,7 +153,7 @@
 				}
         },
 		onLoad() {
-			this.Topping()
+			// this.Topping()
 		},
 		created() {
 			this.getWorkname()
@@ -163,8 +163,8 @@
 			Topping(recruitment_id){
 				console.log("=========")
 				addTopping({
-					"user_id": "8040423884719751168",
-					"recruitment_id":recruitment_id
+					"recruitment_id":recruitment_id,
+					"topping_time":3,
 				}).then(res=>{
 					console.log(res)
 				}).catch(err=>{

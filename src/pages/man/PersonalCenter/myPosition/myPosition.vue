@@ -120,6 +120,8 @@
 				</scroll-view>
 		</swiper-item>
 		</swiper>
+		<u-toast ref="uToast" />
+		<u-picker v-model="show" mode="selector" title="请选择置顶天数"  :range="selector" @confirm="confirm"></u-picker>
   </view>
 </template>
 
@@ -143,15 +145,33 @@
 						name: '实习职位'
 					},
 				],
+				options2: [{
+								label: '去冰',
+								value: 1,
+							},
+							{
+								label: '加冰',
+								value: 2,
+							},
+						],
+				selector:[
+					'1', '2', '3', '4', '5', '6', '7'
+				],
+				input:'',
+				recruitment_id:'',
 				current: 0,
 				swiperCurrent: 0,
 				tabsHeight: 0,
 				dx: 0,
 				src:null,
 				page:0,
-				count:''
+				count:'',
+				show:false,
 				}
         },
+		components:{
+			
+		},
 		onLoad() {
 			// this.Topping()
 		},
@@ -159,18 +179,36 @@
 			this.getWorkname()
 		},
         methods: {
-			// 置顶职位
-			Topping(recruitment_id){
-				console.log("=========")
+			confirm(e) {
+				 this.input = '';
+				 this.input = this.selector[e[0]];
+				 uni.showLoading({
+				 	title:'置顶中...'
+				 })
 				addTopping({
-					"recruitment_id":recruitment_id,
-					"topping_time":3,
+					"recruitment_id":this.recruitment_id,
+					"topping_time":this.input,
 				}).then(res=>{
 					console.log(res)
+					if(res.data.code === 20000){
+						uni.hideLoading()
+						uni.showToast({
+							title:`已经置顶${e[0]}天`
+						})
+					}else{
+						this.$refs.uToast.show({
+							title: '置顶失败,',
+							type: 'error',
+							})
+						}
 				}).catch(err=>{
 					console.log(err)
 				})
-				
+			},
+			// 置顶职位
+			Topping(recruitment_id){
+				this.show = true
+				this.recruitment_id = recruitment_id
 			},
 			// 跳转到详情
 			goDetail(recruitment_id){

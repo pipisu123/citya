@@ -658,6 +658,15 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/man/PersonalCenter/myPoints/integralOrder/integralOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

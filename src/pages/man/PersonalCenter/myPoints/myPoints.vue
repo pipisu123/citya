@@ -2,11 +2,11 @@
 	<view class="integral">
 		<view class="integral-middle">
 			<view class="content">
-				<view class="integral-use">
+				<view class="integral-use" >
 					<text>当前可用积分：</text>
 					<text>2000</text>
 				</view>
-				<view class="integral-detail">
+				<view class="integral-detail" @click="goOrder">
 					<text>积分订单></text>
 				</view>
 			</view>
@@ -76,29 +76,40 @@
 
 		},
 		methods: {
+			// 跳转到积分订单
+			goOrder(){
+				console.log("======")
+				uni.navigateTo({
+					url:'/pages/man/PersonalCenter/myPoints/integralOrder/integralOrder'
+				})
+			},
+			// 购买积分
 			buyIntegral(){
 				buyIntegral({
-					"totalFee":100.00
+					"totalFee":0.01
 				}).then(res=>{
-					console.log(res)
+					let data = res.data.data
+					if(res.data.code === 0){
+						uni.requestPayment({
+						    provider: 'wxpay',
+						    timeStamp: data.timeStamp.toString(),
+						    nonceStr: data.nonceStr,
+						    package: data.package,
+						    signType: data.signType,
+						    paySign: data.paySign,
+						    success: function (res) {
+						        console.log('success:' + JSON.stringify(res));
+						    },
+						    fail: function (err) {
+						        console.log('fail:' + JSON.stringify(err));
+						    }
+						});
+					}
 				}).catch(err=>{
 					console.log(err)
 				})
 				// console.log("=======")
-				// uni.requestPayment({
-				//     provider: 'wxpay',
-				//     timeStamp: String(Date.now()),
-				//     nonceStr: 'A1B2C3D4E5',
-				//     package: 'prepay_id=wx20180101abcdefg',
-				//     signType: 'MD5',
-				//     paySign: '',
-				//     success: function (res) {
-				//         console.log('success:' + JSON.stringify(res));
-				//     },
-				//     fail: function (err) {
-				//         console.log('fail:' + JSON.stringify(err));
-				//     }
-				// });
+				
 			}
 		}
 	}

@@ -6,12 +6,12 @@ export const myRequest = (options)=>{
 			url:BASE_URL+options.url,
 			header: {
 				"authorization":uni.getStorageSync('token'),
-				'Accept': 'application/json',
+				// 'Accept': 'application/json',
 			    // 'content-type':  `multipart/form-data; boundary=${boundary}`,
-				 // 'content-type':  'multipart/form-data',
+				 'content-type':  'multipart/form-data',
 				// 'content-type': 'application/x-www-form-urlencoded'
 			},
-			method:options.method || 'GET',
+			method:options.method || 'POST',
 			data: options.data || {},
 			success: (res)=> {
 				if(res.data.status ==0){

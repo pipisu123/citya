@@ -2,8 +2,8 @@
 <view class="content">
 	<!-- 创建房源信息-->
 		<u-form :model="model" :rules="rules" ref="uForm" :errorType="errorType" v-if="showview">
-			<u-form-item :leftIconStyle="{color: '#888', fontSize: '32rpx'}" left-icon="account" label-width="120" :label-position="labelPosition" label="标题" prop="nam">
-				<u-input :border="border" placeholder="请输入标题" v-model="model.nam" type="text"></u-input>
+			<u-form-item :leftIconStyle="{color: '#888', fontSize: '32rpx'}" left-icon="account" label-width="120" :label-position="labelPosition" label="标题" prop="name">
+				<u-input :border="border" placeholder="请输入标题" v-model="model.name" type="text"></u-input>
 			</u-form-item>
 			<u-form-item :leftIconStyle="{color: '#a0cfff', fontSize: '32rpx'}" left-icon="home" label-width="120" :label-position="labelPosition" label="小区" prop="name">
 				<u-input :border="border" placeholder="请输入小区" v-model="model.name" type="text"></u-input>
@@ -73,15 +73,21 @@
 						</u-checkbox-group>
 			</u-form-item>
 			<u-form-item :label-position="labelPosition" label="上传图片" prop="photo" label-width="150">
-				<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="false" :before-upload="beforeUpload" max-count=1 :max-size="1 * 1024 * 1024" ></u-upload>
+				<u-upload width="160" height="160" action="#"  ref="uUpload" :auto-upload="false" :before-upload="beforeUpload" max-count=9 :max-size="1 * 1024 * 1024" @on-choose-complete="uploadImage"></u-upload>
 			</u-form-item>
-			<text style="color: #a0cfff;">只能上传一张图片，大小不超1m</text>
+			<text style="color: #a0cfff;">可上传多张图片，大小不超1m</text>
+			<u-form-item :label-position="labelPosition" label="上传视频" prop="video" label-width="150">
+				<uploadvideo
+				        :dataList="dataList" 
+				        types="video"
+				        @successImage="successImage" 
+				        @successVideo="successvideo"
+						@getPath="getPath"
+				    />
+			</u-form-item>
 		</u-form>
 		<!-- 创建个体发布信息 -->
 		<PersonRecruitment v-else></PersonRecruitment>
-		<view class="uni-uploader__input" @tap="chooseVideo" v-if="showview">
-			<button type="default">上传视频</button>
-		</view>
 		<!-- <view class="public">
 			<u-button @click="submit" type="primary">发布房源</u-button>
 		</view> -->
@@ -95,7 +101,9 @@
 		
 		<u-picker mode="region" v-model="pickerShow" @confirm="regionConfirm"></u-picker>
 		<u-toast ref="uToast" />
-		<u-button @click="submit" type="primary" v-if="showview">立即发布</u-button>
+		<!-- <u-button @click="submit" type="primary" v-if="showview">立即发布</u-button> -->
+		<u-button @click="submit" type="primary">立即发布</u-button>
+		<button type="default" @click="aa">aaa</button>
 	</view>
 	
 </view>
@@ -103,12 +111,15 @@
 </template>
 
 <script>
+import uploadvideo from '../../components/easy-upload.vue'
 	
+import { addLease } from '../../../util/house.js'
 export default {
 	data() {
 		return {
 			showview: true,
 			sahow:false,
+			dataList:[],
 			public:{
 				publicType:''
 			},
@@ -132,13 +143,7 @@ export default {
 							},
 							{
 								
-								name: '冰箱',
-								checked: false,
-								disabled: false
-							},
-							{
-								
-								name: '宽带',
+								name: '电视机',
 								checked: false,
 								disabled: false
 							},
@@ -150,19 +155,13 @@ export default {
 							},
 							{
 							
-								name: '沙发',
+								name: '沙发 ',
 								checked: false,
 								disabled: false
 							},
 							{
 								
-								name: '可做饭',
-								checked: false,
-								disabled: false
-							},
-							{
-								
-								name: '电视机',
+								name: '电视',
 								checked: false,
 								disabled: false
 							},
@@ -174,13 +173,7 @@ export default {
 							},
 							{
 								
-								name: '床',
-								checked: false,
-								disabled: false
-							},
-							{
-								
-								name: '智能门锁',
+								name: '可做饭',
 								checked: false,
 								disabled: false
 							},
@@ -196,6 +189,19 @@ export default {
 								checked: false,
 								disabled: false
 							},
+							{
+								
+								name: '床',
+								checked: false,
+								disabled: false
+							},
+							{
+								
+								name: '智能门锁',
+								checked: false,
+								disabled: false
+							},
+							
 							{
 								
 								name: '油烟机',
@@ -239,15 +245,22 @@ export default {
 				Type:'',
 				worktime: '',
 				zuf:'',
+				decorationId:'',
 				goodsType: '',
+				houseTypeId:'',
 				loceng:'',
+				locengId:'',
 				intro: '',
 				intr:'',
+				seehouseId:'',
 				region: '',
-				photo:'',
+				photo:[],
+				orientationId:'',
 				lasttime: '',
 				count: '',
+				coun:'',
 				industry:'',
+				video:''
 			},
 			rules:{
 				nam:[
@@ -582,7 +595,7 @@ export default {
 		};
 	},
 	components:{
-		
+		uploadvideo
 	},
 	computed: {
 		borderCurrent() {
@@ -598,6 +611,13 @@ export default {
 	},
 	
 	methods:{
+		// 获取视频文件路径
+		getPath(e){
+			this.model.video = e
+		},
+		aa(){
+			console.log(this.dataList)
+		},
 		radioChange(e) {
 					// console.log(e);
 				},
@@ -646,44 +666,80 @@ export default {
 			console.log(this.model.photo)
 		},
 		// 创建企业招聘信息
-	    submit() {
-			uni.navigateTo({
-				url:'/pages/house/pubilshedpage/pubilshedpage'
-			})
+	       submit() {
 			this.$refs.uForm.validate(valid => {
 					if (valid) {
-						
-						
-					}
-				 })	
-		},
-		submit(recruitment) {
-			
-			this.$refs.uForm.validate(valid => {
-					if (valid) {
-						this.recruitment.wechat = this.model.wechat
-						this.recruitment.name = this.model.name
-						this.recruitment.phone = this.model.phone
-						this.recruitment.wagesType = this.model.wagesType
-						this.recruitment.worktime = this.model.worktime
-						this.recruitment.intro = this.model.intro
-						this.recruitment.lasttime = this.model.lasttime
-						this.recruitment.count = this.model.count
-						this.recruitment.region = this.model.region
-						this.recruitment.photo = this.model.photo
-						this.recruitment.goodsType = this.model.goodsType
-						this.recruitment.workType = this.model.workType
-						this.recruitment.industry = this.model.industry
-						this.recruitment.show = true
-						console.log(this.recruitment)
-						uni.navigateTo({
-							url:'/pages/house/pubilshedpage/pubilshedpage?recruitment='+encodeURIComponent(JSON.stringify(recruitment))
+						addLease({
+							"canLookTime": this.model.seehouseId,//看房时间
+							 "leaseType":this.model.zuf,//租房类型
+							"checkInCondition":'',//入住条件
+							"checkInTime":'2021-03-06',//看房时间
+							"communityId":this.model.name,//小区
+							"decorationId":this.model.decorationId,//装修id
+							"deposit":'',//押金
+							"elevator": this.model.cou,//电铁
+							"floorId":this.model.locengId,//楼层
+							"floorNum":this.model.lasttime,//总楼层
+							"generalize":this.model.lasttime,//房屋概况
+							"hallNum":this.model.industry,//厅
+							"houseTypeId":this.model.houseTypeId,//房屋类型
+							"identityType":this.model.intr,//房屋概况
+							"orientationId":this.model.orientationId,
+							"money":this.model.count,//价钱
+							"payment":'',//付款数
+							"roomNum":this.model.industry,//房
+							"square":this.model.phone,//面积
+							"title": this.model.name,//标题
+							"appliances": '',//家具
+							"bathroomNum":this.model.industry,//卫		
+							 "videoFile":this.model.video,//视频
+							"imgFiles": this.model.photo//图片
+						}).then(res=>{
+							console.log(res)
+						}).catch(err=>{
+							console.log(err)
 						})
+						
 					}
 				 })	
 		},
-		
-		
+		uploadImage(){
+			let files = [];
+			var object = {}
+			files = this.$refs.uUpload.lists;
+			for(var i=0;i<files.length;i++){
+				object = files[i].url
+				this.model.photo.push(object)
+			}
+			
+			console.log(this.model.photo);
+			
+		},
+		// submit(recruitment) {
+			
+		// 	this.$refs.uForm.validate(valid => {
+		// 			if (valid) {
+		// 				this.recruitment.wechat = this.model.wechat
+		// 				this.recruitment.name = this.model.name
+		// 				this.recruitment.phone = this.model.phone
+		// 				this.recruitment.wagesType = this.model.wagesType
+		// 				this.recruitment.worktime = this.model.worktime
+		// 				this.recruitment.intro = this.model.intro
+		// 				this.recruitment.lasttime = this.model.lasttime
+		// 				this.recruitment.count = this.model.count
+		// 				this.recruitment.region = this.model.region
+		// 				this.recruitment.photo = this.model.photo
+		// 				this.recruitment.goodsType = this.model.goodsType
+		// 				this.recruitment.workType = this.model.workType
+		// 				this.recruitment.industry = this.model.industry
+		// 				this.recruitment.show = true
+		// 				console.log(this.recruitment)
+		// 				uni.navigateTo({
+		// 					url:'/pages/house/pubilshedpage/pubilshedpage?recruitment='+encodeURIComponent(JSON.stringify(recruitment))
+		// 				})
+		// 			}
+		// 		 })	
+		// },
 		base64(url){
 		      return new Promise((resolve, reject) => {
 		        wx.getFileSystemManager().readFile({
@@ -702,12 +758,14 @@ export default {
 		actionSheetCallback(index) {
 			uni.hideKeyboard();
 			this.model.workType = this.actionSheetList[index].text;
+			this.model.orientationId = this.actionSheetList[index].id;
 		},
 		// 选择职位类型回调
 		selectConfirm(e) {
 			this.model.goodsType = '';
 			e.map((val, index) => {
 				this.model.goodsType += this.model.goodsType == '' ? val.label : '-' + val.label;
+				this.model.houseTypeId = e[index].value
 			})
 		},
 		// 选择职位类型回调
@@ -715,14 +773,18 @@ export default {
 			this.model.wagesType = '';
 			e.map((val, index) => {
 				this.model.wagesType += this.model.wagesType == '' ? val.label : '-' + val.label;
+				this.model.decorationId = e[index].value
 			})
 		},
-		// 选择楼层
+		// 选择楼层回调
 		selectConfirm4(e) {
 			this.model.loceng = '';
 			e.map((val, index) => {
 				this.model.loceng += this.model.loceng == '' ? val.label : '-' + val.label;
+				this.model.locengId = e[index].value
 			})
+			
+			console.log(e)
 		},
 		// 
 		selectConfirm5(e) {
@@ -744,6 +806,7 @@ export default {
 			this.model.Type = '';
 			e.map((val, index) => {
 				this.model.Type += this.model.Type == '' ? val.label : '-' + val.label;
+				this.model.seehouseId = e[index].value
 			})
 		},
 		// 选择地区回调

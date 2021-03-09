@@ -47,7 +47,16 @@
             },
             "ios" : {},
             /* ios打包配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "payment" : {
+                    "weixin" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appid" : "wx1fccb157de8a0fe7",
+                        "UniversalLinks" : ""
+                    }
+                },
+                "push" : {}
+            }
         }
     },
     /* SDK配置 */
@@ -55,10 +64,11 @@
     /* 快应用特有相关 */
     "mp-weixin" : {
         /* 微信小程序特有相关 */
-        "appid" : "wx36b27344f1f13531",
+        "appid" : "wx1fccb157de8a0fe7",
         "setting" : {
             "urlCheck" : false,
-            "es6" : false
+            "es6" : false,
+            "postcss" : true
         },
         "usingComponents" : true,
         "permission" : {

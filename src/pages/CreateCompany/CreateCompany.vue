@@ -252,18 +252,22 @@
 				    sourceType: sourceType[this.sourceTypeIndex],
 				    success: (res) => {
 				        console.log(JSON.stringify(res.tempFilePath),'视频')
-						console.log(res)
+						// console.log(res)
 						this.src1 = res.tempFilePath;
 				      uni.uploadFile({
 				        url: 'http://192.168.101.24:8080/utils/video/addVideo',
 				        method: 'POST',           // 可用可不用
 				        filePath: res.tempFilePath,
-						header:{"Content-Type":"multipart/form-data"},
+						header:{
+							"Content-Type":"multipart/form-data",
+							"authorization":uni.getStorageSync('token'),
+						},
 				        name: 'file',              // 服务器定义key字段名称
 				        success: (res)=> {
 						  var data= null;
 				          console.log('视频上传成功');
-						  // console.log(JSON.parse(res.data))
+						  console.log(res);
+						  console.log(JSON.parse(res))
 						  data = JSON.parse(res.data)
 						  this.src2 = data.data.video.videoPath
 						 

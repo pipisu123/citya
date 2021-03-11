@@ -103,7 +103,6 @@
 		<u-toast ref="uToast" />
 		<!-- <u-button @click="submit" type="primary" v-if="showview">立即发布</u-button> -->
 		<u-button @click="submit" type="primary">立即发布</u-button>
-		<button type="default" @click="aa">aaa</button>
 	</view>
 	
 </view>
@@ -615,9 +614,6 @@ export default {
 		getPath(e){
 			this.model.video = e
 		},
-		aa(){
-			console.log(this.dataList)
-		},
 		radioChange(e) {
 					// console.log(e);
 				},
@@ -798,7 +794,6 @@ export default {
 			this.model.industry = '';
 			e.map((val, index) => {
 				this.model.industry += this.model.industry == '' ? val.label : '/' + val.label;
-				
 			})
 		},
 		// 选择行业回调
